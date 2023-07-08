@@ -8,8 +8,20 @@
 pip install virtualenv
 ```
 
---> open the envr in your terminal :
+--> create the virtualenv :
 
 ```bash
-.\envr\Scripts\activate
+--python=python3.10.5 env
+```
+
+--> open the env in your terminal :
+
+```bash
+.\env\Scripts\activate
+```
+
+--> and then download the requirement for django :
+
+```bash
+pip install -r django_requirements.txt
 ```

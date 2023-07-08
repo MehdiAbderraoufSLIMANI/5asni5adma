@@ -11,7 +11,7 @@ pip install virtualenv
 --> create the virtualenv :
 
 ```bash
---python=python3.10.5 env
+virtualenv --python=python3.10.5 env
 ```
 
 --> open the env in your terminal :

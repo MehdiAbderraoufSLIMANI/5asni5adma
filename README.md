@@ -25,3 +25,17 @@ pip install virtualenv
 ```bash
 pip install -r django_requirements.txt
 ```
+
+now react requirements
+
+--> go to frontend
+
+```bash
+cd frontend
+```
+
+--> and then :
+
+```bash
+npm install
+```

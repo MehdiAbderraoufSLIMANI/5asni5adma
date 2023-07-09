@@ -7,9 +7,9 @@ class usertest(models.Model):
     name = models.TextField(max_length=50 ,default=" ")
     password = models.TextField(max_length=50 ,default=" ")
 
-class User(models.Model):
+class Person(models.Model):
     #id_compte = models.TextField(max_length=50 ,default=" ")
-    id_compte = models.AutoField(primary_key=True, db_column='copmt_id', verbose_name='compte id')
+    #id_compte = models.AutoField(primary_key=True, db_column='copmt_id', verbose_name='compte id')
 
     username = models.CharField(max_length=50)
     email = models.EmailField()
@@ -37,7 +37,9 @@ class User(models.Model):
             self.compte_type = "client"
         super().save(*args, **kwargs)
 
-class Artisan(User):
+
+#Artisan""""""""""""""""""""""""""""""""
+class Artisan(Person):
     numb_card_national = models.IntegerField()
     wilaya = models.CharField(max_length=50)
     commune = models.CharField(max_length=50)
@@ -49,7 +51,9 @@ class Artisan(User):
         super().__init__(*args, **kwargs)
         self.compte_type = "worker"
 
-class Client(User):
+
+#Client""""""""""""""""""""""""""""""""
+class Client(Person):
     wilaya = models.CharField(max_length=50)
     commune = models.CharField(max_length=50)
     adresse = models.CharField(max_length=50)

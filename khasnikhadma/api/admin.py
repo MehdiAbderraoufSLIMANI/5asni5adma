@@ -1,10 +1,12 @@
 from django.contrib import admin
- 
+from django.contrib.auth.models import User,AbstractUser
+
 from .models import usertest,Artisan,Client
 
 
 admin.site.register(usertest)
 
+ 
 
 #Artisan""""""""""""""""""""""""""""""""
 @admin.register(Artisan)

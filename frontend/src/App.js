@@ -11,7 +11,7 @@ function App() {
   }, [])
 
   let users = async ()=>{
-    let respo = await fetch("http://127.0.0.1:8000/apis/")
+    let respo = await fetch("/api/client")
     let data = await respo.json()
     console.log(data)
     setUsers(data)
@@ -24,7 +24,7 @@ function App() {
 
       {user.map((s,index) =>(
         <div>
-        <h1 key={index}> name : {s.name}</h1>
+        <h1 key={index}> name : {s.username}</h1>
         <h2 key={index}> password : {s.password}</h2>
         </div>
         ))}

@@ -1,11 +1,11 @@
 from django.contrib import admin
 from django.contrib.auth.models import User,AbstractUser
 
-from .models import usertest,Artisan,Client
+from .models import usertest,Artisan,Client,MyUserManager,Administrateur
 
 
 admin.site.register(usertest)
-
+admin.site.register(Administrateur)
  
 
 #Artisan""""""""""""""""""""""""""""""""

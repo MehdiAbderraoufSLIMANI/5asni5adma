@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
+/* Defining css colors as variables*/
+:root {
+    --noir: #1C1F1E;
+    --rouge: #EA4C36;
+    --font: 'Playfair Display', serif;
+}
+/* pour utiliser une couleur dans un sélecteur: var(--noir)*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.App {
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    padding-bottom: 200px;
+    font-family: var(--font);
+}
+.App-header {
+    background-color: var(--noir);
+    min-height: 80px;
+}
+nav {
+    height: 100% !important;
+}
+nav, nav ul li.dropdown button a {
+    font-size: 16px;
+}
+nav ul li {
+    margin-right: 30px;
+}
+nav ul.pushRight {
+    margin-right: 0;
+}
+nav ul.pageLinks {
+    margin-left: 150px;
+}
+
+
+
+nav ul.pageLinks li a {
+    transition: .2s ease-in-out !important;
+}
+nav ul.pageLinks li a:hover {
+    color: rgb(192, 188, 188) !important;
+}
+
+
+
+@media all and (max-width: 991px) {
+    nav ul li{
+        text-align: center;
+    }
+    nav ul.pushRight {
+        margin-left: 62% ;
+        display: flex !important;
+        flex-direction: row;
+    }
+    nav ul li.redBtn {
+        min-width: 35%;
+    }
+    nav ul.pageLinks li  {
+        margin-left: -140px !important;  
+    }
+    
+    nav ul li.btn-group button{
+        margin-left: -2px;
+    }
+    nav ul.dropdown-menu {
+        box-shadow: none;
+    }
+    nav ul.dropdown-menu .dropdown-item {
+        margin-left: 145px;
+        width: 88%;
+    }
+
+    
+}
+nav ul li a {
+    color: white !important;
+}
+
+nav ul.dropdown-menu li a {
+    color: var(--noir) !important;
+}
+
+.btn-group {
+    display: block;
+}
+.btn-group button a {
+    text-decoration: none !important;
+}
+
+.btn-group button {
+    padding-left: 0px;
+    width: 120px;
+    margin-left: 10px;
+    border: none !important;
+}
+
+nav ul li a {
+    transition: .3s ease-in;
+}
+nav ul li a.active {
+    background-color: var(--rouge) ;
+    padding: 8px 15px;
+    border-radius: 15px;
+}
+.dropdown-menu {
+    box-shadow: 8px 5px 12px white;
+   
+    margin-left: 8px;
+}
+.dropdown-menu .dropdown-item {
+    transition-duration: .3s;
+    margin-left: 0px; 
+    text-align: left;
+    width: 110%; 
+}
+.dropdown-menu .dropdown-item:hover {
+    background-color: var(--rouge);
+}
+
+nav ul li.redBtn {
+    background-color: var(--rouge);
+    border-radius: 15px;
+    padding: 0px 8px;
+    font-weight: 600;
+    transition: .4s ease-in-out;
+}
+nav ul li.redBtn:hover {
+    box-shadow: 0px 0px 18px white;
+}
+
+.App-footer {
+    position: absolute;
+    bottom: 0;
+    font-size: 18px;
+    background-color: var(--noir);
+    width: 100%;
+    min-height: 260px;
+    padding-top: 25px;
+}
+.App-footer .footer-top {
+    display: flex;
+    align-items: center;
+}
+.App-footer .footer-top p {
+    color: var(--rouge);
+    width: 80px;
+}
+.App-footer a, .App-footer p {
+    text-decoration: none;
+    color: white;
+}
+.App-footer p a {
+    transition: .2s ease-in-out;
+    padding-bottom: 8px;
+}
+.App-footer p a:hover {
+    border-bottom: solid 2px var(--rouge);
+    color: rgb(192, 188, 188);
+}
+.App-footer .footer-content {
+    margin-left: 3%;
+}
+
+.App-footer .copyRight {
+    font-size: 15px;
+}

@@ -3,7 +3,12 @@ import React from 'react'
 export default function Acceuil() {
   return (
     <div>
-      page acceuil
+      <h1>page acceuil</h1>
+      
+
+      <div id="contact">
+        <h1>contact us</h1>
+      </div>
     </div>
   )
 }

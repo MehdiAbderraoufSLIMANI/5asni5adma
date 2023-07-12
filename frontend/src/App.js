@@ -1,5 +1,4 @@
 
-<<<<<<< HEAD
 /*
 import {
   BrowserRouter as Router,
@@ -9,9 +8,7 @@ import {
 import React, {useState , useEffect} from 'react';
 import axios from 'axios';
 
-=======
 import React from 'react';
->>>>>>> 2d196c015993c294d6c6515bbb0a2f6d27ede95b
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Acceuil from './pages/Acceuil';
@@ -36,19 +33,15 @@ const client = axios.create({
 
 function App() {
 
-<<<<<<< HEAD
 
 /***********************fetch***************************
   let [user , setUsers] = useState([])
-=======
   /*let [users , setUsers] = useState([])
->>>>>>> 2d196c015993c294d6c6515bbb0a2f6d27ede95b
 
   useEffect (() => {
     getUsers()
   }, [])
 
-<<<<<<< HEAD
   let users = async ()=>{
     let respo = await fetch("http://127.0.0.1:8000/api/client")
     let data = await respo.json()
@@ -56,14 +49,12 @@ function App() {
     setUsers(data)
   }
 
-=======
   let getUsers = async ()=>{
     let respo = await fetch("http://127.0.0.1:8000/apis/")
     let data = await respo.json()
     console.log(data)
     setUsers(data)
   }*/
->>>>>>> 2d196c015993c294d6c6515bbb0a2f6d27ede95b
   return (
     <div className="App">
       <Router>
@@ -91,20 +82,9 @@ function App() {
 
       </Router>
 
-<<<<<<< HEAD
-      {user.map((s,index) =>(
-        <div>
-        <h1 key={index}> name : {s.username}</h1>
-        <h2 key={index}> password : {s.password}</h2>
-        </div>
-        ))}
-
-      </header>
-=======
->>>>>>> 2d196c015993c294d6c6515bbb0a2f6d27ede95b
     </div>
   );
-**************************************************/
+
 
 
  

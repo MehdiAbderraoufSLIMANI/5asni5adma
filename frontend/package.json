@@ -10,10 +10,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.14.1",
-<<<<<<< HEAD
-=======
     "react-router-hash-link": "^2.4.3",
->>>>>>> 2d196c015993c294d6c6515bbb0a2f6d27ede95b
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },

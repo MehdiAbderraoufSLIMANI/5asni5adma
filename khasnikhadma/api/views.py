@@ -20,6 +20,11 @@ def usersView(request):
     serializer = serializers.usertestSerializer(queryset ,many =True )
     return Response(serializer.data)
 
+def post(self, request):
+    data = request.data
+    print(data)
+    return Response("serializer.data")
+
 
 #Artisan""""""""""""""""""""""""""""""""
 @api_view(['GET'])

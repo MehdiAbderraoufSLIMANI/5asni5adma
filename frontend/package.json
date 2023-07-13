@@ -6,18 +6,12 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-<<<<<<< HEAD
     "framer-motion": "^10.12.18",
-=======
     "axios": "^1.4.0",
->>>>>>> 1ee04334f84d0946f82b0f0293bfc35f8018c000
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.14.1",
-<<<<<<< HEAD
-=======
     "react-router-hash-link": "^2.4.3",
->>>>>>> 2d196c015993c294d6c6515bbb0a2f6d27ede95b
     "react-scripts": "5.0.1",
     "typed.js": "^2.0.16",
     "web-vitals": "^2.1.4"

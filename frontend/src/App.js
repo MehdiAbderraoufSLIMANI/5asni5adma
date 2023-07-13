@@ -2,7 +2,7 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Acceuil from './pages/Acceuil';
+import Acceuil from './pages/Acceuil/Acceuil';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ListServices from './pages/ListServices';
@@ -11,6 +11,8 @@ import Inscription from './pages/Inscription';
 import Login from './pages/Login';
 import AboutUs from './pages/AboutUs';
 import ErrorPage from './pages/ErrorPage';
+
+
 
 function App() {
 

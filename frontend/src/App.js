@@ -11,7 +11,7 @@ import axios from 'axios';
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Acceuil from './pages/Acceuil';
+import Acceuil from './pages/Acceuil/Acceuil';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ListServices from './pages/ListServices';
@@ -22,6 +22,8 @@ import AboutUs from './pages/AboutUs';
 import ErrorPage from './pages/ErrorPage';
 
 
+<<<<<<< HEAD
+=======
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
@@ -30,6 +32,7 @@ const client = axios.create({
   baseURL: "http://127.0.0.1:8000"
 });
 
+>>>>>>> 1ee04334f84d0946f82b0f0293bfc35f8018c000
 
 function App() {
 

@@ -1,10 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
 /* Defining css colors as variables*/
 :root {
     --noir: #1C1F1E;
     --rouge: #EA4C36;
-    --font: 'Playfair Display', serif;
+    --lightGray: rgb(228, 225, 225);
+    --font: 'Poppins', sans-serif;
 }
 /* pour utiliser une couleur dans un sélecteur: var(--noir)*/
 
@@ -19,29 +20,40 @@
     position: relative;
     min-height: 100vh;
     width: 100%;
-    padding-bottom: 200px;
+    /*padding-bottom: 500px;*/
     font-family: var(--font);
 }
 .App-header {
     background-color: var(--noir);
-    min-height: 80px;
+    padding-top: 0px;
+    min-height: 88px;
 }
 nav {
-    height: 100% !important;
-}
-nav, nav ul li.dropdown button a {
-    font-size: 16px;
-}
-nav ul li {
-    margin-right: 30px;
-}
-nav ul.pushRight {
-    margin-right: 0;
-}
-nav ul.pageLinks {
-    margin-left: 150px;
+    min-height: 88px !important;
+    padding-bottom: 0 !important;
 }
 
+nav .navbar-toggler {
+    border: none !important;
+}
+
+nav span.navbar-toggler-icon {
+    background-image:none;
+    color: white;
+}
+/*************************************************************/
+nav ul li {
+    margin-right: 20px;
+    min-width: 112px;
+}
+
+/*******************************************************/
+nav ul.pushRight {
+    margin-right: 64px;
+}
+nav ul.pageLinks {
+    margin-left: 160px;
+}
 
 
 nav ul.pageLinks li a {
@@ -53,7 +65,7 @@ nav ul.pageLinks li a:hover {
 
 
 
-@media all and (max-width: 991px) {
+@media all and (max-width: 1198px) {
     nav ul li{
         text-align: center;
     }
@@ -65,26 +77,28 @@ nav ul.pageLinks li a:hover {
     nav ul li.redBtn {
         min-width: 35%;
     }
-    nav ul.pageLinks li  {
-        margin-left: -140px !important;  
+   
+    nav ul li.pageLinks {
+        width: 80px !important;
+    }
+    .btn-group button a.active {
+        padding: 8px 40vw 8px 30vw !important;
+    }
+    nav ul li.btn-group {
+       width: 100%; 
     }
     
-    nav ul li.btn-group button{
-        margin-left: -2px;
-    }
     nav ul.dropdown-menu {
         box-shadow: none;
     }
     nav ul.dropdown-menu .dropdown-item {
-        margin-left: 145px;
-        width: 88%;
+        margin-left: 3px;/*145*/
+        width: 100%;
     }
 
     
 }
-nav ul li a {
-    color: white !important;
-}
+
 
 nav ul.dropdown-menu li a {
     color: var(--noir) !important;
@@ -92,29 +106,37 @@ nav ul.dropdown-menu li a {
 
 .btn-group {
     display: block;
+    width: 112px;
+    
+   
 }
 .btn-group button a {
     text-decoration: none !important;
+   
 }
 
 .btn-group button {
-    padding-left: 0px;
-    width: 120px;
-    margin-left: 10px;
     border: none !important;
 }
+.btn-group button a.active {
+    background-color: var(--rouge);
+    border-radius: 40px;
+    padding: 8px 24px 8px 24px ;
+}
 
-nav ul li a {
+nav ul li a, .btn-group button a {
+    color: white !important;
+    font-size: 16px;
+    text-align: center;
+    line-height: normal;
     transition: .3s ease-in;
 }
 nav ul li a.active {
     background-color: var(--rouge) ;
-    padding: 8px 15px;
-    border-radius: 15px;
+    border-radius: 40px;
 }
 .dropdown-menu {
-    box-shadow: 8px 5px 12px white;
-   
+    box-shadow: 2px 3px 12px white;
     margin-left: 8px;
 }
 .dropdown-menu .dropdown-item {
@@ -131,16 +153,11 @@ nav ul li.redBtn {
     background-color: var(--rouge);
     border-radius: 15px;
     padding: 0px 8px;
-    font-weight: 600;
-    transition: .4s ease-in-out;
-}
-nav ul li.redBtn:hover {
-    box-shadow: 0px 0px 18px white;
 }
 
 .App-footer {
     position: absolute;
-    bottom: 0;
+    bottom: 0px;
     font-size: 18px;
     background-color: var(--noir);
     width: 100%;
@@ -174,3 +191,5 @@ nav ul li.redBtn:hover {
 .App-footer .copyRight {
     font-size: 15px;
 }
+
+

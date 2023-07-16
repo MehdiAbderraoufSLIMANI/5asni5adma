@@ -1,20 +1,33 @@
-import React, { useEffect } from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { NavLink, Link, useLocation } from 'react-router-dom'
 import { HashLink } from 'react-router-hash-link'
 import { motion } from 'framer-motion';
 
 export default function Navbar() {
 
-  useEffect(() => {
-    console.log("render");
-  }, [])
-  /*Récupérer à partir de la table "anonce" toutes les categories existantes*/
+/*Récupérer à partir de la table "anonce" toutes les categories existantes*/
   //testing
   const categories = ['Climatiseur', 'Menuisierie'];
 
+
+  
+
+
+
+  
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+
+
+  //Récupérer l'url courante pour attribuer la classe 'active' au lien "Nos services" lorsqu'il est actif
+  const sampleLocation = useLocation();
+  useEffect(() => {
+    sampleLocation.pathname.includes('/services') ? setIsActive(true) : setIsActive(false)
+  }, [sampleLocation])
+  
   return (
-    <nav className="navbar navbar-expand-xl "> 
-      <div className="container-fluid" style={{paddingBottom: '0px'}}>
+    <nav className="navbar navbar-expand-xl ">
+      <div className="container-fluid" style={{ paddingBottom: '0px' }}>
         <a className="navbar-brand">
           <img src="../images/logo.png" alt="logo" width="130px" height="70px" />
         </a>
@@ -30,21 +43,14 @@ export default function Navbar() {
               <NavLink to='/' className="nav-link">Acceuil</NavLink>
             </li>
 
-            <li className="nav-item dropdown btn-group">
-              <button className="btn dropdown-toggle" type="button" id="defaultDropdown" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="true">
-                <NavLink to='/services'>
-                  Nos services
-                </NavLink>
-              </button>
-
-
-              <ul className="dropdown-menu" aria-labelledby="defaultDropdown">
-                { categories.map((categ => <li key={categ}><Link to={`/services/${categ}`} className="dropdown-item" >{categ}</Link></li>))}
-                {/*<li><Link to='/services/climatiseur' className="dropdown-item" >Climatiseur</Link></li>
-                <li><Link to='services/menuisierie' className="dropdown-item">Menuisierie</Link></li> */}
-
-                <li><Link to='/services' className="dropdown-item">Tous les services</Link></li>
-              </ul>
+            <li class="nav-item dropdown">
+              <a href='#' onClick={() => setShowDropdown(!showDropdown)} className={`nav-link dropdown-toggle ${isActive? 'active' :''}`}>
+                Nos services
+              </a>
+              {showDropdown && <ul className="dropdown-menu" onMouseLeave={() => setShowDropdown(false)}>
+              { categories.map((categ => <li key={categ}><Link to={`/services/${categ}`} onClick={()=>setShowDropdown(false)}  className="dropdown-item" >{categ}</Link></li>))}
+                <li><Link to='/services' onClick={()=>setShowDropdown(false)} className="dropdown-item" >Tous les services</Link></li>
+              </ul>}
             </li>
 
             <li className="nav-item">

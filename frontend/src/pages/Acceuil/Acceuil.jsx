@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Typed from 'typed.js';
 import { motion } from 'framer-motion';
 import './Acceuil.css';
@@ -6,6 +6,17 @@ import './Acceuil.css';
 
 
 export default function Acceuil() {
+
+ const [fullname, setFullname] = useState('');
+ const [userEmail, setUserEmail] = useState('');
+ const [message, setMessage] = useState('');
+ 
+ const contactSubmitHandler = (e) => {
+  e.preventDefault();
+  console.log(fullname,userEmail,message)
+ }
+ 
+
 
   const el = useRef();
   useEffect(() => {
@@ -112,21 +123,22 @@ export default function Acceuil() {
           <div className="col-md-6 contact-form">
             <h1 className='display-4'>Nous contacter</h1>
             <p className='mb-5'>Envoyer un message</p>
-            <form>
-              <div class="mb-4">
-                <input type="text" class="form-control" placeholder='Nom complet' />
+
+            <form onSubmit={(e)=>contactSubmitHandler(e)}>
+              <div className="mb-4">
+                <input type="text" className="form-control" placeholder='Nom complet' value={fullname} onChange={(e)=>setFullname(e.target.value)}/>
               </div>
 
-              <div class="mb-4">
-                <input type="email" class="form-control" placeholder='Votre email' />
+              <div className="mb-4">
+                <input type="email" className="form-control" placeholder='Votre email' value={userEmail} onChange={(e)=>setUserEmail(e.target.value)} />
               </div>
 
-              <div class="form-floating mb-5">
-                <textarea class="form-control" placeholder="Ecriver un message..." id="floatingTextarea"></textarea>
-                <label for="floatingTextarea" style={{color: 'var(--noir)'}}>Message...</label>
+              <div className="form-floating mb-5">
+                <textarea className="form-control" placeholder="Ecriver un message..." id="floatingTextarea" value={message} onChange={(e)=>setMessage(e.target.value)}></textarea>
+                <label htmlFor="floatingTextarea" style={{color: 'var(--noir)'}}>Message...</label>
               </div>
 
-              <button type="submit" class="btn envoyerMsg">Submit</button>
+              <button type="submit" className="btn envoyerMsg">Envoyer</button>
             </form>
 
 

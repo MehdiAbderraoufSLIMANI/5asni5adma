@@ -81,13 +81,7 @@ nav ul.pageLinks li a:hover {
     nav ul li.pageLinks {
         width: 80px !important;
     }
-    .btn-group button a.active {
-        padding: 8px 40vw 8px 30vw !important;
-    }
-    nav ul li.btn-group {
-       width: 100%; 
-    }
-    
+        
     nav ul.dropdown-menu {
         box-shadow: none;
     }
@@ -104,27 +98,8 @@ nav ul.dropdown-menu li a {
     color: var(--noir) !important;
 }
 
-.btn-group {
-    display: block;
-    width: 112px;
-    
-   
-}
-.btn-group button a {
-    text-decoration: none !important;
-   
-}
 
-.btn-group button {
-    border: none !important;
-}
-.btn-group button a.active {
-    background-color: var(--rouge);
-    border-radius: 40px;
-    padding: 8px 24px 8px 24px ;
-}
-
-nav ul li a, .btn-group button a {
+nav ul li a {
     color: white !important;
     font-size: 16px;
     text-align: center;
@@ -192,4 +167,6 @@ nav ul li.redBtn {
     font-size: 15px;
 }
 
-
+.dropdown-menu {
+    display: block !important;
+  }

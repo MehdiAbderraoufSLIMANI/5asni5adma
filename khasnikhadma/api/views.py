@@ -3,19 +3,40 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view 
 
 from rest_framework.response import Response
-from .serializers import usertestSerializer
+from api import serializers
  
-from .models import usertest
+from api import models
 
 @api_view(['GET'])
 def userView(request,pk):
     print(pk)
-    queryset = usertest.objects.filter(id = pk)
-    serializer = usertestSerializer(queryset ,many =True )
+    queryset = models.usertest.objects.filter(id = pk)
+    serializer = serializers.usertestSerializer(queryset ,many =True )
     return Response(serializer.data)
 
 @api_view(['GET'])
 def usersView(request):
-    queryset = usertest.objects.all()
-    serializer = usertestSerializer(queryset ,many =True )
+    queryset = models.usertest.objects.all()
+    serializer = serializers.usertestSerializer(queryset ,many =True )
+    return Response(serializer.data)
+
+def post(self, request):
+    data = request.data
+    print(data)
+    return Response("serializer.data")
+
+
+#Artisan""""""""""""""""""""""""""""""""
+@api_view(['GET'])
+def artisanView(request):
+    queryset = models.Artisan.objects.all()
+    serializer = serializers.ArtisanSerializer(queryset ,many =True )
+    return Response(serializer.data)
+
+
+#Client""""""""""""""""""""""""""""""""
+@api_view(['GET'])
+def clientView(request):
+    queryset = models.Client.objects.all()
+    serializer = serializers.ClientSerializer(queryset ,many =True )
     return Response(serializer.data)

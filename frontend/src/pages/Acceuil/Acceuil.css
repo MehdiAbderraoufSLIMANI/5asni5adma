@@ -1,0 +1,100 @@
+.acceuil-intro {
+    background-color: var(--noir);
+    color: white;
+    /*padding: 180px 12%;
+    padding-bottom: 250px;*/
+    padding: 221px 248px 308px 248px;
+    min-height: 450px;
+}
+.acceuil-intro h1 {
+    font-size: 48px;
+    font-weight: 700;
+    line-height: normal;
+}
+.acceuil-intro .typedAnim {
+    font-size: 48px;
+    color: var(--rouge);
+}
+.guarantee {
+    background-color: white;
+    min-height: 400px;
+    padding-top: 70px;
+    padding-left: 60px;
+
+    padding-bottom: 200px;
+   
+}
+.guarantee h2 {
+    color: var(--rouge);
+    margin-bottom: 120px;
+    font-size: 48px;
+    font-weight: 700;
+}
+.guarantee .img-container {
+    border-radius: 50%;
+    background-color: var(--lightGray);
+    height: 230px;
+    width: 250px;
+    overflow: hidden;
+    padding: 8px;
+    margin: 0 auto;
+    border: solid 2px white;
+    box-shadow: 0px 0px 18px black;
+    transition: .4s ease-in-out;
+}
+.guarantee .img-container:hover {
+    transform: scale(1.2);
+    box-shadow: 0px 0px 30px var(--rouge);
+}
+
+.guarantee .feature-container p {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: normal;
+    color: var(--noir);
+    width: 180px; 
+    margin: 30px auto;
+}
+
+#contact {
+    background-color: var(--rouge);
+    min-height: 300px;
+    padding-bottom: 600px;
+    padding-top: 50px;
+}
+
+#contact .contact-form .form-control {
+    width: 60%;
+}
+#contact .contact-form textarea {
+    min-height: 100px;
+}
+#contact .contact-form .envoyerMsg {
+    background-color: var(--noir);
+    color: white;
+    font-size: 24px;
+    /*width: 20%;*/
+   
+width: 160px;
+padding: 8px 24px 8px 24px;
+text-align: center;
+
+}
+#contact .contact-form p {
+    font-size: 30px;
+}
+
+#contact .info-contact {
+    min-height: 480px;
+}
+#contact .info-contact .img-container {
+    height: 60%;
+    width: 50%;
+    border-radius: 50%;
+    background-color: white;
+    box-shadow: 0px 0px 28px var(--noir);
+}
+#contact .info-contact .coord{
+    font-size: 24px;
+    font-weight: 400;
+}

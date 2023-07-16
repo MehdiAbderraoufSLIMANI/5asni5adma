@@ -25,5 +25,6 @@ yarn-error.log*
 
 *.pyc
 __pycache__
+migrations
 
 db.sqlite3

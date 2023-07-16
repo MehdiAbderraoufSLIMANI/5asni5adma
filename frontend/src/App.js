@@ -19,6 +19,8 @@ import Inscription from './pages/Inscription';
 import Login from './pages/Login';
 import AboutUs from './pages/AboutUs';
 import ErrorPage from './pages/ErrorPage';
+import Backendtest from './pages/Backendtest';
+
 
 
 axios.defaults.xsrfCookieName = 'csrftoken';
@@ -72,6 +74,7 @@ function App() {
             <Route path='/connection' element={<Login />} />
             <Route path='/about us' element={<AboutUs />} />
             <Route path='*' element={<ErrorPage />} />
+            <Route path='/backendtest' element={<Backendtest />} />
           </Routes>
         </main>
 

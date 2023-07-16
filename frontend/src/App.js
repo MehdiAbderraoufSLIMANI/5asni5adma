@@ -16,7 +16,7 @@ import Footer from './components/Footer';
 import ListServices from './pages/ListServices';
 import FAQ from './pages/FAQ';
 import Inscription from './pages/Inscription';
-import Login from './pages/Login';
+import Login from './pages/Login/Login';
 import AboutUs from './pages/AboutUs';
 import ErrorPage from './pages/ErrorPage';
 import Backendtest from './pages/Backendtest';

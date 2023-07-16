@@ -9,6 +9,8 @@
     align-items: center;
     padding: 120px 336px;
     margin-bottom: 136px;
+    background-color: aqua;
+    margin-bottom: 80px;
 }
 .login-form{
     width: 768px;

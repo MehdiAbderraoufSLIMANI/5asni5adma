@@ -16,6 +16,10 @@ class Person(models.Model):
     tel = models.IntegerField()
     isBanned = models.BooleanField()
     compte_type = models.CharField(max_length=10 ,editable=False) 
+
+    token_of_validation = models.CharField(max_length=50,editable=False,default=' ')
+
+    valid = models.BooleanField(default=False)
     def save(self, *args, **kwargs):
         # Set the default compte_type based on the model subclass being created
         if isinstance(self, Artisan):
@@ -34,6 +38,9 @@ class Artisan(Person):
     rating = models.FloatField(max_length=1, editable=False, default=0)
     category_of_worker = models.CharField(max_length=10, default=" ")
 
+    def __str__(self):
+            return  str(self.email)
+        
 
 
 #Client""""""""""""""""""""""""""""""""

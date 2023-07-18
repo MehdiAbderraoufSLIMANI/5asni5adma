@@ -11,7 +11,7 @@ admin.site.register(Administrateur)
 #Artisan""""""""""""""""""""""""""""""""
 @admin.register(Artisan)
 class ArtisanAdmin(admin.ModelAdmin):
-    readonly_fields = ('rating','compte_type')
+    readonly_fields = ('rating','compte_type','token_of_validation')
 
 
 #Client""""""""""""""""""""""""""""""""

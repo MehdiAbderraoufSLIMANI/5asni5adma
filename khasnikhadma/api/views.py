@@ -21,12 +21,21 @@ class UserRegister(APIView):
         
         clean_data = request.data
         serializer = serializers.RegisterSerializer(data=clean_data)
-        print("1§§§§§§§§§§§§§§")
         if serializer.is_valid(raise_exception=True):
-            print("2§§§§§§§§§§§§§§")
             user = serializer.create(clean_data)
             if user:
-                print("3§§§§§§§§§§§§§§")
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+    
+class EmailValidation(APIView):
+    permission_classes = (permissions.AllowAny,)
+    def post(self, request):
+        data = request.data  
+        serializer = serializers.RegisterSerializer(data=data)
+        if serializer.is_valid(raise_exception=True):
+            valid = serializer.validatee(data)
+            print("dddddddddddddddd",data)
+            if valid:
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(status=status.HTTP_400_BAD_REQUEST)
 

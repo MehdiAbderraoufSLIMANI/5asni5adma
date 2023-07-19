@@ -14,6 +14,17 @@ from rest_framework import permissions, status
 
 from api import validations
 
+#Contact us""""""""""""""""""""""""""""""""""""""""""""""""
+class UserContactUs(APIView):
+    permission_classes = (permissions.AllowAny,)
+    def post(self, request):
+        
+        data = request.data
+        serializer = serializers.RegisterSerializer(data=data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.create(data)
+
+
 #Register""""""""""""""""""""""""""""""""""""""""""""""""""
 class UserRegister(APIView):
     permission_classes = (permissions.AllowAny,)

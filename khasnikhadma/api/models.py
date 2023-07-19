@@ -50,6 +50,16 @@ class Client(Person):
     adresse = models.CharField(max_length=50)
 
 
+#Contact Us""""""""""""""""""""""""""""""""
+class Contact(models.Model):
+    fullname = models.CharField(max_length=20)
+    userEmail = models.EmailField()
+    message = models.TextField()
+    def __str__(self):
+        return self.fullname   
+
+
+#User""""""""""""""""""""""""""""""""
 
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser, PermissionsMixin

@@ -50,7 +50,7 @@ class RegisterSerializer(serializers.ModelSerializer):
    
 
 
-#email validation""""""""""""""""""""""""""""""""""""""""""""""""""""
+ 
 
 
 
@@ -95,3 +95,18 @@ class ClientSerializer(serializers.ModelSerializer):
         'adresse',
     )
 
+
+#Contact us""""""""""""""""""""""""""""""""""""""""""""
+
+class RegisterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.usertest
+        fields = '__all__'
+    def create(self, clean_data):
+            
+            theMessage = models.Contact.objects.create(
+                fullname=clean_data['fullname'],
+                userEmail=clean_data['userEmail'],
+                message=clean_data['message']) 
+             
+            theMessage.save()

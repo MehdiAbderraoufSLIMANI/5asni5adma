@@ -8,27 +8,18 @@ class usertest(models.Model):
     password = models.TextField(max_length=50 ,default=" ")
 
 class Person(models.Model):
-    #id_compte = models.TextField(max_length=50 ,default=" ")
-    #id_compte = models.AutoField(primary_key=True, db_column='copmt_id', verbose_name='compte id')
-
     username = models.CharField(max_length=50)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=50) 
-    
     nom = models.CharField(max_length=50)
     prenom = models.CharField(max_length=50)
     tel = models.IntegerField()
-
     isBanned = models.BooleanField()
-    
-    CATEGORY_CHOICES = [
-        ('client', 'Client'),
-        ('worker', 'Worker'),
-    ]
-    
-    #compte_type = models.CharField(max_length=10, choices=CATEGORY_CHOICES, default="client")
     compte_type = models.CharField(max_length=10 ,editable=False) 
 
+    token_of_validation = models.CharField(max_length=50,editable=False,default=' ')
+
+    valid = models.BooleanField(default=False)
     def save(self, *args, **kwargs):
         # Set the default compte_type based on the model subclass being created
         if isinstance(self, Artisan):
@@ -40,13 +31,16 @@ class Person(models.Model):
 
 #Artisan""""""""""""""""""""""""""""""""
 class Artisan(Person):
-    numb_card_national = models.IntegerField()
+    numb_card_national = models.IntegerField(default=124)
     wilaya = models.CharField(max_length=50)
     commune = models.CharField(max_length=50)
     adresse = models.CharField(max_length=50)
     rating = models.FloatField(max_length=1, editable=False, default=0)
     category_of_worker = models.CharField(max_length=10, default=" ")
 
+    def __str__(self):
+            return  str(self.email)
+        
 
 
 #Client""""""""""""""""""""""""""""""""

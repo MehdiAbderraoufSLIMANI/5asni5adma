@@ -9,6 +9,7 @@
     align-items: center;
     padding: 120px 336px;
     margin-bottom: 136px;
+    padding-bottom: 20%;
 }
 .login-form{
     width: 768px;
@@ -26,7 +27,7 @@
     flex-shrink: 0;
     background: var(--noir);
     box-shadow: 0px 1px 8px 0px var(--noir);
-    gap: 80px;
+    gap: 80px;  
 
 }
 

@@ -29,15 +29,13 @@ export default function Acceuil() {
   }
 
   client.post('/api/contectus/',jsondata)
-  .then(response => {
-    console.log('Registration successful:', response.data);
-    
-  })
   .catch(error => {
     console.error('Registration failed:', error);
     
   });
-  console.log(fullname,userEmail,message)
+  setFullname('');
+  setUserEmail('');
+  setMessage(''); 
  }
  
 

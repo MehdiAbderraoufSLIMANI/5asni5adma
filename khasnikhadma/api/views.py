@@ -20,7 +20,7 @@ class UserContactUs(APIView):
     def post(self, request):
         
         data = request.data
-        serializer = serializers.RegisterSerializer(data=data)
+        serializer = serializers.ContactUsSerializer(data=data)
         if serializer.is_valid(raise_exception=True):
             serializer.create(data)
 
@@ -55,7 +55,6 @@ class EmailValidation(APIView):
         serializer = serializers.RegisterSerializer(data=data)
         if serializer.is_valid(raise_exception=True):
             valid = serializer.validatee(data)
-            print("dddddddddddddddd",data)
             if valid:
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(status=status.HTTP_400_BAD_REQUEST)

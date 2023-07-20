@@ -44,7 +44,7 @@ class LoginSerializer(serializers.Serializer):
         
 
 #Register""""""""""""""""""""""""""""""""""""""""""""
-class RegisterSerializer(serializers.ModelSerializer):
+class RegisterSerializer(serializers.Serializer):
  
     def create(self, clean_data):
         
@@ -60,8 +60,7 @@ class RegisterSerializer(serializers.ModelSerializer):
                 wilaya=clean_data['wilaya'],
                 commune=clean_data['commune'],
                 adresse=clean_data['adresse'],
-                rating=clean_data['rating'],
-                category_of_worker=clean_data['category_of_worker'],
+                rating=clean_data['rating'], 
                 isBanned=False
 
                 ) 
@@ -132,8 +131,10 @@ class ClientSerializer(serializers.ModelSerializer):
 
 #Contact us""""""""""""""""""""""""""""""""""""""""""""
 
-class RegisterSerializer(serializers.ModelSerializer):
- 
+class ContactUsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Contact
+        fields = '__all__'
     def create(self, clean_data):
             
             theMessage = models.Contact.objects.create(

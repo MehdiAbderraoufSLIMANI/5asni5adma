@@ -31,12 +31,12 @@ class Person(models.Model):
 
 #Artisan""""""""""""""""""""""""""""""""
 class Artisan(Person):
-    numb_card_national = models.IntegerField(default=124)
+    #numb_card_national = models.IntegerField(default=124)
     wilaya = models.CharField(max_length=50)
     commune = models.CharField(max_length=50)
     adresse = models.CharField(max_length=50)
     rating = models.FloatField(max_length=1, editable=False, default=0)
-    category_of_worker = models.CharField(max_length=10, default=" ")
+    
 
     def __str__(self):
             return  str(self.email)
@@ -57,6 +57,18 @@ class Contact(models.Model):
     message = models.TextField()
     def __str__(self):
         return self.fullname   
+
+#Annonces""""""""""""""""""""""""""""""""
+class Annonces(models.Model):
+    date_of_pub = models.DateTimeField(verbose_name="date of publication")    
+    categorie = models.CharField(max_length=10)
+    service = models.CharField(max_length=20)
+    img_annonce = models.ImageField(verbose_name="img annonce") 
+    description = models.TextField()
+    rating_annonce = models.FloatField(max_length=1, editable=False, default=0,verbose_name="rating annonce")
+    artisan = models.ForeignKey(Artisan, on_delete=models.CASCADE)
+    
+ 
 
 
 #User""""""""""""""""""""""""""""""""

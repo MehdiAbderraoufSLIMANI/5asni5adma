@@ -1,25 +1,71 @@
 from typing import Any
 from django.db import models
 
- 
-#testing 2
-class usertest(models.Model):
-    name = models.TextField(max_length=50 ,default=" ")
-    password = models.TextField(max_length=50 ,default=" ")
+from django.contrib.auth.models import (
+    BaseUserManager, AbstractBaseUser, PermissionsMixin
+)
 
-class Person(models.Model):
-    username = models.CharField(max_length=50)
-    email = models.EmailField(unique=True)
-    password = models.CharField(max_length=50) 
+#MyUserManager""""""""""""""""""""""""""""""""
+class MyUserManager(BaseUserManager):
+    def create_user(self, email, username, nom, prenom, tel, password=None):
+        
+        if not email:
+            raise ValueError('Users must have an email address')
+    
+        email = self.normalize_email(email)
+        email = email.lower()
+
+        user = self.model(
+            email=email,
+            username = username,
+            nom = nom,
+            prenom = prenom,
+            password=password,
+            tel=tel
+        )
+
+        
+        user.set_password(password)
+
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, username, nom, prenom, tel, password=None):
+        user = self.create_user(
+            email = email,
+            username = username,
+            nom = nom,
+            prenom = prenom,
+            password=password,
+            tel=tel,
+        )
+        user.is_staff = True
+        user.is_superuser = True
+        user.save(using=self._db)
+        return user
+
+ 
+#Person""""""""""""""""""""""""""""""""
+class Person(AbstractBaseUser, PermissionsMixin):
+    username = models.CharField(max_length=20)
+    email = models.EmailField(max_length=255,unique=True)
     nom = models.CharField(max_length=50)
     prenom = models.CharField(max_length=50)
     tel = models.IntegerField()
-    isBanned = models.BooleanField()
+    isBanned = models.BooleanField(default=False)
     compte_type = models.CharField(max_length=10 ,editable=False) 
-
     token_of_validation = models.CharField(max_length=50,editable=False,default=' ')
-
     valid = models.BooleanField(default=False)
+
+    password2 = models.CharField(max_length=255, verbose_name= 'Password confirmation', null=True) 
+    is_active = models.BooleanField(default=True,editable=False)
+    is_staff = models.BooleanField(default=False,editable=False)
+
+
+    objects = MyUserManager()
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username', 'nom', 'prenom', 'tel' ]
+
     def save(self, *args, **kwargs):
         # Set the default compte_type based on the model subclass being created
         if isinstance(self, Artisan):
@@ -71,63 +117,5 @@ class Annonces(models.Model):
  
 
 
-#User""""""""""""""""""""""""""""""""
-
-from django.contrib.auth.models import (
-    BaseUserManager, AbstractBaseUser, PermissionsMixin
-)
-
-
-class MyUserManager(BaseUserManager):
-    def create_user(self, first_name, last_name, email, password=None):
-        
-        if not email:
-            raise ValueError('Users must have an email address')
-    
-        email = self.normalize_email(email)
-        email = email.lower()
-
-        user = self.model(
-            first_name=first_name,
-            last_name=last_name,
-            email=email
-        )
-
-        
-        user.set_password(password)
-
-        user.save(using=self._db)
-        return user
-
-    def create_superuser(self, first_name, last_name, email, password=None):
-        user = self.create_user(
-            first_name= first_name,
-            last_name= last_name,
-            email = email,
-            password=password,
-        )
-        user.is_staff = True
-        user.is_superuser = True
-        user.save(using=self._db)
-        return user
-
-
-class Administrateur(AbstractBaseUser, PermissionsMixin):
-    last_name = models.CharField(max_length=255, verbose_name='Last name') 
-    first_name = models.CharField(max_length=255, verbose_name='First name') 
-    email = models.EmailField(
-        verbose_name='email address',
-        max_length=255,
-        unique=True,
-    )
-    password2 = models.CharField(max_length=255, verbose_name= 'Password confirmation', null=True) 
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
-
-    objects = MyUserManager()
-
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name']
-
-    def __str__(self):
-        return f'First name: {self.first_name}, Last name: {self.last_name}, Email: {self.email}'    
+#Administrateur""""""""""""""""""""""""""""""""
+ 

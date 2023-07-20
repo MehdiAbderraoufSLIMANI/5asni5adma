@@ -24,6 +24,16 @@ class UserContactUs(APIView):
         if serializer.is_valid(raise_exception=True):
             serializer.create(data)
 
+#Login""""""""""""""""""""""""""""""""""""""""""""""""""
+class Login(APIView):
+    permission_classes = (permissions.AllowAny,)
+    def post(self, request):
+        
+        clean_data = request.data
+        serializer = serializers.LoginSerializer(data=clean_data)
+        if serializer.is_valid(raise_exception=True):
+            user = serializer.check_user(clean_data)
+          
 
 #Register""""""""""""""""""""""""""""""""""""""""""""""""""
 class UserRegister(APIView):
@@ -51,6 +61,7 @@ class EmailValidation(APIView):
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
 #""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""
 @api_view(['GET'])
 def userView(request,pk):
     print(pk)
@@ -68,7 +79,7 @@ def post(self, request):
     data = request.data
     print(data)
     return Response("serializer.data")
-
+"""
 
 #Artisan""""""""""""""""""""""""""""""""
 @api_view(['GET'])

@@ -1,13 +1,51 @@
+from django.forms import ValidationError
 from rest_framework import serializers
 from api import models,validations
 
+#Login""""""""""""""""""""""""""""""""""""""""""""
+class ArtisanSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Artisan
+        fields = '__all__'
 
+class ClientSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Client
+        fields = '__all__'
+
+class LoginSerializer(serializers.Serializer):
+    artisan = ArtisanSerializer()
+    client = ClientSerializer()
+    def check_user(self, clean_data):
+
+        # Attempt to find the email in Artisan and Client models
+        try:
+            artisan_instance = models.Artisan.objects.get(email=clean_data['email'])
+        except models.Artisan.DoesNotExist:
+            artisan_instance = None
+
+        try:
+            client_instance = models.Client.objects.get(email=clean_data['email'])
+        except models.Client.DoesNotExist:
+            client_instance = None
+        if artisan_instance == None and client_instance == None:
+            raise ValidationError('user not found')
+        elif artisan_instance != None:
+            return artisan_instance
+        elif client_instance != None:
+            return client_instance
+        else:
+            raise ValidationError('unknow errour')
+        
+        
+         
+ 
+        
+        
 
 #Register""""""""""""""""""""""""""""""""""""""""""""
 class RegisterSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.usertest
-        fields = '__all__'
+ 
     def create(self, clean_data):
         
         if clean_data['compte_type'] == "worker":
@@ -54,11 +92,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 
 
-#""""""""""""""""""""""""""""""""""""""""""""""""""""
-class usertestSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.usertest
-        fields = '__all__'
+
 
 
 #Artisan""""""""""""""""""""""""""""""""
@@ -99,9 +133,7 @@ class ClientSerializer(serializers.ModelSerializer):
 #Contact us""""""""""""""""""""""""""""""""""""""""""""
 
 class RegisterSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.usertest
-        fields = '__all__'
+ 
     def create(self, clean_data):
             
             theMessage = models.Contact.objects.create(
@@ -110,3 +142,10 @@ class RegisterSerializer(serializers.ModelSerializer):
                 message=clean_data['message']) 
              
             theMessage.save()
+
+"""
+class usertestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.usertest
+        fields = '__all__'
+"""

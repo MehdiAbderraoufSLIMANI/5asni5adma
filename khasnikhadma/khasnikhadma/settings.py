@@ -82,8 +82,12 @@ WSGI_APPLICATION = 'khasnikhadma.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': '5asni5admadb', 
+        'USER': 'postgres',
+        'PASSWORD': '5astni5admaadmin',
+        'HOST': '127.0.0.1', 
+        'PORT': '5432',
     }
 }
 
@@ -138,7 +142,7 @@ CORS_ALLOWED_ORIGINS = [
 
 CORS_ALLOW_CREDENTIALS = True
 
-AUTH_USER_MODEL = 'api.Administrateur'
+AUTH_USER_MODEL = 'api.Person'
 
 
 

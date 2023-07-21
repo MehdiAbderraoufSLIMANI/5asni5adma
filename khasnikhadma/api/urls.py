@@ -15,5 +15,6 @@ urlpatterns = [
     path('api/login/', views.Login.as_view() ,name='login'),
     path('api/valid/', views.EmailValidation.as_view() ,name='EmailValidation'),
     path('api/contectus/', views.UserContactUs.as_view() ,name='UserContactUs'),
+    path('api/user-data/', views.UserData.as_view(), name='user-data'),
      
 ]

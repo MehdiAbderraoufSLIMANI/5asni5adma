@@ -5,29 +5,29 @@ import {ReactComponent as LockLogo} from "../../resources/logos/lock-solid.svg"
 import {Link} from "react-router-dom"
 
 import { useEffect, useRef, useState } from 'react'
-import axios from 'axios';
-axios.defaults.xsrfCookieName = 'csrftoken';
-axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-axios.defaults.withCredentials = true;
-const client = axios.create({
-  baseURL: "http://127.0.0.1:8000"
-});
+
+import { client } from '../../App'
 
 
+export let user;
 const Login = () => {
  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [logedin, setlogedin] = useState(false);
-  const loginsubmition = (e) => {
+  const  handleLogin  = (e) => {
     e.preventDefault();
- 
-      client.post('/api/login/', 
-        {email: email,
-        password: password,}  )
+    const jsondata =
+    {email:email,
+     password:password
+    }
+      client.post('/api/login/', jsondata
+        )
       .then(response => {
-        setlogedin(true)
-        console.log('Registration successful:', logedin);
+      
+        window.location.href = '/';
+        user = response
+        console.log("Registration successful:"+logedin);
        
       })
       .catch(error => {
@@ -37,6 +37,23 @@ const Login = () => {
 
    }
   
+   const loginsubmition = (e) => {
+    e.preventDefault();
+    const jsondata =  {email: email,
+      password: password}  
+
+    client.post('/api/login/', jsondata)
+      .then(response => {
+        // Save the JWT token to local storage
+        localStorage.setItem('accessToken', response.data.access);
+        // Redirect to the dashboard or any other authenticated route
+        window.location.href = '/';
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+
 
   return (
     <div className="container">

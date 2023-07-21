@@ -21,7 +21,8 @@ class MyUserManager(BaseUserManager):
             nom = nom,
             prenom = prenom,
             password=password,
-            tel=tel
+            tel=tel,
+            compte_type = "Administrator"
         )
 
         
@@ -43,6 +44,45 @@ class MyUserManager(BaseUserManager):
         user.is_superuser = True
         user.save(using=self._db)
         return user
+    
+    def create_artisan(self,
+                username,
+                email,
+                password,
+                nom,
+                prenom,
+                tel,
+                wilaya,
+                commune,
+                adresse,
+                rating, 
+                isBanned):
+        
+        if not email:
+            raise ValueError('Users must have an email address')
+    
+        email = self.normalize_email(email)
+        email = email.lower()
+
+        user = self.model(
+                username=username,
+                email=email,
+                password=password,
+                nom=nom,
+                prenom=prenom,
+                tel=tel,
+                wilaya=wilaya,
+                commune=commune,
+                adresse=adresse,
+                rating=rating, 
+                isBanned=isBanned
+        )
+
+        
+        user.set_password(password)
+
+        user.save(using=self._db)
+        return user
 
  
 #Person""""""""""""""""""""""""""""""""
@@ -53,7 +93,7 @@ class Person(AbstractBaseUser, PermissionsMixin):
     prenom = models.CharField(max_length=50)
     tel = models.IntegerField()
     isBanned = models.BooleanField(default=False)
-    compte_type = models.CharField(max_length=10 ,editable=False) 
+    compte_type = models.CharField(max_length=20 ,editable=False) 
     token_of_validation = models.CharField(max_length=50,editable=False,default=' ')
     valid = models.BooleanField(default=False)
 
@@ -71,8 +111,13 @@ class Person(AbstractBaseUser, PermissionsMixin):
         if isinstance(self, Artisan):
             self.compte_type = "worker"
         elif isinstance(self, Client):
-            self.compte_type = "client"
+            self.compte_type = "client" 
         super().save(*args, **kwargs)
+
+
+    class Meta:
+        verbose_name = "Administrator"
+        verbose_name_plural = "Administrators"
 
 
 #Artisan""""""""""""""""""""""""""""""""
@@ -105,7 +150,7 @@ class Contact(models.Model):
         return self.fullname   
 
 #Annonces""""""""""""""""""""""""""""""""
-class Annonces(models.Model):
+class Annonce(models.Model):
     date_of_pub = models.DateTimeField(verbose_name="date of publication")    
     categorie = models.CharField(max_length=10)
     service = models.CharField(max_length=20)

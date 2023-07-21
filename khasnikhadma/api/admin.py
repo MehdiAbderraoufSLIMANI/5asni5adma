@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.models import User,AbstractUser
 
-from .models import Artisan,Client,MyUserManager ,Contact,Annonces
+from .models import Artisan,Client,MyUserManager ,Contact,Annonce,Person
 from django.contrib.auth.forms import UserChangeForm
  
  
@@ -30,8 +30,27 @@ class ClientAdmin(admin.ModelAdmin):
     readonly_fields = ('compte_type',)
     list_display = ('username','email', 'nom', 'prenom', 'tel', 'isBanned', 'compte_type', 'valid','wilaya','commune','adresse')
 
+#Administrator""""""""""""""""""""""""""""""""
+class PersonChangeForm(UserChangeForm):
+    class Meta(UserChangeForm.Meta):
+        model = Person
+        exclude = ['isBanned', 'valid', 'wilaya','commune','adresse']
+        verbose_name = "Administrator"
+        verbose_name_plural = "Administrators"
+@admin.register(Person)
+class PersonAdmin(admin.ModelAdmin):
+    form = PersonChangeForm
+    readonly_fields = ('compte_type',)
+    list_display = ('username','email', 'nom', 'prenom', 'tel' )
+
+    def get_queryset(self, request):
+        queryset = super().get_queryset(request) 
+        return queryset.filter(compte_type='Administrator')
+
 #Contact us""""""""""""""""""""""""""""""""
 admin.site.register(Contact)
 
 #Annonces""""""""""""""""""""""""""""""""
-admin.site.register(Annonces)
+admin.site.register(Annonce)
+
+ 

@@ -2,15 +2,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import Typed from 'typed.js';
 import { motion } from 'framer-motion';
 import './Acceuil.css';
-
-import axios from 'axios';
-axios.defaults.xsrfCookieName = 'csrftoken';
-axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-axios.defaults.withCredentials = true;
-const client = axios.create({
-  baseURL: "http://127.0.0.1:8000"
-});
-
+ 
+import { client } from '../../App'
 
 export default function Acceuil() {
 
@@ -18,6 +11,9 @@ export default function Acceuil() {
  const [userEmail, setUserEmail] = useState('');
  const [message, setMessage] = useState('');
  
+
+
+
  const contactSubmitHandler = (e) => {
   e.preventDefault();
 
@@ -54,6 +50,32 @@ export default function Acceuil() {
       typed.destroy();
     };
   }, []);
+
+
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    // Get the JWT token from local storage
+    const token = localStorage.getItem('accessToken');
+    const headers = { Authorization: `Bearer ${token}` };
+    console.log(headers)
+    // Make the authenticated API request to get user data
+    client.get('/api/user-data/', { headers })
+      .then(response => {
+        // Set the user data in the state
+        console.log(response.data)
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, []);
+
+
+
+
+
+
+
   return (
     <div>
       <div className="acceuil-intro container-fluid">

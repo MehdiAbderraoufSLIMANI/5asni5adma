@@ -1,6 +1,8 @@
 from django.forms import ValidationError
 from rest_framework import serializers
 from api import models,validations
+from django.contrib.auth import get_user_model, authenticate
+
 
 #Login""""""""""""""""""""""""""""""""""""""""""""
 class ArtisanSerializer(serializers.ModelSerializer):
@@ -14,8 +16,14 @@ class ClientSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class LoginSerializer(serializers.Serializer):
-    artisan = ArtisanSerializer()
-    client = ClientSerializer()
+ 
+    ##
+    def check_user(self, clean_data):
+        user = authenticate(username=clean_data['email'], password=clean_data['password'])
+        if not user:
+            raise ValidationError('user not found')
+        return user
+    """
     def check_user(self, clean_data):
 
         # Attempt to find the email in Artisan and Client models
@@ -36,10 +44,17 @@ class LoginSerializer(serializers.Serializer):
             return client_instance
         else:
             raise ValidationError('unknow errour')
+    """
+
         
         
          
- 
+#get the data of the loged in 
+
+class PersonSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Person
+        fields = ['username', 'email', 'nom', 'prenom', 'tel']
         
         
 
@@ -50,7 +65,7 @@ class RegisterSerializer(serializers.Serializer):
         
         if clean_data['compte_type'] == "worker":
             
-            user_obj = models.Artisan.objects.create(
+            user_obj = models.Artisan.objects.create_artisan(
                 username=clean_data['username'],
                 email=clean_data['email'],
                 password=clean_data['password'],
@@ -131,10 +146,8 @@ class ClientSerializer(serializers.ModelSerializer):
 
 #Contact us""""""""""""""""""""""""""""""""""""""""""""
 
-class ContactUsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.Contact
-        fields = '__all__'
+class ContactUsSerializer(serializers.Serializer):
+ 
     def create(self, clean_data):
             
             theMessage = models.Contact.objects.create(

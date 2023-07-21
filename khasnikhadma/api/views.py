@@ -6,12 +6,12 @@ from rest_framework.response import Response
 from api import serializers
  
 from api import models
-
-from django.contrib.auth import get_user_model, login, logout
+from rest_framework_simplejwt.tokens import RefreshToken
+from django.contrib.auth import get_user_model, login, logout,authenticate
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.views import APIView
 from rest_framework import permissions, status
-
+from rest_framework.permissions import IsAuthenticated
 from api import validations
 
 #Contact us""""""""""""""""""""""""""""""""""""""""""""""""
@@ -26,14 +26,40 @@ class UserContactUs(APIView):
 
 #Login""""""""""""""""""""""""""""""""""""""""""""""""""
 class Login(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = ()
+    
     def post(self, request):
-        
-        clean_data = request.data
-        serializer = serializers.LoginSerializer(data=clean_data)
-        if serializer.is_valid(raise_exception=True):
-            user = serializer.check_user(clean_data)
-          
+        email = request.data.get('email')
+        password = request.data.get('password')
+        user = authenticate(request, username=email, password=password)
+
+        if user is not None:
+            login(request, user)
+            refresh = RefreshToken.for_user(user)
+            return Response({
+                'refresh': str(refresh),
+                'access': str(refresh.access_token),
+                'user_data': {
+                    'username': user.username,
+                    'email': user.email,
+                    # Add other user-specific data as needed
+                }
+            })
+        else:
+            return Response({'error': 'Invalid credentials'}, status=401)
+
+
+class UserData(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        # Get the currently authenticated user
+        user = request.user
+        # Serialize the user data
+        serializer =serializers.PersonSerializer(user)
+        return Response(serializer.data)
+
+
 
 #Register""""""""""""""""""""""""""""""""""""""""""""""""""
 class UserRegister(APIView):

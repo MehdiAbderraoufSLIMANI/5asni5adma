@@ -4,53 +4,60 @@ import {ReactComponent as UserLogo} from "../../resources/logos/user-solid.svg"
 import {ReactComponent as LockLogo} from "../../resources/logos/lock-solid.svg"
 import {Link} from "react-router-dom"
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect,  useState } from 'react'
 
 import { client } from '../../App'
 
-
-export let user;
+import { isLoggedIn } from '../../conctions/AuthCon'
+ 
+import { useNavigate } from 'react-router-dom';
 const Login = () => {
+ 
+
+    const history = useNavigate();
+
+    const checklogin = async () => {
+      const loggedIn = await isLoggedIn();
+      return loggedIn;
+    };
+  
+    useEffect(() => {
+      const redirectToHome = async () => {
+        const loggedIn = await checklogin();
+        if (loggedIn) {
+          history('/');
+       
+         
+        }
+      };
+  
+      redirectToHome();
+    }, [history]);
+
  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [logedin, setlogedin] = useState(false);
-  const  handleLogin  = (e) => {
-    e.preventDefault();
-    const jsondata =
-    {email:email,
-     password:password
-    }
-      client.post('/api/login/', jsondata
-        )
-      .then(response => {
-      
-        window.location.href = '/';
-        user = response
-        console.log("Registration successful:"+logedin);
-       
-      })
-      .catch(error => {
-        console.error('Registration failed:', logedin);
-      
-      });
-
-   }
-  
+  const [error, setError] = useState('');
+ 
    const loginsubmition = (e) => {
     e.preventDefault();
-    const jsondata =  {email: email,
-      password: password}  
+    
 
-    client.post('/api/login/', jsondata)
+    client.post('/api/login/', 
+      {email: email,
+      password: password})
       .then(response => {
         // Save the JWT token to local storage
         localStorage.setItem('accessToken', response.data.access);
         // Redirect to the dashboard or any other authenticated route
         window.location.href = '/';
+        setError('')
       })
       .catch(error => {
-        console.error(error);
+           if (error.response && error.response.data && error.response.data.error) {
+          
+          setError(error.response.data.error);
+        }
       });
   };
 
@@ -63,6 +70,8 @@ const Login = () => {
             <p>Connexion</p>
             <div className="line"></div>
           </div>
+
+
           <form className="user-info"  onSubmit={(e)=>loginsubmition(e)}>
             <div className="input-box">
               <UserLogo className="icon"/>
@@ -84,6 +93,9 @@ const Login = () => {
               </Link>
             </div>
           </form>
+          <div  className="user-error" >
+                  {error && <p>{error}</p>}
+          </div>
         </div>
         <div className="rectangle"></div>
       </div>

@@ -1,14 +1,8 @@
 
-/*
-import {
-  BrowserRouter as Router,
-  Route,
-} from "react-router-dom";
-*/
 import React from 'react'; 
  
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route,  } from 'react-router-dom';
 import Acceuil from './pages/Acceuil/Acceuil';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -19,8 +13,7 @@ import Login from './pages/Login/Login';
 import AboutUs from './pages/AboutUs';
 import ErrorPage from './pages/ErrorPage';
 import Backendtest from './pages/Backendtest';
-import ValidationPage from './pages/ValidationPage';
-
+import ValidationPage from './pages/ValidationPage'; 
 import axios from 'axios';
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -31,12 +24,17 @@ export const client = axios.create({
 
 
 function App() {
+ 
+
+  // List of routes where Navbar should be hidden
+  const hideNavbarRoutes = ['/connection'];
+
   return (
     <div className="App">
       <Router>
 
         <header className="App-header">
-          <Navbar />
+          <Navbar /> 
         </header>
 
         <main>

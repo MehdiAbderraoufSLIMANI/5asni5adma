@@ -46,7 +46,7 @@ class Login(APIView):
                 }
             })
         else:
-            return Response({'error': 'Invalid credentials'}, status=401)
+            return Response({'error': 'Invalid email or password.'}, status=status.HTTP_401_UNAUTHORIZED)
 
 
 class UserData(APIView):
@@ -58,6 +58,9 @@ class UserData(APIView):
         # Serialize the user data
         serializer =serializers.PersonSerializer(user)
         return Response(serializer.data)
+
+ 
+ 
 
 
 

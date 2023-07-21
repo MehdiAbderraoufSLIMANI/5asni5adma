@@ -1,17 +1,50 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink, Link, useLocation } from 'react-router-dom'
 import { HashLink } from 'react-router-hash-link'
-import { motion } from 'framer-motion';
+import { motion } from 'framer-motion'; 
+
+
+ 
+import { client } from '../App';
+import { isLoggedIn } from '../conctions/AuthCon';  
+import { useNavigate } from 'react-router-dom';
 
 export default function Navbar() {
+
+  const history = useNavigate();
+  const [islogedin, setislogedin] = useState(false);
+  const checklogin = async () => {
+    const loggedIn = await isLoggedIn();
+    return loggedIn;
+  };
+
+  useEffect(() => {
+    const redirectToHome = async () => {
+      const loggedIn = await checklogin();
+      if (loggedIn) {
+         
+        setislogedin(true);
+       
+      }
+    };
+
+    redirectToHome();
+  }, [history]);
+  
+
+
+  
+  const handleLogout = () => {
+    localStorage.removeItem('accessToken');
+    setislogedin(false);
+  };
 
 /*Récupérer à partir de la table "anonce" toutes les categories existantes*/
   //testing
   const categories = ['Climatiseur', 'Menuisierie'];
 
-
-  
-
+  const sampleLocation = useLocation();
+ 
 
 
   
@@ -20,7 +53,7 @@ export default function Navbar() {
 
 
   //Récupérer l'url courante pour attribuer la classe 'active' au lien "Nos services" lorsqu'il est actif
-  const sampleLocation = useLocation();
+  
   useEffect(() => {
     sampleLocation.pathname.includes('/services') ? setIsActive(true) : setIsActive(false)
   }, [sampleLocation])
@@ -85,7 +118,14 @@ export default function Navbar() {
                 scale: 1
               }}
             >
-              <Link to='/connection' className="nav-link ">Se connecter</Link>
+              {islogedin ? (
+            // Render this link if the user is logged in
+            <Link to='/connection' onClick={handleLogout}  className="nav-link">Déconnecté</Link>
+          ) : (
+            // Render this link if the user is not logged in
+            <Link to='/connection' className="nav-link ">Se connecter</Link>
+          )}
+              
             </motion.li>
           </ul>
 

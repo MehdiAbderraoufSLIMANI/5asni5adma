@@ -4,8 +4,11 @@ import { motion } from 'framer-motion';
 import './Acceuil.css';
  
 import { client } from '../../App'
+ 
 
 export default function Acceuil() {
+
+
 
  const [fullname, setFullname] = useState('');
  const [userEmail, setUserEmail] = useState('');

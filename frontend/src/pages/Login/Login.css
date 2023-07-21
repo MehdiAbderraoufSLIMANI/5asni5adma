@@ -232,3 +232,8 @@
     flex: 1 0 0;
     align-self: stretch;
 }
+
+.user-error{
+    font-family: Poppins;
+    color: var(--rouge);
+}

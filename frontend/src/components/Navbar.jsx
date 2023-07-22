@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import { NavLink, Link, useLocation } from 'react-router-dom'
+import { NavLink,Link, useLocation } from 'react-router-dom'
 import { HashLink } from 'react-router-hash-link'
 import { motion } from 'framer-motion';
 
 export default function Navbar() {
 
-/*Récupérer à partir de la table "anonce" toutes les categories existantes*/
+/*Backend
+Récupérer à partir de la table "anonce" toutes les categories existantes*/
   //testing
   const categories = ['Climatiseur', 'Menuisierie'];
 
 
   
 
-
-
-  
   const [showDropdown, setShowDropdown] = useState(false);
   const [isActive, setIsActive] = useState(false);
+
 
 
   //Récupérer l'url courante pour attribuer la classe 'active' au lien "Nos services" lorsqu'il est actif
@@ -43,7 +42,7 @@ export default function Navbar() {
               <NavLink to='/' className="nav-link">Acceuil</NavLink>
             </li>
 
-            <li class="nav-item dropdown">
+            <li className="nav-item dropdown">
               <a href='#' onClick={() => setShowDropdown(!showDropdown)} className={`nav-link dropdown-toggle ${isActive? 'active' :''}`}>
                 Nos services
               </a>
@@ -58,8 +57,10 @@ export default function Navbar() {
             </li>
 
             <li className="nav-item">
-              <HashLink to='/#contact' className="nav-link ">Nous Contacter</HashLink>
+              <HashLink to='/#contact' smooth={true}  className="nav-link ">Nous Contacter</HashLink>  {/* scroll={(el) => el.scrollIntoView({ behavior: 'smooth', block: 'start' })} */}
             </li>
+
+
           </ul>
           <ul className="navbar-nav  mb-2 mb-lg-0 pushRight"  >
             <motion.li className="nav-item redBtn"

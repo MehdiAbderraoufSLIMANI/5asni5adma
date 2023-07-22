@@ -140,7 +140,7 @@ export default function Acceuil() {
         </div>
       </div>
 
-      <div id="contact" className='container-fluid text-light'>
+      <div id='contact'  className='container-fluid text-light'>  
         <div className="row justify-content-center align-items-center">
           <div className="col-md-6 contact-form">
             <h1 className='display-4'>Nous contacter</h1>
@@ -155,9 +155,8 @@ export default function Acceuil() {
                 <input type="email" className="form-control" placeholder='Votre email' value={userEmail} onChange={(e)=>setUserEmail(e.target.value)} />
               </div>
 
-              <div className="form-floating mb-5">
-                <textarea className="form-control" placeholder="Ecriver un message..." id="floatingTextarea" value={message} onChange={(e)=>setMessage(e.target.value)}></textarea>
-                <label htmlFor="floatingTextarea" style={{color: 'var(--noir)'}}>Message...</label>
+              <div className="mb-5">
+                <textarea placeholder="Entrez votre message ici..." className="form-control" value={message} onChange={(e)=>setMessage(e.target.value)}></textarea>
               </div>
 
               <button type="submit" className="btn envoyerMsg">Envoyer</button>

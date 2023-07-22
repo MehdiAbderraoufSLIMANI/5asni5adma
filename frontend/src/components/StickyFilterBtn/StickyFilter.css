@@ -1,0 +1,23 @@
+.sticky-container {
+    position: fixed;
+    bottom: 248px;
+    right: 8px;
+    background-color: var(--rouge); 
+    border-radius: 50%;
+    height: 60px;
+    width: 70px;
+    z-index: 10;
+    box-shadow: 0px 0px 8px  rgb(129, 129, 129);
+}
+.sticky-container button {
+    color: rgb(226, 224, 224);
+    font-size: 16px;
+    padding: 15px 8px;
+    text-align: center;
+    line-height: 16px;
+    transition: .4s ease-in-out;
+}
+.sticky-container:hover {
+    color: white;
+    background-color: #ec533f;
+}

@@ -21,8 +21,8 @@ export default function Footer() {
 
             <div className="col-md-4">
                 <p>Suivez nous</p>
-                <a href="https://fr-fr.facebook.com/"><i class="bi bi-facebook me-3"></i></a>
-                <a href="https://www.instagram.com/"><i class="bi bi-instagram"></i></a>
+                <a href="https://fr-fr.facebook.com/"><i className="bi bi-facebook me-3"></i></a>
+                <a href="https://www.instagram.com/"><i className="bi bi-instagram"></i></a>
             </div>
         </div>
     </div>

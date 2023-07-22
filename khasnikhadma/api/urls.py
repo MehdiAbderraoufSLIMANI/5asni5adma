@@ -7,7 +7,7 @@ from api import views
 path('apis/', views.usersView , name='users'),
 path('api/post', views.post , name='post'),
 path('api/user/<str:pk>/', views.userView ,name='user'),
-"""
+""" 
 urlpatterns = [
     path('api/client/', views.clientView ,name='client'),
     path('api/artisan/', views.artisanView ,name='artisan'),
@@ -16,5 +16,6 @@ urlpatterns = [
     path('api/valid/', views.EmailValidation.as_view() ,name='EmailValidation'),
     path('api/contectus/', views.UserContactUs.as_view() ,name='UserContactUs'),
     path('api/user-data/', views.UserData.as_view(), name='user-data'),
+    path('api/AnnonceCreate/', views.AnnonceCreate.as_view(), name='AnnonceCreate'),
      
 ]

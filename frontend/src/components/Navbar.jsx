@@ -95,6 +95,14 @@ export default function Navbar() {
             </li>
           </ul>
           <ul className="navbar-nav  mb-2 mb-lg-0 pushRight"  >
+
+            
+          {islogedin ? (
+              <div></div>
+            ) : (
+              // Render this link if the user is not logged in
+               
+
             <motion.li className="nav-item redBtn"
               whileHover={{
                 scale: 1.1,
@@ -105,8 +113,15 @@ export default function Navbar() {
                 scale: 1
               }}
             >
+
               <Link to='/inscription' className="nav-link ">Rejoigner nous</Link>
+           
+             
+             
+           
             </motion.li>
+            )}
+            
 
             <motion.li className="nav-item redBtn"
               whileHover={{

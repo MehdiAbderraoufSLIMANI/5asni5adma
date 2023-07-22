@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.models import User,AbstractUser
 
+from django.contrib.auth.models import Permission
 from .models import Artisan,Client,MyUserManager ,Contact,Annonce,Person
 from django.contrib.auth.forms import UserChangeForm
  
@@ -51,6 +52,9 @@ class PersonAdmin(admin.ModelAdmin):
 admin.site.register(Contact)
 
 #Annonces""""""""""""""""""""""""""""""""
-admin.site.register(Annonce)
-
+@admin.register(Annonce)
+class AnnonceAdmin(admin.ModelAdmin):
+    list_display = ("id", "date_of_pub", "categorie", "service",  )
  
+#Permission""""""""""""""""""""""""""""""""
+admin.site.register(Permission)

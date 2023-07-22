@@ -14,6 +14,21 @@ from rest_framework import permissions, status
 from rest_framework.permissions import IsAuthenticated
 from api import validations
 
+#AnnonceCreate""""""""""""""""""""""""""""""""""""""""""""""""
+class AnnonceCreate(APIView):
+    permission_classes = (permissions.AllowAny,)
+    def post(self, request):
+        
+        clean_data = request.data
+        serializer = serializers.AnnonceCreateSerializer(data=clean_data)
+        if serializer.is_valid(raise_exception=True):
+            created = serializer.create(clean_data)
+            if created:
+                return Response(status=status.HTTP_201_CREATED)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+
 #Contact us""""""""""""""""""""""""""""""""""""""""""""""""
 class UserContactUs(APIView):
     permission_classes = (permissions.AllowAny,)

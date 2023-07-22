@@ -12,8 +12,11 @@ import Inscription from './pages/Inscription';
 import Login from './pages/Login/Login';
 import AboutUs from './pages/AboutUs';
 import ErrorPage from './pages/ErrorPage';
-import Backendtest from './pages/Backendtest';
 import ValidationPage from './pages/ValidationPage'; 
+
+import Backendtest from './pages/Backendtest';
+import Annoncetesting from './testing/Annoncetesting';
+
 import axios from 'axios';
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -47,8 +50,11 @@ function App() {
             <Route path='/connection' element={<Login />} />
             <Route path='/about us' element={<AboutUs />} />
             <Route path='*' element={<ErrorPage />} />
-            <Route path='/backendtest' element={<Backendtest />} />
             <Route path='/ValidationPage' element={<ValidationPage />} />
+
+            
+            <Route path='/backendtest' element={<Backendtest />} />
+            <Route path='/Annoncetesting' element={<Annoncetesting />} />
           </Routes>
         </main>
 

@@ -22,4 +22,23 @@ export async function isLoggedIn() {
     }
   }
   
- 
+  
+export async function Logedininfo() {
+  try {
+    // Get the JWT token from local storage
+    const token = localStorage.getItem('accessToken');
+    if (!token) { 
+      return null;
+    }
+
+    const headers = { Authorization: `Bearer ${token}` };
+    // Make the authenticated API request to get user data
+    const response = await client.get('/api/user-data/', { headers });
+
+    // Assuming the request was successful, user is logged in
+    return response.data;
+  } catch (error) {
+    // If there's an error, user is not logged in
+    return null;
+  }
+}

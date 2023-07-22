@@ -1,23 +1,18 @@
 import { client } from '../App' 
 
  
-export async function isLoggedIn() {
-    try {
-      // Get the JWT token from local storage
+export  function isLoggedIn() {
+    try { 
       const token = localStorage.getItem('accessToken');
-      if (!token) {
-        // Token doesn't exist, user is not logged in
+      if (!token) { 
         return false;
-      }
-  
-      const headers = { Authorization: `Bearer ${token}` };
-      // Make the authenticated API request to get user data
-      const response = await client.get('/api/user-data/', { headers });
-  
-      // Assuming the request was successful, user is logged in
-      return true;
-    } catch (error) {
-      // If there's an error, user is not logged in
+      } 
+      const decodedPayload = JSON.parse(atob(token.split('.')[1]));
+      const currentTimestampInSeconds = Math.floor(Date.now() / 1000);
+      const isTokenExpired = decodedPayload.exp < currentTimestampInSeconds;
+ 
+      return !isTokenExpired;
+    } catch (error) { 
       return false;
     }
   }
@@ -33,9 +28,7 @@ export async function Logedininfo() {
 
     const headers = { Authorization: `Bearer ${token}` };
     // Make the authenticated API request to get user data
-    const response = await client.get('/api/user-data/', { headers });
-
-    // Assuming the request was successful, user is logged in
+    const response = await client.get('/api/user-data/', { headers }); 
     return response.data;
   } catch (error) {
     // If there's an error, user is not logged in

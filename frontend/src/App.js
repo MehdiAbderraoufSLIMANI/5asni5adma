@@ -1,6 +1,5 @@
  
-import React, {useState, useEffect } from 'react';
-import axios from 'axios';
+import React, {useState, useEffect } from 'react'; 
  
 import './App.css';
 import { BrowserRouter as Router, Routes, Route,  } from 'react-router-dom';
@@ -18,15 +17,17 @@ import ValidationPage from './pages/ValidationPage';
 
 import Backendtest from './pages/Backendtest';
 import Annoncetesting from './testing/Annoncetesting';
-
+import GoTop from './components/GoTopBtn/GoTop'; 
 import axios from 'axios';
+
+
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
 export const client = axios.create({
   baseURL: "http://127.0.0.1:8000"
 });
-import GoTop from './components/GoTopBtn/GoTop'; 
+
 
 function App() {
  
@@ -83,8 +84,6 @@ function App() {
             <Route path='/about us' element={<AboutUs />} />
             <Route path='*' element={<ErrorPage />} />
             <Route path='/ValidationPage' element={<ValidationPage />} />
-
-            
             <Route path='/backendtest' element={<Backendtest />} />
             <Route path='/Annoncetesting' element={<Annoncetesting />} />
           </Routes>

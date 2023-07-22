@@ -52,11 +52,8 @@ export default function Acceuil() {
       // Destroy Typed instance during cleanup to stop animation
       typed.destroy();
     };
-  }, []);
-
-
-  const [userData, setUserData] = useState(null);
-
+  }, []); 
+  
   useEffect(() => {
     // Get the JWT token from local storage
     const token = localStorage.getItem('accessToken');

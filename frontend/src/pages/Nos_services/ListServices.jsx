@@ -85,32 +85,7 @@ export default function ListServices() {
   const [isLoading, setIsLoading] = useState(true);
 
   const { categ } = useParams();
-
-  /* Backend
-    Récupérer toutes les annonces avec la clé étrangère 'id_artisan' plus la wilaya et la commune de l'artisan(jointure)
-   */
-    
-    /*useEffect( () => {
-      async function fetchAnnonces() {
-      setIsLoading(true);
-      try {
-        const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-        const data = await response.json();
-        setAllannonces(data);
-        if(categ) {
-          setAnnonces(data.filter(ann=>ann.categorie===categ))
-         }
-         else {
-           setAnnonces(data)
-            }  
-      setIsLoading(false);      
-      } catch (error) {
-        console.log("error", error);
-      }    
-  }
-  fetchAnnonces();
-    }, [] ) */
-    
+ 
   
     /***********************************************************************************************
     /******************  I put these commented instructions below to *********************************

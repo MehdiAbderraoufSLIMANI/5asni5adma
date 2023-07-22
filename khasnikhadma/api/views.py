@@ -57,7 +57,7 @@ class Login(APIView):
                 'user_data': {
                     'username': user.username,
                     'email': user.email,
-                    # Add other user-specific data as needed
+                   
                 }
             })
         else:

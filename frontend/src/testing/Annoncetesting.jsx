@@ -1,11 +1,6 @@
 // AnnonceForm.js
 import React, { useState } from "react";
-
-
-
-import axios from 'axios';
 import { client } from '../App'
-
 import { Logedininfo } from "../conctions/AuthCon";
 
 const Annoncetesting = () => {
@@ -14,7 +9,7 @@ const Annoncetesting = () => {
     service: "",
     img_annonce: null,
     description: "",
-    artisan: "", // Replace with the ID or other identifier of the selected artisan
+    artisan: "", 
   });
 
   const handleChange = (event) => {

@@ -39,3 +39,16 @@ cd frontend
 ```bash
 npm install
 ```
+
+--> in khasnikhadma/api
+create folder name it migrations and inside it create a file name **init**.py
+
+and then do :
+
+```bash
+python manage.py makemigrations
+```
+
+```bash
+python manage.py migrate
+```

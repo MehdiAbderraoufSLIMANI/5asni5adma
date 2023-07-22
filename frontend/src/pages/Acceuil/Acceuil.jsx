@@ -3,6 +3,13 @@ import Typed from 'typed.js';
 import { motion } from 'framer-motion';
 import './Acceuil.css';
 
+import axios from 'axios';
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.withCredentials = true;
+const client = axios.create({
+  baseURL: "http://127.0.0.1:8000"
+});
 
 
 export default function Acceuil() {
@@ -13,10 +20,22 @@ export default function Acceuil() {
  
  const contactSubmitHandler = (e) => {
   e.preventDefault();
-  //console.log(fullname,userEmail,message)
+
+  const jsondata = {
+    fullname: fullname,
+    userEmail: userEmail,
+    message: message,
+
+  }
+
+  client.post('/api/contectus/',jsondata)
+  .catch(error => {
+    console.error('Registration failed:', error);
+     
+  });
   setFullname('');
   setUserEmail('');
-  setMessage('');
+  setMessage(''); 
  }
  
 

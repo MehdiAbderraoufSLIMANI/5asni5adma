@@ -1,0 +1,233 @@
+@import url('https://fonts.googleapis.com/css2?family=Neucha&family=Outfit:wght@700&family=Poppins&display=swap');
+
+
+
+.container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 120px 336px;
+    margin-bottom: 136px;
+    padding-bottom: 20%;
+}
+.login-form{
+    width: 768px;
+    height: 706px;
+    position: relative;
+}
+
+.login-form .login-content{
+    display: flex;
+    width: 752px;
+    height: 688px;
+    padding: 32px 120px;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    background: var(--noir);
+    box-shadow: 0px 1px 8px 0px var(--noir);
+    gap: 80px;  
+
+}
+
+.login-form .login-content .login{
+    display: flex;
+    width: 272px;
+    flex-direction: column;
+    align-items: flex-start;
+    
+}
+
+.login-form .login-content .login p{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: stretch;
+    color: var(--rouge);
+    text-align: center;
+
+    /* Big titles/head */
+    font-family: Poppins;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: capitalize;
+}
+.login-form .login-content .login .line{
+    width: 80px;
+    height: 6px;
+    background-color: var(--rouge) ;
+}
+
+.login-form .login-content .user-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 56px;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.login-form .rectangle{
+    width: 752px;
+    height: 688px;
+    flex-shrink: 0;
+    background: var(--rouge);
+    box-shadow: 8px 8px 15px 0px rgba(0, 0, 0, 0.25);
+    position: absolute;
+    top: 16px;
+    right: -16px;   
+    z-index: -1;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 56px;
+    flex: 1 0 0;
+    align-self: stretch;
+    height: 288px;
+    
+}
+
+.user-info .input-box{
+    position: relative;
+    width: 100%;
+    height: 24px;
+    border-bottom: solid var(--rouge) 1px;
+}
+
+.input-box label{
+    position: absolute;
+    top: -8px;
+    left: 0;
+    color: rgba(234, 76, 54, 0.70);
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    pointer-events: none;
+    transition: .5s ease;
+}
+.input-box .email-input:focus~label,
+.input-box .password-input:focus~label,
+.input-box .email-input:valid~label,
+.input-box .password-input:valid~label,
+.input-box .email-input:active~label,
+.input-box .password-input:active~label
+{
+    top: -40px;
+}
+
+.input-box .email-input,
+.input-box .password-input{
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    position: absolute;
+    top: -8px;
+    color: #fff;
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    
+}
+
+.input-box .icon{
+    position: absolute;
+    right: 0;
+    top: -8px;
+    width: 16px;
+    flex-shrink: 0;
+    align-self: stretch;
+    fill: var(--rouge);
+}
+
+.btn-submit{
+    height: 64px;
+    padding: 16px 32px;
+    width: 100%;
+    background: linear-gradient(90deg, #EA4C36 0%, #F77F5C 100%);
+}
+
+.btn-login{
+   
+    width: 100%;
+    height: 100%;
+    color: #1C1F1E;
+    text-align: center;
+
+    /* Big titles/button-text */
+    font-family: Poppins;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    outline: none;
+    background: none;
+    border: none;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    align-self: stretch;
+}
+
+.buttons p{
+    display: flex;
+    justify-content: center;
+    align-self: stretch;
+    color: #FFF;
+    text-align: center;
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    gap: 8px;
+}
+
+.buttons p .cliquer-ici{
+    color: #fff;
+}
+
+.buttons .btn-register{
+    display: flex;
+    height: 56px;
+    padding: 16px 32px;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+    border: 2px solid #EA4C36;
+    text-decoration: none;
+} 
+
+.buttons .btn-register span{
+    color: var(--rouge);
+    text-align: center;
+
+    /* Big titles/button-text */
+    font-family: Poppins;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1 0 0;
+    align-self: stretch;
+}

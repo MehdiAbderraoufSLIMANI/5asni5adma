@@ -10,20 +10,14 @@ import ListServices from './pages/Nos_services/ListServices';
 import ConsulterService from './pages/ConsulterService';
 import FAQ from './pages/FAQ';
 import Inscription from './pages/Inscription';
-import Login from './pages/Login';
+import Login from './pages/Login/Login';
 import AboutUs from './pages/AboutUs';
 import ErrorPage from './pages/ErrorPage';
 import GoTop from './components/GoTopBtn/GoTop';
+import Backendtest from './pages/Backendtest';
+import ValidationPage from './pages/ValidationPage';
 
-
-axios.defaults.xsrfCookieName = 'csrftoken';
-axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-axios.defaults.withCredentials = true;
-
-const client = axios.create({
-  baseURL: "http://127.0.0.1:8000"
-});
-
+ 
 
 function App() {
 
@@ -95,6 +89,8 @@ function App() {
             <Route path='/connection' element={<Login />} />
             <Route path='/about us' element={<AboutUs />} />
             <Route path='*' element={<ErrorPage />} />
+            <Route path='/backendtest' element={<Backendtest />} />
+            <Route path='/ValidationPage' element={<ValidationPage />} />
           </Routes>
 
         </main>
@@ -107,44 +103,7 @@ function App() {
 
     </div>
   );
-
-
-
  
-const [email, setEmail] = useState(''); 
-const [password, setPassword] = useState('');
-
-
-
-function submitLogin(e) {
-  e.preventDefault();
-  client.post(
-    "/api/post",
-    {
-      email: email,
-      password: password
-    }
-  );
-}
-
-
-  return (
-    <form onSubmit={submitLogin}>
-    <div className="mb-3">
-      <label htmlFor="email">Email address</label>
-      <input type="email" id="email" placeholder="Enter email" value={email} onChange={e => setEmail(e.target.value)} />
-      <small className="text-muted">
-        We'll never share your email with anyone else.
-      </small>
-    </div>
-    <div className="mb-3">
-      <label htmlFor="password">Password</label>
-      <input type="password" id="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-    </div>
-    <button type="submit">Submit</button>
-  </form>
-  
-  );
 }
 
 export default App;

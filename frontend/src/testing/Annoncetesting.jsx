@@ -35,7 +35,7 @@ const Annoncetesting = () => {
     const jsonData = {
       categorie: formData["categorie"],
       service: formData["service"],
-      img_annonce: formData["img_annonce"],
+      img_annonce: formData["img_annonce"].name,
       description: formData["description"],
       artisan: '',
     };
@@ -43,7 +43,7 @@ const Annoncetesting = () => {
     (async () => {
       try {
         const user = await Logedininfo();
-        console.log(user)
+        console.log(jsonData)
         jsonData.artisan = user['email'];
   
         // Now, you can make the API request with the user information

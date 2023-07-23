@@ -17,5 +17,6 @@ urlpatterns = [
     path('api/contectus/', views.UserContactUs.as_view() ,name='UserContactUs'),
     path('api/user-data/', views.UserData.as_view(), name='user-data'),
     path('api/AnnonceCreate/', views.AnnonceCreate.as_view(), name='AnnonceCreate'),
+    path('api/Annonce/', views.AnnonceView, name='Annonce'),
      
 ]

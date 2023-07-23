@@ -52,9 +52,14 @@ class PersonAdmin(admin.ModelAdmin):
 admin.site.register(Contact)
 
 #Annonces""""""""""""""""""""""""""""""""
+from django.utils.html import format_html
 @admin.register(Annonce)
 class AnnonceAdmin(admin.ModelAdmin):
-    list_display = ("id", "date_of_pub", "categorie", "service",  )
+    def image_tag(self, obj):
+
+        return format_html('<img src="{}" style="max-width:200px; max-height:200px"/>'.format(obj.img_annonce.url))
+
+    list_display = ("id", "date_of_pub", "categorie", "service","image_tag"  )
  
 #Permission""""""""""""""""""""""""""""""""
 admin.site.register(Permission)

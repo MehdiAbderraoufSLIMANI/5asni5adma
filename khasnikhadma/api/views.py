@@ -14,6 +14,14 @@ from rest_framework import permissions, status
 from rest_framework.permissions import IsAuthenticated
 from api import validations
 
+
+#Annonce""""""""""""""""""""""""""""""""
+@api_view(['GET'])
+def AnnonceView(request):
+    queryset = models.Annonce.objects.all()
+    serializer = serializers.AnnonceSerializer(queryset ,many =True )
+    return Response(serializer.data)
+
 #AnnonceCreate""""""""""""""""""""""""""""""""""""""""""""""""
 class AnnonceCreate(APIView):
     permission_classes = (permissions.AllowAny,)

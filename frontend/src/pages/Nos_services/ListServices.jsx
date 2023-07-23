@@ -9,46 +9,10 @@ import StickyFilter from '../../components/StickyFilterBtn/StickyFilter';
 import './ListServices.css';
 import Skeleton from '../../components/Skeleton/Skeleton';
 
+import { annonceInfo  } from '../../conctions/AnnonceManip';
+
+import { client } from '../../App';
 export default function ListServices() {
-
-  const [scrollRate, setScrollRate] = useState(0);
-  const [showStickyFilter, setShowStickyFilter] = useState(false);
-
-  const handleScroll = () => {
-    const element = document.documentElement || document.body;
-    const scrollTop = element.scrollTop;
-    const scrollHeight = element.scrollHeight - element.clientHeight;
-    const rate = (scrollTop / scrollHeight) * 100;
-    setScrollRate(rate);
-  };
-
-  useEffect(() => {
-    // Ajouter un écouteur d'événement de défilement lors du montage du composant
-    window.addEventListener('scroll', handleScroll);
-
-    // Nettoyer l'écouteur d'événement lors du démontage du composant
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-  useEffect(() => {
-    if(scrollRate > 50) {//30
-      if(!showFilter) {
-        setShowStickyFilter(true);
-      }   
-    } else {
-      setShowStickyFilter(false);
-    }
-  
-  }, [scrollRate])
-
-
-
-
-
-
-  const { categorie, wilaya, commune,setCategorie, setWilaya, setCommune} = useContext(filterCtx);
 
   const TousAnnonces = [
     { num: 1,id_artisan: 1, categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
@@ -78,14 +42,92 @@ export default function ListServices() {
   ];
 
 
+  const [scrollRate, setScrollRate] = useState(0);
+  const [showStickyFilter, setShowStickyFilter] = useState(false);
+  
   const [annonces, setAnnonces] = useState([]);
-  const [allAnnonces, setAllannonces] = useState(TousAnnonces);
+  const [allAnnonces, setAllannonces] = useState([]);
   const [showFilter, setShowFilter] = useState(false);
   const [keyWord, setKeyWord] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
   const { categ } = useParams();
  
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(true);
+    getTousAnnonce();
+    
+    
+  }, []); 
+  useEffect(() => {
+    // This effect will run whenever 'allAnnonces' state is updated
+    if (allAnnonces.length > 0) {
+      setIsLoading(false);
+     setLoading(false)
+
+     if (categ) {
+      setAnnonces(allAnnonces.filter(ann => ann.categorie === categ));
+    }
+    else {
+      setAnnonces(allAnnonces);
+    }
+    setIsLoading(false);    
+    }
+  }, [allAnnonces,categ]);
+
+  const getTousAnnonce = async () => {
+    try {
+      const response = await client.get('/api/Annonce/');
+      const data = response.data;
+      setAllannonces(data);
+     
+    } catch (error) {
+      // If there's an error, user is not logged in
+      return null;
+    }
+  };
+
+  const handleScroll = () => {
+    const element = document.documentElement || document.body;
+    const scrollTop = element.scrollTop;
+    const scrollHeight = element.scrollHeight - element.clientHeight;
+    const rate = (scrollTop / scrollHeight) * 100;
+    setScrollRate(rate);
+  };
+
+  useEffect(() => { 
+    // Ajouter un écouteur d'événement de défilement lors du montage du composant
+    window.addEventListener('scroll', handleScroll);
+
+    // Nettoyer l'écouteur d'événement lors du démontage du composant
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    if(scrollRate > 50) {//30
+      if(!showFilter) {
+        setShowStickyFilter(true);
+      }   
+    } else {
+      setShowStickyFilter(false);
+    }
+  
+  }, [scrollRate])
+
+
+
+
+
+
+  const { categorie, wilaya, commune,setCategorie, setWilaya, setCommune} = useContext(filterCtx);
+
+
+ 
+
   
     /***********************************************************************************************
     /******************  I put these commented instructions below to *********************************
@@ -93,35 +135,17 @@ export default function ListServices() {
      * ************************************************************************************************/
   useEffect(()=> { 
     //async function fetchData() {
-    setIsLoading(true);
+    
     
      // const response = await fetch('https://jsonplaceholder.typicode.com/posts');
       //const data = await response.json();
-      if (categ) {
-        setAnnonces(allAnnonces.filter(ann => ann.categorie === categ));
-      }
-      else {
-        setAnnonces(allAnnonces);
-      }
-      setIsLoading(false);    
+ 
   //}
   //fetchData();
     }, [])
     
 
-
-  useEffect(() => {
-    setIsLoading(true);
-    setCurrentPage(1);
-    if (categ) {
-      setAnnonces(allAnnonces.filter(ann => ann.categorie === categ));
-    }
-    else {
-      setAnnonces(allAnnonces)
-    }
-    setIsLoading(false);
-  }, [categ])
-
+ 
   //Search bar logic
   const searchHandler = (e) => {
     setIsLoading(true);
@@ -193,8 +217,7 @@ export default function ListServices() {
   }, [wilaya])
 
   
-  
-  //Extraire toutes les catégories existantes
+ 
   const categories = [...new Set(allAnnonces.map(ann => ann.categorie))];
 
   return (
@@ -266,5 +289,5 @@ export default function ListServices() {
 
 
     </div>
-  )
+  ) 
 }

@@ -14,19 +14,38 @@ class AnnonceCreateSerializer(serializers.Serializer):
         annonce_obj = models.Annonce.objects.create(
                 categorie = clean_data['categorie'],
                 service = clean_data['service'],
-                img_annonce = clean_data['img_annonce'],
+                img_annonce ="annonce/"+clean_data['service']+"/"+ clean_data['img_annonce'],
                 description = clean_data['description'], 
                 artisan = user,
                 date_of_pub = timezone.now(),
-
             )       
         annonce_obj.save()
         return annonce_obj 
- 
 
+class ArtisanSerializer(serializers.ModelSerializer):
+    wilaya = serializers.CharField(source='artisan.wilaya')
+    commune = serializers.CharField(source='artisan.commune')
+    class Meta:
+        model =models.Artisan
+        fields = ('wilaya', 'commune')
 
+class AnnonceSerializer(serializers.ModelSerializer): 
+    num = serializers.IntegerField(source='id')
+    wilaya = serializers.CharField(source='artisan.wilaya')
+    commune = serializers.CharField(source='artisan.commune')
+    id_artisan = serializers.IntegerField(source='artisan.id')
+    img = serializers.CharField(source='img_annonce')
+    rating = serializers.CharField(source='rating_annonce')
+    class Meta:
+        model = models.Annonce
+        fields = ['num', 'id_artisan', 'categorie', 'service', 'img', 'rating', 'wilaya', 'commune']
+"""
+class AnnonceCreateSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = models.Annonce
+        fields = ['categorie', 'service','img_annonce', 'description', 'service','img_annonce', 'description']
 
-
+"""
 
 #Login""""""""""""""""""""""""""""""""""""""""""""
  

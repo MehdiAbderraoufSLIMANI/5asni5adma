@@ -16,12 +16,13 @@ import ListServices from './pages/ListServices';
 import FAQ from './pages/FAQ';
 import Inscription from './pages/Inscription/Inscription';
 import RegisterClient from './pages/Inscription/Register-client/RegisterClient'
+import RegisterWorker from './pages/Inscription/Register-worker/RegisterWorker'
 import Login from './pages/Login/Login';
 import AboutUs from './pages/AboutUs';
 import ErrorPage from './pages/ErrorPage';
 import Backendtest from './pages/Backendtest';
 import ValidationPage from './pages/ValidationPage';
-import RegisterWorker from './pages/Inscription/Register-worker/RegisterWorker';
+
 
  
 
@@ -41,8 +42,8 @@ function App() {
             <Route path='/services/:categorie' element={<ListServices />} />
             <Route path='/FAQ' element={<FAQ />} />
             <Route path='/inscription' element={<Inscription />} />
+            <Route path='/register-worker' element={<RegisterWorker/>} />
             <Route path='/register-client' element={<RegisterClient />} />
-            <Route path='/register-worker' element={<RegisterWorker />} />
             <Route path='/connection' element={<Login />} />
             <Route path='/about us' element={<AboutUs />} />
             <Route path='*' element={<ErrorPage />} />

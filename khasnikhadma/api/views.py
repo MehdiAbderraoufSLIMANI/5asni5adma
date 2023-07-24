@@ -12,7 +12,14 @@ from rest_framework.authentication import SessionAuthentication
 from rest_framework.views import APIView
 from rest_framework import permissions, status
 from rest_framework.permissions import IsAuthenticated
-from api import validations
+from api import validations,models
+from rest_framework.parsers import MultiPartParser, FormParser
+from .models import Artisan
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
+
+
 
 
 #Annonce""""""""""""""""""""""""""""""""
@@ -25,12 +32,14 @@ def AnnonceView(request):
 #AnnonceCreate""""""""""""""""""""""""""""""""""""""""""""""""
 class AnnonceCreate(APIView):
     permission_classes = (permissions.AllowAny,)
+    parser_classes = (MultiPartParser, FormParser,)
     def post(self, request):
         
         clean_data = request.data
+        
         serializer = serializers.AnnonceCreateSerializer(data=clean_data)
         if serializer.is_valid(raise_exception=True):
-            created = serializer.create(clean_data)
+            created = serializer.create(clean_data) 
             if created:
                 return Response(status=status.HTTP_201_CREATED)
         return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -48,6 +57,21 @@ class UserContactUs(APIView):
             serializer.create(data)
 
 #Login""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, Artisan):
+        token = super().get_token(Artisan)
+
+        # Add custom claims
+        token['email'] = Artisan.email
+        token['username'] = Artisan.username 
+        return token
+    
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
+
 class Login(APIView):
     permission_classes = ()
     

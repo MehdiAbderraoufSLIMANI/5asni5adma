@@ -14,7 +14,7 @@ class AnnonceCreateSerializer(serializers.Serializer):
         annonce_obj = models.Annonce.objects.create(
                 categorie = clean_data['categorie'],
                 service = clean_data['service'],
-                img_annonce ="annonce/"+clean_data['service']+"/"+ clean_data['img_annonce'],
+                img_annonce =clean_data['img_annonce'],
                 description = clean_data['description'], 
                 artisan = user,
                 date_of_pub = timezone.now(),

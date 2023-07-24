@@ -9,7 +9,7 @@ const Annoncetesting = () => {
     service: "",
     img_annonce: null,
     description: "",
-    artisan: "", 
+    artisan:'',
   });
 
   const handleChange = (event) => {
@@ -35,19 +35,28 @@ const Annoncetesting = () => {
     const jsonData = {
       categorie: formData["categorie"],
       service: formData["service"],
-      img_annonce: formData["img_annonce"].name,
+      img_annonce: formData["img_annonce"],
       description: formData["description"],
       artisan: '',
     };
+    const formDataObj = new FormData();
+    formDataObj.append("categorie", formData["categorie"]);
+    formDataObj.append("service", formData["service"]);
+    formDataObj.append("img_annonce", formData["img_annonce"]);
+    formDataObj.append("description", formData["description"]);
+  
+    // Append artisan separately since it's not a file
+    
+
   
     (async () => {
       try {
         const user = await Logedininfo();
-        console.log(jsonData)
-        jsonData.artisan = user['email'];
-  
+        formDataObj.append("artisan",  user['email']);
+       
+        console.log(formDataObj)
         // Now, you can make the API request with the user information
-        client.post("api/AnnonceCreate/", jsonData)
+        client.post("api/AnnonceCreate/", formDataObj)
           .then((response) => { 
             console.log("Success:", response.data);
           })

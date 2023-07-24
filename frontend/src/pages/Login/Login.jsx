@@ -41,11 +41,11 @@ const Login = () => {
  
    const loginsubmition = (e) => {
     e.preventDefault();
-    
+    const formDataObj = new FormData();
+    formDataObj.append("email", email);
+    formDataObj.append("password", password);
 
-    client.post('/api/login/', 
-      {email: email,
-      password: password})
+    client.post('api/token/', formDataObj )
       .then(response => {
         // Save the JWT token to local storage
         localStorage.setItem('accessToken', response.data.access);

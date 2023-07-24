@@ -1,11 +1,18 @@
 import React, { useRef, useState } from 'react'
 import {ReactComponent as UserLogo} from "../../../resources/logos/user-solid.svg"
 import {ReactComponent as LockLogo} from "../../../resources/logos/lock-solid.svg"
+import {ReactComponent as HashLogo} from "../../../resources/logos/hashtag-solid.svg"
+import {ReactComponent as LocationLogo} from "../../../resources/logos/location-dot-solid.svg"
+import {ReactComponent as PhoneLogo} from "../../../resources/logos/phone-solid.svg"
+import {ReactComponent as AtLogo} from "../../../resources/logos/at-solid.svg"
+import {ReactComponent as HammerLogo} from "../../../resources/logos/hammer-solid.svg"
+import {ReactComponent as PenLogo} from "../../../resources/logos/pen-clip-solid.svg"
+import {ReactComponent as CameraLogo} from "../../../resources/logos/camera-solid.svg"
 import jsonData from "../../../JSON/wilaya&commune.json"
 import {Link} from "react-router-dom"
 import "./RegisterWorker.css"
 
-const RegisterClient = () => {
+const RegisterWorker = () => {
 
   // Remove duplicates based on the "wilaya_name" property using Set
   const uniqueData = Array.from(new Set(jsonData.map((wilaya) => wilaya.wilaya_name))).map((wilaya_name) => {
@@ -29,7 +36,7 @@ const RegisterClient = () => {
           </div>
           <form className="user-info">
             <div className="input-box">
-              <UserLogo className="icon"/>
+              <HashLogo className="icon"/>
               <input type="number" className='input' required/>
               <label>Numéro nationale</label>
             </div>
@@ -44,7 +51,7 @@ const RegisterClient = () => {
               </select>
             </div>
             <div className="input-box">
-              <UserLogo className="icon"/>
+              <LocationLogo className="icon"/>
               <input type="text" className='input' required/>
               <label>Adresse de résidence</label>
             </div>
@@ -61,7 +68,7 @@ const RegisterClient = () => {
               </div>
             </div>
             <div className="input-box">
-              <UserLogo className="icon"/>
+              <AtLogo className="icon"/>
               <input type="email" className='input' required/>
               <label>Email</label>
             </div>
@@ -78,12 +85,12 @@ const RegisterClient = () => {
               </div>
             </div>
             <div className="input-box">
-                <UserLogo className="icon"/>
+                <PhoneLogo className="icon"/>
                 <input type="text" className='input' required/>
                 <label>Numéro de téléphone</label>
             </div>
             <div className="input-box">
-                <UserLogo className="icon"/>
+                <HammerLogo className="icon"/>
                 <input type="text" className='input' required/>
                 <label>Service</label>
             </div>
@@ -96,21 +103,21 @@ const RegisterClient = () => {
                 </select>
             </div>
             <div className="input-box">
-                <UserLogo className="icon"/>
+                <PenLogo className="icon"/>
                 <input type="text" className='input' required/>
                 <label>Discription du sevice</label>
             </div>
             <div className="input-box">
-                <UserLogo className="icon"/>
+                <CameraLogo className="icon"/>
                 <input type="file" className='input' required/>
             </div>
             <div className="btn-submit">
               <button type='submit' className='btn-register'>Inscription</button>
             </div>
             <div className="buttons">
-              <p>Mot de passe oublié.<Link className="cliquer-ici">cliquer ici</Link></p>
-              <Link className='btn-register' to="/inscription">
-                <span>Créer un compte</span>
+              <p>vous avez déja un compte?</p>
+              <Link className='btn-register' to="/connection">
+                <span>Connexion</span>
               </Link>
             </div>
           </form>
@@ -121,4 +128,4 @@ const RegisterClient = () => {
   )
 }
 
-export default RegisterClient
+export default RegisterWorker

@@ -1,8 +1,8 @@
-import React, {useState, useEffect } from 'react';
-import axios from 'axios';
+ 
+import React, {useState, useEffect } from 'react'; 
  
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route,  } from 'react-router-dom';
 import Acceuil from './pages/Acceuil/Acceuil';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -16,37 +16,32 @@ import FAQ from './pages/FAQ';
 import Login from './pages/Login/Login';
 import AboutUs from './pages/AboutUs';
 import ErrorPage from './pages/ErrorPage';
-import GoTop from './components/GoTopBtn/GoTop';
+import ValidationPage from './pages/ValidationPage'; 
+
 import Backendtest from './pages/Backendtest';
-import ValidationPage from './pages/ValidationPage';
+import Annoncetesting from './testing/Annoncetesting';
+import GoTop from './components/GoTopBtn/GoTop'; 
+import axios from 'axios';
+
+import { AuthProvider } from './conctions/AuthContext';
+import PrivateRoute from './conctions/PrivateRoute';
+
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.withCredentials = true;
+export const client = axios.create({
+  baseURL: "http://127.0.0.1:8000"
+});
 
 
  
 
 function App() {
+ 
+ 
 
 
-/***********************fetch***************************
-  let [user , setUsers] = useState([])
-  /*let [users , setUsers] = useState([])
 
-  useEffect (() => {
-    getUsers()
-  }, [])
-
-  let users = async ()=>{
-    let respo = await fetch("http://127.0.0.1:8000/api/client")
-    let data = await respo.json()
-    console.log(data)
-    setUsers(data)
-  }
-
-  let getUsers = async ()=>{
-    let respo = await fetch("http://127.0.0.1:8000/apis/")
-    let data = await respo.json()
-    console.log(data)
-    setUsers(data)
-  }*/
   const [scrollRate, setScrollRate] = useState(0);
   
   const handleScroll = () => {
@@ -74,29 +69,39 @@ function App() {
   return (
     <div className="App">
       <Router>
-
+      <AuthProvider>
         <header className="App-header">
-          <Navbar />
+          <Navbar /> 
         </header>
 
         <GoTop scrollRate={scrollRate} />  
         
         
         <main>
-          <Routes>
-            <Route path='/' element={<Acceuil />} />
+          <Routes> 
+          
             <Route path='/services' element={<ListServices />} />
             <Route path='/services/:categ' element={<ListServices />} />
             <Route path='/service/:numAnn/:idArtisan' element={<ConsulterService />} />
             <Route path='/FAQ' element={<FAQ />} />
             <Route path='/inscription' element={<Inscription />} />
+
+            <Route exact path='/' element={<PrivateRoute/>}>
+              <Route exact path='/' element={<Acceuil/>}/>
+            </Route> 
+                 
+
+            
             <Route path='/register-worker' element={<RegisterWorker/>} />
             <Route path='/register-client' element={<RegisterClient />} />
             <Route path='/connection' element={<Login />} />
             <Route path='/about us' element={<AboutUs />} />
             <Route path='*' element={<ErrorPage />} />
-            <Route path='/backendtest' element={<Backendtest />} />
             <Route path='/ValidationPage' element={<ValidationPage />} />
+            <Route path='/backendtest' element={<Backendtest />} />
+            <Route path='/Annoncetesting' element={<Annoncetesting />} />
+
+           
           </Routes>
 
         </main>
@@ -104,7 +109,7 @@ function App() {
         <footer className='App-footer'>
           <Footer />
         </footer>
-
+        </AuthProvider>
       </Router>
 
     </div>

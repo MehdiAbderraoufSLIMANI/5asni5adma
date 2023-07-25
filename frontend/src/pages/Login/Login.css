@@ -116,7 +116,7 @@
     transition: .5s ease;
 }
 .input-box .email-input:focus~label,
-.input-box .password-input:focus~label,
+.input-box .password-input:focus~label, 
 .input-box .email-input:valid~label,
 .input-box .password-input:valid~label,
 .input-box .email-input:active~label,
@@ -124,6 +124,8 @@
 {
     top: -40px;
 }
+ 
+
 
 .input-box .email-input,
 .input-box .password-input{
@@ -230,4 +232,9 @@
     justify-content: center;
     flex: 1 0 0;
     align-self: stretch;
+}
+
+.user-error{
+    font-family: Poppins;
+    color: var(--rouge);
 }

@@ -6,7 +6,7 @@ import './Annonce.css';
 export default function Annonce({ ann }) {
   return (
     <div className="col-md-5 col-lg-3 annonce-container">
-      <img src={ann.img} height='55%' width='100%' />
+      <img src={"http://127.0.0.1:8000/media/"+ann.img} height='55%' width='100%' />
       <h4> {ann.service} </h4>
       <StarRating rating={ann.rating} />
       <p>Catégorie: {ann.categorie} </p>

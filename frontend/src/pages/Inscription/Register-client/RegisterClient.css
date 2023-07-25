@@ -7,7 +7,10 @@
     justify-content: center;
     align-items: center;
     padding: 120px 336px;
-    padding-bottom: 60%;
+ 
+    padding-bottom: 90%;
+
+ 
 }
 
 
@@ -20,7 +23,9 @@
 .register-form .register-content{
     display: flex;
     width: 881.25px;
-    height: 1400px;
+ 
+    height: 1200px !important;
+ 
     padding: 32px 120px;
     flex-direction: column;
     align-items: center;
@@ -73,7 +78,9 @@
 .register-form .rectangle{
     
     width: 880px;
-    height: 1400px;
+ 
+    height: 1200px;
+ 
     flex-shrink: 0;
     background: var(--rouge);
     box-shadow: 8px 8px 15px 0px rgba(0, 0, 0, 0.25);

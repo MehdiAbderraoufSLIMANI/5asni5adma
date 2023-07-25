@@ -12,6 +12,7 @@ import Inscription from './pages/Inscription/Inscription';
 import RegisterClient from './pages/Inscription/Register-client/RegisterClient'
 import RegisterWorker from './pages/Inscription/Register-worker/RegisterWorker'
 import FAQ from './pages/FAQ';
+ 
 import Login from './pages/Login/Login';
 import AboutUs from './pages/AboutUs';
 import ErrorPage from './pages/ErrorPage';
@@ -32,6 +33,8 @@ export const client = axios.create({
   baseURL: "http://127.0.0.1:8000"
 });
 
+
+ 
 
 function App() {
  

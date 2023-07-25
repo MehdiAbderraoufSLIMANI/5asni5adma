@@ -27,7 +27,7 @@
     flex-shrink: 0;
     background: var(--noir);
     box-shadow: 0px 1px 8px 0px var(--noir);
-    gap: 80px;
+    gap: 80px;  
 
 }
 

@@ -89,7 +89,9 @@ nav ul.pageLinks li a:hover {
         margin-left: 3px;/*145*/
         width: 100%;
     }
-
+    .App-header {
+        padding-bottom: 20px;
+    }
     
 }
 
@@ -170,3 +172,6 @@ nav ul li.redBtn {
 .dropdown-menu {
     display: block !important;
   }
+
+
+ 

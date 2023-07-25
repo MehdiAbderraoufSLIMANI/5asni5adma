@@ -2,11 +2,15 @@
 
 .worker-register-conn{
     width: 100%;
+ 
+ 
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 120px 336px;
+ 
     padding-bottom: 90%;
+ 
 
 }
 
@@ -20,7 +24,9 @@
 .register-form .register-content{
     display: flex;
     width: 881.25px;
+ 
     height: 1400px !important;
+ 
     padding: 32px 120px;
     flex-direction: column;
     align-items: center;

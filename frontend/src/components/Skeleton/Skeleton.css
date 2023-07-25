@@ -1,0 +1,176 @@
+/*  rgb(99, 98, 98) avec #313131 */
+/* rgb(187, 186, 186) avec rgb(99, 98, 98) */
+
+@keyframes skeleton-anim {
+    to {
+        opacity: 0.7;
+    }
+}
+.main-content-sk {
+    background-color: #F2F2F2;  /* noir #313131*/
+    padding-top: 64px;
+    padding-bottom: 550px;
+}
+.filter-search-container-sk {
+    height: 120px;
+}
+@keyframes shine {	
+  to {
+    background-position: 100% 0, /* move highlight to right */ 0 0;
+  }
+}
+.filter-search-container-sk form {
+    width: 80%;
+  margin: 0 auto;
+    position: relative;
+  border-radius: 12px;
+  background: linear-gradient(	  
+      to right,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.5) 50%,
+      rgba(255, 255, 255, 0) 80%
+    ),
+    lightgray;
+  background-repeat: repeat-y;
+  background-size: 50px 500px;
+  background-position: 0 0;
+  animation: shine 1s infinite;	
+}
+.filter-search-container-sk input {
+    width: 60%;
+    height: 48px;
+    margin: 24px 32px 24px 48px;
+    border-radius: 40px;
+    padding-left: 16px;
+    background-color: rgb(99, 98, 98);
+    animation: skeleton-anim 1s ease infinite alternate;  
+}
+.filter-search-container-sk .icon-search-sk {
+    position: absolute;
+    top: 28px;
+    right: 36%;
+    background-color: rgb(187, 186, 186);
+    border-radius: 24px;
+    padding: 3px 10px;
+    width: 40px;
+    height: 40px;
+    animation: skeleton-anim 1s ease infinite alternate;
+}
+.filter-search-container-sk .filterBTN, .filter-search-container-sk .showAll {
+    padding: 8px 16px;
+    height: 48px;
+    border-radius: 24px;
+    background-color: rgb(99, 98, 98);
+    animation: skeleton-anim 1s ease infinite alternate;
+ }
+ .filter-search-container-sk .filterBTN {
+   position: absolute;
+   right: 24%;
+   top: 24px;
+   width: 100px;
+}
+.filter-search-container-sk .showAll {
+    position: absolute;
+    right: 6%;
+     top: 24px;
+     width: 164px;
+}
+
+@media all and (max-width: 992px ) {
+    .filterBTN {
+        position: absolute;
+        right: 22% !important;
+    } 
+    .showAll {
+        position: absolute;
+        right: 8px !important;
+    }
+    .filter-search-container-sk form {
+        width: 95%;
+    }
+}
+.List-annonces-sk {
+    margin-top: 64px; 
+}
+.adjustSize-sk {
+    width: 76% !important;
+    margin-right: 15px !important;
+}
+.annonce-container-sk {
+    background-color: rgb(99, 98, 98);
+    min-height: 600px;
+    padding: 8px;
+    border-radius: 8px;
+    margin-right: 16px; 
+    margin-bottom: 48px; 
+    position: relative;
+    animation: skeleton-anim 1s ease infinite alternate;
+}
+.annonce-container-sk .img-sk {  
+    border-radius: 8px;
+    height: 330px;
+    width: 100% ;
+}
+.annonce-container-sk .h4-sk {
+    margin-top: 24px;
+    width: 215px;
+    height: 40px;
+    border-radius: 8px;
+}
+.annonce-container-sk i.bi-star-fill {
+    font-size: 20px;
+    margin-right: 4px;
+    color:rgb(187, 186, 186);
+}
+.annonce-container-sk .categorie-sk { 
+    padding: 8px;
+    height: 32px;
+    width: 170px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+.annonce-container-sk .loc {
+    display: flex;
+    align-items: center;
+    margin-top: 16px;
+}
+.annonce-container-sk .icon-adress-sk {
+    margin-right: 8px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;   
+}
+.annonce-container-sk div.location-sk {
+    width: 120px;
+    height: 30px;
+    border-radius: 12px;
+}
+.annonce-container-sk a {
+     position: absolute;
+     bottom: 8px;
+     right: 16px;
+     width: 120px;
+     height: 48px;
+     padding: 12px 11px;
+     border-radius: 8px;
+}
+@media all and (min-width: 992px ) {
+    .annonce-container-sk {
+        width: 30% !important;
+    }
+}
+.annonce-container-sk .img-sk,.annonce-container-sk .h4-sk, 
+.annonce-container-sk .categorie-sk, .annonce-container-sk .icon-adress-sk,
+.annonce-container-sk div.location-sk, .annonce-container-sk a {
+  background: linear-gradient(	  
+      to right,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.5) 50%,
+      rgba(255, 255, 255, 0) 80%
+    ),
+    rgb(187, 186, 186);
+  background-repeat: repeat-y;
+  background-size: 50px 500px;
+  background-position: 0 0;
+  animation: shine 1s infinite;	
+}

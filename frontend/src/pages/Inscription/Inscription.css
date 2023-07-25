@@ -1,19 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Neucha&family=Outfit:wght@700&family=Poppins&display=swap');
 
 .inscription-container{
+
     width: 100%;
-    height: 100vh;
-    display: flex;
+    height: 100% !important;
+    display: flex;  
     justify-content: center;
     align-items: center;
     padding: 120px 336px;
-    margin-bottom: 136px;
-    padding-bottom: 20%;
-    
+    padding-bottom: 90%;
 }
 .register-form{
     width: 872px;
-    height: 440px;
+    height: 440px !important;
     position: relative;
 }
 

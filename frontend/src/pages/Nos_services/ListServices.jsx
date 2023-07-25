@@ -8,8 +8,7 @@ import Pagination from '../../components/Pagination/Pagination';
 import StickyFilter from '../../components/StickyFilterBtn/StickyFilter';
 import './ListServices.css';
 import Skeleton from '../../components/Skeleton/Skeleton';
-
-import { annonceInfo  } from '../../conctions/AnnonceManip';
+ 
 
 import { client } from '../../App';
 export default function ListServices() {
@@ -52,8 +51,7 @@ export default function ListServices() {
   const [isLoading, setIsLoading] = useState(true);
 
   const { categ } = useParams();
- 
-  const [loading, setLoading] = useState(true);
+  
 
   useEffect(() => {
     setIsLoading(true);
@@ -64,9 +62,7 @@ export default function ListServices() {
   useEffect(() => {
     // This effect will run whenever 'allAnnonces' state is updated
     if (allAnnonces.length > 0) {
-      setIsLoading(false);
-     setLoading(false)
-
+      setIsLoading(false); 
      if (categ) {
       setAnnonces(allAnnonces.filter(ann => ann.categorie === categ));
     }

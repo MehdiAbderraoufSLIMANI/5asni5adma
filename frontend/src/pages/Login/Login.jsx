@@ -1,65 +1,18 @@
-import React from 'react'
 import "./Login.css"
 import {ReactComponent as UserLogo} from "../../resources/logos/user-solid.svg"
 import {ReactComponent as LockLogo} from "../../resources/logos/lock-solid.svg"
 import {Link} from "react-router-dom"
 
-import { useEffect,  useState } from 'react'
-
-import { client } from '../../App'
-
-import { isLoggedIn } from '../../conctions/AuthCon'
  
-import { useNavigate } from 'react-router-dom';
+ 
+import React, {useContext} from 'react'
+
+import AuthContext  from '../../conctions/AuthContext'
 const Login = () => {
- 
+    
+    let {loginUser} = useContext(AuthContext)
 
-    const history = useNavigate();
 
-    const checklogin = async () => {
-      const loggedIn = await isLoggedIn();
-      return loggedIn;
-    };
-  
-    useEffect(() => {
-      const redirectToHome = async () => {
-        const loggedIn = await checklogin();
-        if (loggedIn) {
-          history('/');
-       
-         
-        }
-      };
-  
-      redirectToHome();
-    }, [history]);
-
- 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
- 
-   const loginsubmition = (e) => {
-    e.preventDefault();
-    const formDataObj = new FormData();
-    formDataObj.append("email", email);
-    formDataObj.append("password", password);
-
-    client.post('api/token/', formDataObj )
-      .then(response => {
-        // Save the JWT token to local storage
-        localStorage.setItem('accessToken', response.data.access);
-        // Redirect to the dashboard or any other authenticated route
-        window.location.href = '/';
-        setError('')
-      })
-      .catch(error => {
-           if (error.response && error.response.data && error.response.data.error) {
-          
-          setError(error.response.data.error);
-        }
-      });
-  };
 
 
   return (
@@ -72,15 +25,15 @@ const Login = () => {
           </div>
 
 
-          <form className="user-info"  onSubmit={(e)=>loginsubmition(e)}>
+          <form className="user-info" onSubmit={loginUser}>
             <div className="input-box">
               <UserLogo className="icon"/>
-              <input type="email" className='email-input' required value={email} onChange={(e)=>setEmail(e.target.value)}/>
+              <input type="email" className='email-input' required name="email" />
               <label>Email</label>
             </div>
             <div className="input-box">
               <LockLogo className="icon"/>
-              <input type="password" className='password-input' required  value={password} onChange={(e)=>setPassword(e.target.value)}/>
+              <input type="password" className='password-input' required name="password"/>
               <label>Mot de passe</label>
             </div>
             <div className="btn-submit">
@@ -93,15 +46,22 @@ const Login = () => {
               </Link>
             </div>
           </form>
-          <div  className="user-error" >
-                  {error && <p>{error}</p>}
-          </div>
+          
+
         </div>
         <div className="rectangle"></div>
       </div>
     </div>
     
   )
+
+  /*
+  
+            <div  className="user-error" >
+                  {error && <p>{error}</p>}
+          </div>
+
+  */ 
 }
 
 export default Login

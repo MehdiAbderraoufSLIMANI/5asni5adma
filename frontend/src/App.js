@@ -20,6 +20,8 @@ import Annoncetesting from './testing/Annoncetesting';
 import GoTop from './components/GoTopBtn/GoTop'; 
 import axios from 'axios';
 
+import { AuthProvider } from './conctions/AuthContext';
+import PrivateRoute from './conctions/PrivateRoute';
 
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -31,9 +33,7 @@ export const client = axios.create({
 
 function App() {
  
-
-  // List of routes where Navbar should be hidden
-  const hideNavbarRoutes = ['/connection'];
+ 
 
 
 
@@ -64,7 +64,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-
+      <AuthProvider>
         <header className="App-header">
           <Navbar /> 
         </header>
@@ -73,19 +73,30 @@ function App() {
         
         
         <main>
-          <Routes>
-            <Route path='/' element={<Acceuil />} />
+          <Routes> 
+          
             <Route path='/services' element={<ListServices />} />
             <Route path='/services/:categ' element={<ListServices />} />
             <Route path='/service/:numAnn/:idArtisan' element={<ConsulterService />} />
             <Route path='/FAQ' element={<FAQ />} />
             <Route path='/inscription' element={<Inscription />} />
-            <Route path='/connection' element={<Login />} />
+
+            <Route exact path='/' element={<PrivateRoute/>}>
+              <Route exact path='/' element={<Acceuil/>}/>
+            </Route> 
+                
+                
+                <Route path='/connection' element={<Login />} />
+           
+
+            
             <Route path='/about us' element={<AboutUs />} />
             <Route path='*' element={<ErrorPage />} />
             <Route path='/ValidationPage' element={<ValidationPage />} />
             <Route path='/backendtest' element={<Backendtest />} />
             <Route path='/Annoncetesting' element={<Annoncetesting />} />
+
+           
           </Routes>
 
         </main>
@@ -93,7 +104,7 @@ function App() {
         <footer className='App-footer'>
           <Footer />
         </footer>
-
+        </AuthProvider>
       </Router>
 
     </div>

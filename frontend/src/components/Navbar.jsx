@@ -4,39 +4,18 @@ import { HashLink } from 'react-router-hash-link'
 import { motion } from 'framer-motion'; 
 
 
- 
-import { client } from '../App';
-import { isLoggedIn } from '../conctions/AuthCon';  
-import { useNavigate } from 'react-router-dom';
+import   {useContext} from 'react' 
 
+import AuthContext from '../conctions/AuthContext';
 export default function Navbar() {
 
-  const history = useNavigate();
-  const [islogedin, setislogedin] = useState(false);
-  const checklogin = async () => {
-    const loggedIn = await isLoggedIn();
-    return loggedIn;
-  };
-
-  useEffect(() => {
-    const redirectToHome = async () => {
-      const loggedIn = await checklogin();
-      if (loggedIn) {
-         
-        setislogedin(true);
-       
-      }
-    };
-
-    redirectToHome();
-  }, [history]);
   
-
+  let {isLoggedIn,logoutUser} = useContext(AuthContext)
 
   
   const handleLogout = () => {
-    localStorage.removeItem('accessToken');
-    setislogedin(false);
+    logoutUser()
+     
   };
 
  
@@ -68,7 +47,7 @@ Récupérer à partir de la table "anonce" toutes les categories existantes*/
   return (
     <nav className="navbar navbar-expand-xl ">
       <div className="container-fluid" style={{ paddingBottom: '0px' }}>
-        <a className="navbar-brand">
+        <a className="navbar-brand"  >
           <img src="../images/logo.png" alt="logo" width="130px" height="70px" />
         </a>
         <div className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -106,7 +85,7 @@ Récupérer à partir de la table "anonce" toutes les categories existantes*/
           <ul className="navbar-nav  mb-2 mb-lg-0 pushRight"  >
 
             
-          {islogedin ? (
+          {isLoggedIn() ? (
               <div></div>
             ) : (
               // Render this link if the user is not logged in
@@ -142,7 +121,7 @@ Récupérer à partir de la table "anonce" toutes les categories existantes*/
                 scale: 1
               }}
             >
-              {islogedin ? (
+              {isLoggedIn() ? (
             // Render this link if the user is logged in
             <Link to='/connection' onClick={handleLogout}  className="nav-link">Déconnecté</Link>
           ) : (

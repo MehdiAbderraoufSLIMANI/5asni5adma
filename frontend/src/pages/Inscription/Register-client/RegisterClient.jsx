@@ -2,14 +2,17 @@ import React, { useRef, useState } from 'react'
 import {ReactComponent as UserLogo} from "../../../resources/logos/user-solid.svg"
 import {ReactComponent as LockLogo} from "../../../resources/logos/lock-solid.svg"
 import {ReactComponent as HashLogo} from "../../../resources/logos/hashtag-solid.svg"
-import {ReactComponent as HouseLogo} from "../../../resources/logos/location-dot-solid.svg"
-import {ReactComponent as AtLogo} from "../../../resources/logos/at-solid.svg"
+ 
+import {ReactComponent as LocationLogo} from "../../../resources/logos/location-dot-solid.svg"
 import {ReactComponent as PhoneLogo} from "../../../resources/logos/phone-solid.svg"
+import {ReactComponent as AtLogo} from "../../../resources/logos/at-solid.svg"
 import jsonData from "../../../JSON/wilaya&commune.json"
 import {Link} from "react-router-dom"
-import "./RegisterClient"
+import "./RegisterClient.css"
 
 const RegisterClient = () => {
+
+ 
   // Remove duplicates based on the "wilaya_name" property using Set
   const uniqueData = Array.from(new Set(jsonData.map((wilaya) => wilaya.wilaya_name))).map((wilaya_name) => {
     return jsonData.find((item) => item.wilaya_name === wilaya_name);
@@ -47,7 +50,9 @@ const RegisterClient = () => {
               </select>
             </div>
             <div className="input-box">
-              <HouseLogo className="icon"/>
+ 
+              <LocationLogo className="icon"/>
+ 
               <input type="text" className='input' required/>
               <label>Adresse de résidence</label>
             </div>
@@ -82,14 +87,18 @@ const RegisterClient = () => {
             </div>
             <div className="input-box">
                 <PhoneLogo className="icon"/>
-                <input type="number" className='input' required/>
+ 
+                <input type="text" className='input' required/>
+ 
                 <label>Numéro de téléphone</label>
             </div>
             <div className="btn-submit">
               <button type='submit' className='btn-register'>Inscription</button>
             </div>
             <div className="buttons">
-              <p>Vous avez déja un compte.</p>
+ 
+              <p>vous avez déja un compte?</p>
+ 
               <Link className='btn-register' to="/connection">
                 <span>Connexion</span>
               </Link>

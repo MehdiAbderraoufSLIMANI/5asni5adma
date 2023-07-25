@@ -12,12 +12,14 @@ import Inscription from './pages/Inscription/Inscription';
 import RegisterClient from './pages/Inscription/Register-client/RegisterClient'
 import RegisterWorker from './pages/Inscription/Register-worker/RegisterWorker'
 import FAQ from './pages/FAQ';
+ 
 import Login from './pages/Login/Login';
 import AboutUs from './pages/AboutUs';
 import ErrorPage from './pages/ErrorPage';
 import GoTop from './components/GoTopBtn/GoTop';
 import Backendtest from './pages/Backendtest';
 import ValidationPage from './pages/ValidationPage';
+
 
  
 

@@ -13,7 +13,7 @@ import Skeleton from '../../components/Skeleton/Skeleton';
 import { client } from '../../App';
 export default function ListServices() {
 
-  const TousAnnonces = [
+  /*const TousAnnonces = [
     { num: 1,id_artisan: 1, categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
     { num: 2,id_artisan: 1, categorie: 'Peintre', service: 'peinture mur', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Ain Taya' },
     { num: 3,id_artisan: 1, categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '4', wilaya: 'Alger', commune: 'Kouba' },
@@ -38,7 +38,7 @@ export default function ListServices() {
     { num: 21,id_artisan: 5,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
     { num: 22,id_artisan: 5,  categorie: 'Peintre', service: 'peinture mur', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
     { num: 23,id_artisan: 5,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-  ];
+  ];*/
 
 
   const [scrollRate, setScrollRate] = useState(0);
@@ -55,10 +55,9 @@ export default function ListServices() {
 
   useEffect(() => {
     setIsLoading(true);
-    getTousAnnonce();
-    
-    
+    getTousAnnonce(); 
   }, []); 
+
   useEffect(() => {
     // This effect will run whenever 'allAnnonces' state is updated
     if (allAnnonces.length > 0) {
@@ -104,7 +103,7 @@ export default function ListServices() {
   }, []);
 
   useEffect(() => {
-    if(scrollRate > 50) {//30
+    if(scrollRate > 50) {
       if(!showFilter) {
         setShowStickyFilter(true);
       }   
@@ -122,24 +121,17 @@ export default function ListServices() {
   const { categorie, wilaya, commune,setCategorie, setWilaya, setCommune} = useContext(filterCtx);
 
 
- 
-
-  
-    /***********************************************************************************************
-    /******************  I put these commented instructions below to *********************************
-     * ****************  test the skeleton while loading the page, you need to put the Network on slow 3G    ***************************
-     * ************************************************************************************************/
-  useEffect(()=> { 
-    //async function fetchData() {
-    
-    
-     // const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-      //const data = await response.json();
- 
-  //}
-  //fetchData();
-    }, [])
-    
+  useEffect(() => {
+    setIsLoading(true);
+    setCurrentPage(1);
+    if (categ) {
+      setAnnonces(allAnnonces.filter(ann => ann.categorie === categ));
+    }
+    else {
+      setAnnonces(allAnnonces)
+    }
+    setIsLoading(false);
+  }, [categ])
 
  
   //Search bar logic
@@ -164,7 +156,7 @@ export default function ListServices() {
   
   //Pagination logic
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;  // optimal val: 12
+  const itemsPerPage = 12;  
   const nbPages = Math.ceil(annonces.length / itemsPerPage);
   const firstInd = (currentPage-1) * itemsPerPage;
   const lastInd = currentPage * itemsPerPage;

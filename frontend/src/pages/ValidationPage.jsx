@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import React, { useEffect} from 'react';
+import React, { useEffect , useState} from 'react';
 import axios from 'axios';
  
 
@@ -13,25 +13,27 @@ const client = axios.create({
 
 function ValidationPage(){
 
-    const location = useLocation();
-    let token,id,typea;
+    const location = useLocation(); 
+    
+    const [token, setToken] = useState('');
+    const [id, setUserId] = useState('');
+    const [typea, setTypea] = useState('');
     useEffect(() => {
       const searchParams = new URLSearchParams(location.search);
-      token = searchParams.get('token');
-      id = searchParams.get('id');
-      typea = searchParams.get('typea');
+      setToken(searchParams.get('token'));
+      setUserId(searchParams.get('id'));
+      setTypea(searchParams.get('typea')); 
        
     }, [location.search]);
 
   function validSubmit(event){
     event.preventDefault();
-
-    const jas = { 
-        token: token,
-        id: id,
-        typea: typea,
-    }
-    client.post('/api/valid/', jas  )
+ 
+    client.post('/api/valid/',  { 
+      token: token,
+      id: id,
+      typea: typea,
+  }  )
       .then(response => {
         console.log('Registration successful:', response.data);
         
@@ -39,8 +41,7 @@ function ValidationPage(){
       .catch(error => {
         console.error('Registration failed:', error);
         
-      });
-    console.log(jas);
+      }); 
   };
 
     return (

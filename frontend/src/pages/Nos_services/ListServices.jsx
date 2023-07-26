@@ -8,11 +8,81 @@ import Pagination from '../../components/Pagination/Pagination';
 import StickyFilter from '../../components/StickyFilterBtn/StickyFilter';
 import './ListServices.css';
 import Skeleton from '../../components/Skeleton/Skeleton';
+ 
 
+import { client } from '../../App';
 export default function ListServices() {
+
+  /*const TousAnnonces = [
+    { num: 1,id_artisan: 1, categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
+    { num: 2,id_artisan: 1, categorie: 'Peintre', service: 'peinture mur', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Ain Taya' },
+    { num: 3,id_artisan: 1, categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '4', wilaya: 'Alger', commune: 'Kouba' },
+    { num: 4,id_artisan: 1, categorie: 'Menuisierie', service: 'armoire et lit', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
+    { num: 5,id_artisan: 1, categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
+    { num: 6,id_artisan: 1, categorie: 'Menuisierie', service: 'armoire et lit', img: '../images/peintre.jpg', rating: '1', wilaya: 'Jijel', commune: 'Taher' },
+    { num: 7,id_artisan: 1, categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
+    { num: 8,id_artisan: 2, categorie: 'Menuisierie', service: 'armoire et lit', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Sidi Moussa' },
+    { num: 9,id_artisan: 2, categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '5', wilaya: 'Jijel', commune: 'Taher' },
+    { num: 10,id_artisan: 3,  categorie: 'Peintre', service: 'peinture mur', img: '../images/peintre.jpg', rating: '2', wilaya: 'Alger', commune: 'Ain Taya' },
+    { num: 11,id_artisan: 3,  categorie: 'Peintre', service: 'peinture mur', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Ain Taya' },
+    { num: 12,id_artisan: 3,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
+    { num: 13,id_artisan: 3,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Sidi Moussa' },
+    { num: 14,id_artisan: 3,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
+    { num: 15,id_artisan: 3,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
+    
+    { num: 16,id_artisan: 4,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
+    { num: 17,id_artisan: 4,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
+    { num: 18,id_artisan: 4,  categorie: 'Peintre', service: 'peinture mur', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
+    { num: 19,id_artisan: 4,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
+    { num: 20,id_artisan: 5,  categorie: 'Peintre', service: 'peinture mur', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
+    { num: 21,id_artisan: 5,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
+    { num: 22,id_artisan: 5,  categorie: 'Peintre', service: 'peinture mur', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
+    { num: 23,id_artisan: 5,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
+  ];*/
+
 
   const [scrollRate, setScrollRate] = useState(0);
   const [showStickyFilter, setShowStickyFilter] = useState(false);
+  
+  const [annonces, setAnnonces] = useState([]);
+  const [allAnnonces, setAllannonces] = useState([]);
+  const [showFilter, setShowFilter] = useState(false);
+  const [keyWord, setKeyWord] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+
+  const { categ } = useParams();
+  
+
+  useEffect(() => {
+    setIsLoading(true);
+    getTousAnnonce(); 
+  }, []); 
+
+  useEffect(() => {
+    // This effect will run whenever 'allAnnonces' state is updated
+    if (allAnnonces.length > 0) {
+      setIsLoading(false); 
+     if (categ) {
+      setAnnonces(allAnnonces.filter(ann => ann.categorie === categ));
+    }
+    else {
+      setAnnonces(allAnnonces);
+    }
+    setIsLoading(false);    
+    }
+  }, [allAnnonces,categ]);
+
+  const getTousAnnonce = async () => {
+    try {
+      const response = await client.get('/api/Annonce/');
+      const data = response.data;
+      setAllannonces(data);
+     
+    } catch (error) {
+      // If there's an error, user is not logged in
+      return null;
+    }
+  };
 
   const handleScroll = () => {
     const element = document.documentElement || document.body;
@@ -22,7 +92,7 @@ export default function ListServices() {
     setScrollRate(rate);
   };
 
-  useEffect(() => {
+  useEffect(() => { 
     // Ajouter un écouteur d'événement de défilement lors du montage du composant
     window.addEventListener('scroll', handleScroll);
 
@@ -50,90 +120,6 @@ export default function ListServices() {
 
   const { categorie, wilaya, commune,setCategorie, setWilaya, setCommune} = useContext(filterCtx);
 
-  const TousAnnonces = [
-    { num: 1,id_artisan: 1, categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/logo.png', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 2,id_artisan: 1, categorie: 'Peintre', service: 'peinture mur', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Ain Taya' },
-    { num: 3,id_artisan: 1, categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '4', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 4,id_artisan: 1, categorie: 'Menuisierie', service: 'armoire et lit', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 5,id_artisan: 1, categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 6,id_artisan: 1, categorie: 'Menuisierie', service: 'armoire et lit', img: '../images/peintre.jpg', rating: '1', wilaya: 'Jijel', commune: 'Taher' },
-    { num: 7,id_artisan: 1, categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 8,id_artisan: 2, categorie: 'Menuisierie', service: 'armoire et lit', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Sidi Moussa' },
-    { num: 9,id_artisan: 2, categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '5', wilaya: 'Jijel', commune: 'Taher' },
-    { num: 10,id_artisan: 3,  categorie: 'Peintre', service: 'peinture mur', img: '../images/peintre.jpg', rating: '2', wilaya: 'Alger', commune: 'Ain Taya' },
-    { num: 11,id_artisan: 3,  categorie: 'Peintre', service: 'peinture mur', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Ain Taya' },
-    { num: 12,id_artisan: 3,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 13,id_artisan: 3,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Sidi Moussa' },
-    { num: 14,id_artisan: 3,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 15,id_artisan: 3,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    
-    { num: 16,id_artisan: 4,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 17,id_artisan: 4,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 18,id_artisan: 4,  categorie: 'Peintre', service: 'peinture mur', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 19,id_artisan: 4,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 20,id_artisan: 5,  categorie: 'Peintre', service: 'peinture mur', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 21,id_artisan: 5,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 22,id_artisan: 5,  categorie: 'Peintre', service: 'peinture mur', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 23,id_artisan: 5,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-  ];
-
-
-  const [annonces, setAnnonces] = useState([]);
-  const [allAnnonces, setAllannonces] = useState(TousAnnonces);
-  const [showFilter, setShowFilter] = useState(false);
-  const [keyWord, setKeyWord] = useState('');
-  const [isLoading, setIsLoading] = useState(true);
-
-  const { categ } = useParams();
-
-  /* Backend
-    Récupérer toutes les annonces avec la clé étrangère 'id_artisan' plus la wilaya et la commune de l'artisan(jointure)
-   */
-    
-    /*useEffect( () => {
-      async function fetchAnnonces() {
-      setIsLoading(true);
-      try {
-        const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-        const data = await response.json();
-        setAllannonces(data);
-        if(categ) {
-          setAnnonces(data.filter(ann=>ann.categorie===categ))
-         }
-         else {
-           setAnnonces(data)
-            }  
-      setIsLoading(false);      
-      } catch (error) {
-        console.log("error", error);
-      }    
-  }
-  fetchAnnonces();
-    }, [] ) */
-    
-  
-    /***********************************************************************************************
-    /******************  I put these commented instructions below to *********************************
-     * ****************  test the skeleton while loading the page, you should put the Network on slow 3G    ***************************
-     * ************************************************************************************************/
-  useEffect(()=> { 
-    //async function fetchData() {
-    setIsLoading(true);
-    
-     // const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-      //const data = await response.json();
-      if (categ) {
-        setAnnonces(allAnnonces.filter(ann => ann.categorie === categ));
-      }
-      else {
-        setAnnonces(allAnnonces);
-      }
-      setIsLoading(false);    
-  //}
-  //fetchData();
-    }, [])
-    
-
 
   useEffect(() => {
     setIsLoading(true);
@@ -147,6 +133,7 @@ export default function ListServices() {
     setIsLoading(false);
   }, [categ])
 
+ 
   //Search bar logic
   const searchHandler = (e) => {
     setIsLoading(true);
@@ -218,8 +205,7 @@ export default function ListServices() {
   }, [wilaya])
 
   
-  
-  //Extraire toutes les catégories existantes
+ 
   const categories = [...new Set(allAnnonces.map(ann => ann.categorie))];
 
   return (
@@ -291,5 +277,5 @@ export default function ListServices() {
 
 
     </div>
-  )
+  ) 
 }

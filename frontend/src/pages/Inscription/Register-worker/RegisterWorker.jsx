@@ -1,7 +1,6 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useContext } from 'react'
 import {ReactComponent as UserLogo} from "../../../resources/logos/user-solid.svg"
-import {ReactComponent as LockLogo} from "../../../resources/logos/lock-solid.svg"
-import {ReactComponent as HashLogo} from "../../../resources/logos/hashtag-solid.svg"
+import {ReactComponent as LockLogo} from "../../../resources/logos/lock-solid.svg" 
  
 import {ReactComponent as LocationLogo} from "../../../resources/logos/location-dot-solid.svg"
 import {ReactComponent as PhoneLogo} from "../../../resources/logos/phone-solid.svg"
@@ -13,19 +12,20 @@ import {ReactComponent as CameraLogo} from "../../../resources/logos/camera-soli
 import jsonData from "../../../JSON/wilaya&commune.json"
 import {Link} from "react-router-dom"
 import "./RegisterWorker.css"
-
+import AuthContext from '../../../conctions/AuthContext'
 const RegisterWorker = () => {
+  let {regesterWorker} = useContext(AuthContext)
 
   // Remove duplicates based on the "wilaya_name" property using Set
-  const uniqueData = Array.from(new Set(jsonData.map((wilaya) => wilaya.wilaya_name))).map((wilaya_name) => {
-    return jsonData.find((item) => item.wilaya_name === wilaya_name);
+  const uniqueData = Array.from(new Set(jsonData.map((wilaya) => wilaya.wilaya_name_ascii))).map((wilaya_name_ascii) => {
+    return jsonData.find((item) => item.wilaya_name_ascii === wilaya_name_ascii);
   });
 
   const [commune, setCommune] = useState([])
   const selectedWilaya = useRef(null)
 
   const handleChange = () => {
-    setCommune(jsonData.filter(commune => commune.wilaya_name === selectedWilaya.current.value) )
+    setCommune(jsonData.filter(commune => commune.wilaya_name_ascii === selectedWilaya.current.value) )
   } 
 
   return (
@@ -36,50 +36,54 @@ const RegisterWorker = () => {
             <p>inscription</p>
             <div className="line"></div>
           </div>
-          <form className="user-info">
-            <div className="input-box">
-              <HashLogo className="icon"/>
-              <input type="number" className='input' required/>
-              <label>Numéro nationale</label>
+          <form className="user-info" onSubmit={regesterWorker}>
+          <div className="full-name">
+              <div className="input-box">
+                <UserLogo className="icon"/>
+                <input type="text" className='input' name='nom' required/>
+                <label>Nom</label>
+              </div>
+              <div className="input-box">
+                <UserLogo className="icon"/>
+                <input type="text" className='input' name='prenom' required/>
+                <label>Prénom</label>
+              </div>
             </div>
             <div className="input-box">
-              <select onClick={handleChange} ref={selectedWilaya} className='wilaya-input' required>
-                {uniqueData.map(wilaya => <option value={wilaya.wilaya_name}>{wilaya.wilaya_name}</option>)}
+              <UserLogo className="icon"/>
+              <input type="text" className='input' name='username' required/>
+              <label>Nom d'utilisateur</label>
+            </div>
+
+            <div className="input-box">
+              <AtLogo className="icon"/>
+              <input type="email" className='input' name='email' required/>
+              <label>Email</label>
+            </div>
+
+            <div className="input-box">
+              <select onClick={handleChange} ref={selectedWilaya} className='wilaya-input' name='wilaya' required>
+                {uniqueData.map(wilaya => <option value={wilaya.wilaya_name_ascii}>{wilaya.wilaya_name_ascii}</option>)}
               </select>
             </div>
             <div className="input-box">
-              <select className='wilaya-input' required>
-                {commune.map(commune => <option value={commune.commune_name}>{commune.commune_name}</option>)}
+              <select className='wilaya-input' name='commune' required>
+                {commune.map(commune => <option value={commune.commune_name_ascii}>{commune.commune_name_ascii}</option>)}
               </select>
             </div>
             <div className="input-box">
  
               <LocationLogo className="icon"/>
  
-              <input type="text" className='input' required/>
+              <input type="text" className='input' name='adresse' required/>
               <label>Adresse de résidence</label>
             </div>
-            <div className="full-name">
-              <div className="input-box">
-                <UserLogo className="icon"/>
-                <input type="text" className='input' required/>
-                <label>Nom</label>
-              </div>
-              <div className="input-box">
-                <UserLogo className="icon"/>
-                <input type="text" className='input' required/>
-                <label>Prénom</label>
-              </div>
-            </div>
-            <div className="input-box">
-              <AtLogo className="icon"/>
-              <input type="email" className='input' required/>
-              <label>Email</label>
-            </div>
+
+
             <div className="password">
               <div className="input-box">
                 <LockLogo className="icon"/>
-                <input type="password" className='input' required/>
+                <input type="password" className='input' name='password' required/>
                 <label>Mot de passe</label>
               </div>
               <div className="input-box">
@@ -91,31 +95,15 @@ const RegisterWorker = () => {
             <div className="input-box">
                 <PhoneLogo className="icon"/>
  
-                <input type="text" className='input' required/>
+                <input type="text" className='input' name='telephone' required/>
  
                 <label>Numéro de téléphone</label>
             </div>
-            <div className="input-box">
-                <HammerLogo className="icon"/>
-                <input type="text" className='input' required/>
-                <label>Service</label>
-            </div>
-            <div className="input-box">
-                <select className='wilaya-input' required>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                </select>
-            </div>
-            <div className="input-box">
-                <PenLogo className="icon"/>
-                <input type="text" className='input' required/>
-                <label>Discription du sevice</label>
-            </div>
+ 
+ 
             <div className="input-box">
                 <CameraLogo className="icon"/>
-                <input type="file" className='input' required/>
+                <input type="file" className='input' name='img' required/>
             </div>
             <div className="btn-submit">
               <button type='submit' className='btn-register'>Inscription</button>

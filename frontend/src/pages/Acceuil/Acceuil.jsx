@@ -53,24 +53,7 @@ export default function Acceuil() {
       typed.destroy();
     };
   }, []); 
-  
-  useEffect(() => {
-    // Get the JWT token from local storage
-    const token = localStorage.getItem('accessToken');
-    const headers = { Authorization: `Bearer ${token}` };
-    console.log(headers)
-    // Make the authenticated API request to get user data
-    client.get('/api/user-data/', { headers })
-      .then(response => {
-        // Set the user data in the state
-        console.log(response.data)
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }, []);
-
-
+   
 
 
 

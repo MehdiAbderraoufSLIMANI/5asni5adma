@@ -56,7 +56,8 @@ class MyUserManager(BaseUserManager):
                 commune,
                 adresse,
                 rating, 
-                isBanned):
+                isBanned,
+                img):
         
         if not email:
             raise ValueError('Users must have an email address')
@@ -75,6 +76,44 @@ class MyUserManager(BaseUserManager):
                 commune=commune,
                 adresse=adresse,
                 rating=rating, 
+                isBanned=isBanned,
+                img=img
+        )
+
+        
+        user.set_password(password)
+
+        user.save(using=self._db)
+        return user
+    
+    def create_client(self,
+                username,
+                email,
+                password,
+                nom,
+                prenom,
+                tel,
+                wilaya,
+                commune,
+                adresse,  
+                isBanned):
+        
+        if not email:
+            raise ValueError('Users must have an email address')
+    
+        email = self.normalize_email(email)
+        email = email.lower()
+
+        user = self.model(
+                username=username,
+                email=email,
+                password=password,
+                nom=nom,
+                prenom=prenom,
+                tel=tel,
+                wilaya=wilaya,
+                commune=commune,
+                adresse=adresse, 
                 isBanned=isBanned
         )
 
@@ -121,8 +160,11 @@ class Person(AbstractBaseUser, PermissionsMixin):
 
 
 #Artisan""""""""""""""""""""""""""""""""
+def upload_path_Artisan(instance, filename):
+    return '/'.join(['artisan', str(instance.username), filename])
 class Artisan(Person):
     #numb_card_national = models.IntegerField(default=124)
+    img = models.ImageField(verbose_name="img Artisan", blank=True, null=True, upload_to=upload_path_Artisan)
     wilaya = models.CharField(max_length=50)
     commune = models.CharField(max_length=50)
     adresse = models.CharField(max_length=50)
@@ -154,7 +196,7 @@ def upload_path(instance, filename):
     return '/'.join(['annonce', str(instance.service), filename])
 class Annonce(models.Model):
     date_of_pub = models.DateTimeField(verbose_name="date of publication")    
-    categorie = models.CharField(max_length=10)
+    categorie = models.CharField(max_length=30)
     service = models.CharField(max_length=20)
     img_annonce = models.ImageField(verbose_name="img annonce", blank=True, null=True, upload_to=upload_path) 
     description = models.TextField()

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { HashLink } from 'react-router-hash-link'
 
 export default function Footer() {
   return (
@@ -16,7 +17,7 @@ export default function Footer() {
             </div>
 
             <div className="col-md-4 align-self-start">
-                <p><Link to='/services'>Nos services</Link></p>
+                <p><HashLink to='/services#top'>Nos services</HashLink></p>
             </div>
 
             <div className="col-md-4">

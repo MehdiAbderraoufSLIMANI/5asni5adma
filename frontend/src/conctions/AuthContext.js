@@ -70,8 +70,7 @@ export const AuthProvider = ({children}) => {
             console.log('Registration successful!');
             loginUser(e)
           })
-          .catch((error) => {
-            console.log(formData)
+          .catch((error) => { 
             console.error('Registration failed:', error);
             // Handle error as needed
           });
@@ -97,8 +96,7 @@ export const AuthProvider = ({children}) => {
             console.log('Registration successful!');
             loginUser(e)
           })
-          .catch((error) => {
-            console.log(formData)
+          .catch((error) => { 
             console.error('Registration failed:', error);
             // Handle error as needed
           });

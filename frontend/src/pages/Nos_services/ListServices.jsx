@@ -74,10 +74,17 @@ export default function ListServices() {
 
   const getTousAnnonce = async () => {
     try {
-      const response = await client.get('/api/Annonce/');
-      const data = response.data;
-      setAllannonces(data);
+ 
      
+      client.get('/api/Annonce/')
+      .then((response ) => {
+        setAllannonces(response.data);
+        setIsLoading(false);  
+      })
+      .catch((error) => { 
+        setIsLoading(false);
+      });
+
     } catch (error) {
       // If there's an error, user is not logged in
       return null;

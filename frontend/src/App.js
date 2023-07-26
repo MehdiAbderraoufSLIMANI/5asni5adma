@@ -96,7 +96,7 @@ function App() {
             <Route path='/register-client' element={<RegisterClient />} />
             <Route path='/connection' element={<Login />} />
             <Route path='/about us' element={<AboutUs />} />
-            <Route path='*' element={<ErrorPage />} />
+            <Route path='*' element={<ErrorPage errorMessage="la page n'existe pas" />} />
             <Route path='/ValidationPage' element={<ValidationPage />} />
             <Route path='/backendtest' element={<Backendtest />} />
             <Route path='/Annoncetesting' element={<Annoncetesting />} />

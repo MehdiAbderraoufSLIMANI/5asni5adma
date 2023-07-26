@@ -27,7 +27,7 @@ const RegisterClient = () => {
 
   return (
     <div className="client-register-conn">
-      <div className='register-form'>
+      <div className='registerclient-form'>
         <div className="register-content">
           <div className="inscription">
             <p>inscription</p>

@@ -8,7 +8,7 @@ const Inscription = () => {
 
   return (
     <div className="inscription-container">
-      <div className='register-form'>
+      <div className='inscription-form'>
       <div className="register-content">
           <div className="inscription">
             <p>Inscription</p>

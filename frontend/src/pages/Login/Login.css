@@ -124,7 +124,10 @@
 {
     top: -40px;
 }
- 
+
+.input-box .email-label-clicked{
+    top: -40px;
+}
 
 
 .input-box .email-input,

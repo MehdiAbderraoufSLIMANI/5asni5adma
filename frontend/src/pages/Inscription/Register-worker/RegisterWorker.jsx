@@ -28,6 +28,20 @@ const RegisterWorker = () => {
     setCommune(jsonData.filter(commune => commune.wilaya_name === selectedWilaya.current.value) )
   } 
 
+
+  let [isInputEmpty, setIsInputEmpty] = useState(true)
+
+    const handleEmailChange = (e) => {
+      e.preventDefault()
+
+      if(e.target.value !== ''){
+        setIsInputEmpty(false)
+      }else{
+        setIsInputEmpty(true)
+      }
+
+    }
+
   return (
     <div className="worker-register-conn">
       <div className='register-form'>
@@ -73,8 +87,8 @@ const RegisterWorker = () => {
             </div>
             <div className="input-box">
               <AtLogo className="icon"/>
-              <input type="email" className='input' required/>
-              <label>Email</label>
+              <input type="email" onChange={handleEmailChange} className='input' required/>
+              <label className={!isInputEmpty? 'email-label-clicked' : '' }>Email</label>
             </div>
             <div className="password">
               <div className="input-box">

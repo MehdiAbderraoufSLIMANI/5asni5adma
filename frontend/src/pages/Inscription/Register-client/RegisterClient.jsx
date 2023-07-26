@@ -25,6 +25,23 @@ const RegisterClient = () => {
     setCommune(jsonData.filter(commune => commune.wilaya_name === selectedWilaya.current.value) )
   } 
 
+
+
+
+
+  let [isInputEmpty, setIsInputEmpty] = useState(true)
+
+    const handleEmailChange = (e) => {
+      e.preventDefault()
+
+      if(e.target.value !== ''){
+        setIsInputEmpty(false)
+      }else{
+        setIsInputEmpty(true)
+      }
+
+    }
+
   return (
     <div className="client-register-conn">
       <div className='registerclient-form'>
@@ -70,8 +87,8 @@ const RegisterClient = () => {
             </div>
             <div className="input-box">
               <AtLogo className="icon"/>
-              <input type="email" className='input' required/>
-              <label>Email</label>
+              <input onChange={handleEmailChange} type="email" className='input' required/>
+              <label className={!isInputEmpty? 'email-label-clicked' : '' }>Email</label>
             </div>
             <div className="password">
               <div className="input-box">

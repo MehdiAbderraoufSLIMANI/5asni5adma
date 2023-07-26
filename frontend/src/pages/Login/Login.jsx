@@ -5,12 +5,27 @@ import {Link} from "react-router-dom"
 
  
  
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 
 import AuthContext  from '../../conctions/AuthContext'
 const Login = () => {
     
     let {loginUser} = useContext(AuthContext)
+    let [isInputEmpty, setIsInputEmpty] = useState(true)
+
+    const handleChange = (e) => {
+      e.preventDefault()
+
+      if(e.target.value !== ''){
+        setIsInputEmpty(false)
+      }else{
+        setIsInputEmpty(true)
+      }
+
+    }
+
+
+
 
 
 
@@ -28,8 +43,8 @@ const Login = () => {
           <form className="user-info" onSubmit={loginUser}>
             <div className="input-box">
               <UserLogo className="icon"/>
-              <input type="email" className='email-input' required name="email" />
-              <label>Email</label>
+              <input type="email" onChange={handleChange} className='email-input' required name="email" />
+              <label className={!isInputEmpty? 'email-label-clicked' : ''}>Email</label>
             </div>
             <div className="input-box">
               <LockLogo className="icon"/>

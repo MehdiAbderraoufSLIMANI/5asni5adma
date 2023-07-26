@@ -33,7 +33,7 @@ export default function ListServices() {
   }, []);
 
   useEffect(() => {
-    if(scrollRate > 50) {//30
+    if(scrollRate > 50) {
       if(!showFilter) {
         setShowStickyFilter(true);
       }   
@@ -51,7 +51,7 @@ export default function ListServices() {
   const { categorie, wilaya, commune,setCategorie, setWilaya, setCommune} = useContext(filterCtx);
 
   const TousAnnonces = [
-    { num: 1,id_artisan: 1, categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
+    { num: 1,id_artisan: 1, categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/logo.png', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
     { num: 2,id_artisan: 1, categorie: 'Peintre', service: 'peinture mur', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Ain Taya' },
     { num: 3,id_artisan: 1, categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '4', wilaya: 'Alger', commune: 'Kouba' },
     { num: 4,id_artisan: 1, categorie: 'Menuisierie', service: 'armoire et lit', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
@@ -114,7 +114,7 @@ export default function ListServices() {
   
     /***********************************************************************************************
     /******************  I put these commented instructions below to *********************************
-     * ****************  test the skeleton while loading the page, you need to put the Network on slow 3G    ***************************
+     * ****************  test the skeleton while loading the page, you should put the Network on slow 3G    ***************************
      * ************************************************************************************************/
   useEffect(()=> { 
     //async function fetchData() {
@@ -169,7 +169,7 @@ export default function ListServices() {
   
   //Pagination logic
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;  // optimal val: 12
+  const itemsPerPage = 12;  
   const nbPages = Math.ceil(annonces.length / itemsPerPage);
   const firstInd = (currentPage-1) * itemsPerPage;
   const lastInd = currentPage * itemsPerPage;

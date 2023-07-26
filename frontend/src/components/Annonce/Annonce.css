@@ -1,6 +1,6 @@
 .annonce-container {
     background-color: white;
-    min-height: 600px;
+    height: 560px; 
     padding: 8px;
     border-radius: 8px;
     margin-right: 16px; 
@@ -51,22 +51,7 @@
     font-weight: 600;
 }
 .annonce-container a {
-    background-color: var(--rouge);
-     position: absolute;
-     bottom: 8px;
-     right: 16px;
-     width: 120px;
-     height: 48px;
-     padding: 12px 11px;
-     color: white;
-     border-radius: 8px;
-     font-size: 16px;
-     transition: .4s ease-in-out;
-}
-.annonce-container a:hover {
-    background-color: #e26655;
-    border: solid 1px var(--rouge);
-    color: white;
+    text-decoration: none;
 }
 
 @media all and (min-width: 992px ) {

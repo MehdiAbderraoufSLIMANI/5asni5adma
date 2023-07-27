@@ -1,5 +1,5 @@
  
-import React, {useState, useEffect } from 'react'; 
+import React, {useState, useEffect,  } from 'react'; 
  
 import './App.css';
 import { BrowserRouter as Router, Routes, Route,  } from 'react-router-dom';
@@ -15,7 +15,7 @@ import FAQ from './pages/FAQ';
  
 import Login from './pages/Login/Login';
 import AboutUs from './pages/AboutUs';
-import ErrorPage from './pages/ErrorPage';
+import ErrorPage from './pages/ErrorPage/ErrorPage';
 import ValidationPage from './pages/ValidationPage'; 
 
 import Backendtest from './pages/Backendtest';
@@ -25,6 +25,7 @@ import axios from 'axios';
 
 import { AuthProvider } from './conctions/AuthContext';
 import PrivateRoute from './conctions/PrivateRoute';
+
 
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -38,10 +39,6 @@ export const client = axios.create({
 
 function App() {
  
- 
-
-
-
   const [scrollRate, setScrollRate] = useState(0);
   
   const handleScroll = () => {
@@ -63,21 +60,19 @@ function App() {
   }, []);
 
   
- 
-  
-
   return (
     <div className="App">
       <Router>
       <AuthProvider>
+      
         <header className="App-header">
           <Navbar /> 
-        </header>
+        </header> 
 
         <GoTop scrollRate={scrollRate} />  
-        
-        
+             
         <main>
+          
           <Routes> 
           
             <Route path='/services' element={<ListServices />} />
@@ -86,29 +81,28 @@ function App() {
             <Route path='/FAQ' element={<FAQ />} />
             <Route path='/inscription' element={<Inscription />} />
 
-            <Route exact path='/' element={<PrivateRoute/>}>
+            <Route path='/' element={<Acceuil/>}/>
+           {/* <Route exact path='/' element={<PrivateRoute/>}>
               <Route exact path='/' element={<Acceuil/>}/>
-            </Route> 
+             </Route> */}
                  
-
-            
             <Route path='/register-worker' element={<RegisterWorker/>} />
             <Route path='/register-client' element={<RegisterClient />} />
             <Route path='/connection' element={<Login />} />
             <Route path='/about us' element={<AboutUs />} />
-            <Route path='*' element={<ErrorPage errorMessage="la page n'existe pas" />} />
             <Route path='/ValidationPage' element={<ValidationPage />} />
             <Route path='/backendtest' element={<Backendtest />} />
             <Route path='/Annoncetesting' element={<Annoncetesting />} />
 
-           
+            <Route path='*' element={<ErrorPage />} />           
           </Routes>
 
         </main>
 
+        
         <footer className='App-footer'>
-          <Footer />
-        </footer>
+           <Footer />
+        </footer> 
         </AuthProvider>
       </Router>
 

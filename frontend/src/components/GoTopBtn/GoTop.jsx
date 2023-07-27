@@ -8,7 +8,7 @@ export default function GoTop({scrollRate}) {
     const [showTopBtn, setShowTopBtn] = useState(false);
 
     useEffect(() => {
-        if(scrollRate > 65) {
+        if(scrollRate > 90) { //65
           setShowTopBtn(true);
         } else {
           setShowTopBtn(false);

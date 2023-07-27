@@ -10,8 +10,9 @@ path('api/user/<str:pk>/', views.userView ,name='user'),
 """ 
 urlpatterns = [
     path('api/client/', views.clientView ,name='client'),
-    path('api/artisan/', views.artisanView ,name='artisan'),
-    path('api/register/', views.UserRegister.as_view() ,name='register'),
+    path('api/artisan/', views.artisanView ,name='artisan'), 
+    path('api/register-client/', views.ClientRegister.as_view() ,name='registerclient'),
+    path('api/register-worker/', views.WorkerRegister.as_view() ,name='register-worker'),
     path('api/login/', views.Login.as_view() ,name='login'), 
     path('api/valid/', views.EmailValidation.as_view() ,name='EmailValidation'),
     path('api/contectus/', views.UserContactUs.as_view() ,name='UserContactUs'),

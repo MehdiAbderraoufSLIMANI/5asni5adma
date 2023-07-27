@@ -112,17 +112,32 @@ class UserData(APIView):
 
 
 #Register""""""""""""""""""""""""""""""""""""""""""""""""""
-class UserRegister(APIView):
+class WorkerRegister(APIView):
     permission_classes = (permissions.AllowAny,)
+    parser_classes = (MultiPartParser, FormParser,)
     def post(self, request):
         
         clean_data = request.data
-        serializer = serializers.RegisterSerializer(data=clean_data)
+        print("dddddddddd",clean_data)
+        serializer = serializers.WorkerRegisterSerializer(data=clean_data)
         if serializer.is_valid(raise_exception=True):
             user = serializer.create(clean_data)
             if user:
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(status=status.HTTP_400_BAD_REQUEST)
+class ClientRegister(APIView):
+    permission_classes = (permissions.AllowAny,)
+    def post(self, request):
+        
+        clean_data = request.data
+        serializer = serializers.ClientRegisterSerializer(data=clean_data)
+        if serializer.is_valid(raise_exception=True):
+            user = serializer.create(clean_data)
+            if user:
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+    
+ 
     
 class EmailValidation(APIView):
     permission_classes = (permissions.AllowAny,)

@@ -8,7 +8,7 @@ export default function Annonce({ ann }) {
 
     <div className="col-md-5 col-lg-3 annonce-container">
       <Link to={`/service/${ann.num}/${ann.id_artisan}`}>
-        <img src={ann.img} height='330px' width='100%' />  
+        <img src={"http://127.0.0.1:8000/media/"+ann.img} height='330px' width='100%' />  
         <h4> {ann.service} </h4>
       </Link>
 

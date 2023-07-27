@@ -1,0 +1,21 @@
+.error-container {
+    height: 100vh;
+    width: 100%;
+    padding-top: 40px;
+    margin-bottom: 350px;
+}
+.error-content {
+    width: 60%;
+    margin: 0 auto;
+    text-align: center;
+}
+.error-content img {
+    margin-top: -40px;
+    margin-bottom: -10px;
+}
+.error-content p {
+ width: 60%;
+ font-size: 16px;
+ margin: 16px auto;
+ line-height: normal;
+}

@@ -1,12 +1,21 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { HashLink } from 'react-router-hash-link'
+import logo from '../resources/images/logo.png';
+
 
 export default function Footer() {
+    const sampleLocation = useLocation();
+
+    //*********************************************************************************** */
+  const withoutNavFooterRoutes = ["/connection" , "/inscription", "/register-worker","/register-client"];
+  ///******************************************************************************* */
+
+  if (withoutNavFooterRoutes.some((item) => sampleLocation.pathname === item))   return null;
   return (
-    <>
+    <div className="footer-container">
     <div className="footer-top">
-        <img src='../images/logo.png' height='120px' width='150px' alt='logo' />
+        <img src={logo} height='120px' width='150px' alt='logo' />
         <p className='display-6'>5asni 5adam</p>
     </div>
     <div className="footer-content container-fluid mt-5">
@@ -28,6 +37,6 @@ export default function Footer() {
         </div>
     </div>
     <p className='copyRight text-center mt-5'>&copy; Copyright 2023 All Rights Reserved </p>
-    </>
+    </div>
   )
 }

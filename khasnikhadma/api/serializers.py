@@ -223,6 +223,15 @@ class ContactUsSerializer(serializers.Serializer):
              
             theMessage.save()
 
+#FAQ""""""""""""""""""""""""""""""""""""""""""""
+
+class FAQSerializer(serializers.ModelSerializer):
+ 
+    class Meta:
+        model = models.FAQ
+        fields = '__all__'
+
+
 """
 class usertestSerializer(serializers.ModelSerializer):
     class Meta:

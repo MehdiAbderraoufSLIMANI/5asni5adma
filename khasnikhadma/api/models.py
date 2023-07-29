@@ -207,5 +207,10 @@ class Annonce(models.Model):
     artisan = models.ForeignKey(Artisan, on_delete=models.CASCADE)
   
 
+#FAQ"""""""""""""""""""""""""""""""
+class FAQ(models.Model):
+    question = models.TextField(max_length=200)
+    answer = models.TextField(max_length=200) 
+
  
  

@@ -56,6 +56,13 @@ class UserContactUs(APIView):
         if serializer.is_valid(raise_exception=True):
             serializer.create(data)
 
+#FAQ""""""""""""""""""""""""""""""""""""""""""""""""
+@api_view(['GET'])
+def FAQView(request):
+    queryset = models.FAQ.objects.all()
+    serializer = serializers.FAQSerializer(queryset ,many =True )
+    return Response(serializer.data) 
+
 #Login""""""""""""""""""""""""""""""""""""""""""""""""""
 
 

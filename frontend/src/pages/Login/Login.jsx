@@ -42,7 +42,7 @@ const Login = () => {
               <UserLogo className="icon"/>
               <input type="email" className='email-input' required name="email" />
               <label>Email</label>
-            </div>
+            </div> 
             <div className="input-box">
               <LockLogo className="icon"/>
               <input type="password" className='password-input' required name="password"/>

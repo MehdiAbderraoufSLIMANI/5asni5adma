@@ -3,15 +3,29 @@ import {ReactComponent as UserLogo} from "../../resources/logos/user-solid.svg"
 import {ReactComponent as LockLogo} from "../../resources/logos/lock-solid.svg"
 import {Link} from "react-router-dom"
 
+import { motion } from "framer-motion"
  
  
-import React, {useContext, useEffect} from 'react'
+import React, {useContext, useState} from 'react'
 
 import AuthContext  from '../../conctions/AuthContext'
 const Login = () => {
     
     let {loginUser} = useContext(AuthContext)
 
+
+    const [isLoading, setIsLoading] = useState(false);
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+     
+      setIsLoading(true);
+      console.log("iam in")
+      loginUser(e);
+      
+     
+  };
 
   return (
     <div className="login-container">
@@ -23,19 +37,28 @@ const Login = () => {
           </div>
 
 
-          <form className="user-info" onSubmit={loginUser}>
+          <form className="user-info" onSubmit={handleLogin}>
             <div className="input-box">
               <UserLogo className="icon"/>
               <input type="email" className='email-input' required name="email" />
               <label>Email</label>
-            </div>
+            </div> 
             <div className="input-box">
               <LockLogo className="icon"/>
               <input type="password" className='password-input' required name="password"/>
               <label>Mot de passe</label>
             </div>
             <div className="btn-submit">
-              <button type='submit' className='btn-login'>Connexion</button>
+            <motion.button
+            disabled={isLoading}
+            style={{ cursor: isLoading ? 'wait' : 'pointer' }}
+            whileHover={!isLoading ? { scale: 1.1 } : {}}
+            whileTap={!isLoading ? { scale: 0.9 } : {}}
+            type="submit"
+            className="btn-login"
+          >
+            {isLoading ? 'Please wait...' : 'Connexion'}
+          </motion.button>
             </div>
             <div className="buttons">
               <p>Mot de passe oublié.<Link className="cliquer-ici">cliquer ici</Link></p>

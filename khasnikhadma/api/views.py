@@ -19,7 +19,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 
-
+from django.conf import settings
 
 
 #Annonce""""""""""""""""""""""""""""""""
@@ -61,12 +61,27 @@ class UserContactUs(APIView):
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
-    def get_token(cls, Artisan):
-        token = super().get_token(Artisan)
+    def get_token(cls, acount):
+        token = super().get_token(acount)
 
-        # Add custom claims
-        token['email'] = Artisan.email
-        token['username'] = Artisan.username 
+        if acount.compte_type == "worker":
+            worker = Artisan.objects.get(email = acount.email)
+            # Add custom claims
+            token['email'] = worker.email
+            token['username'] = worker.username
+            
+            if len(str(worker.img)) != 0 :
+                token['pic'] = settings.SITE_URL + "/media/"+ str(worker.img) 
+        elif acount.compte_type == "client":
+            client = models.Client.objects.get(email = acount.email)
+            
+            token['email'] = client.email
+            token['username'] = client.username
+            if len(str(client.img)) != 0 : 
+                token['pic'] = settings.SITE_URL + "/media/"+ str(client.img) 
+        else :
+            token['email'] = acount.email
+            token['username'] = acount.username
         return token
     
 class MyTokenObtainPairView(TokenObtainPairView):

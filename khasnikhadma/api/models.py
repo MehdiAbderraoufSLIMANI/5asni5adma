@@ -177,7 +177,10 @@ class Artisan(Person):
 
 
 #Client""""""""""""""""""""""""""""""""
+def upload_path_Client(instance, filename):
+    return '/'.join(['client', str(instance.username), filename])
 class Client(Person):
+    img = models.ImageField(verbose_name="img Client", blank=True, null=True, upload_to=upload_path_Client)
     wilaya = models.CharField(max_length=50)
     commune = models.CharField(max_length=50)
     adresse = models.CharField(max_length=50)

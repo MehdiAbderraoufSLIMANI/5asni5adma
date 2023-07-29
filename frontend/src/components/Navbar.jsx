@@ -6,14 +6,15 @@ import logo from '../resources/images/logo.png';
 
 
 import   {useContext} from 'react' 
-
+ 
 import AuthContext from '../conctions/AuthContext';
 
 export default function Navbar() {
 
   
-  let {isLoggedIn,logoutUser} = useContext(AuthContext)
+  let {isLoggedIn,logoutUser,user} = useContext(AuthContext)
 
+ 
   
   const handleLogout = () => {
     logoutUser()
@@ -24,7 +25,7 @@ export default function Navbar() {
 Récupérer à partir de la table "anonce" toutes les categories existantes*/
   //testing
   const categories = ['Climatiseur', 'Menuisierie'];
-
+ 
 
   
 
@@ -124,14 +125,38 @@ Récupérer à partir de la table "anonce" toutes les categories existantes*/
               }}
             >
               {isLoggedIn() ? (
-            // Render this link if the user is logged in
+                <div>
             <Link to='/connection' onClick={handleLogout}  className="nav-link">Déconnecté</Link>
+ 
+         
+            </div>
+
           ) : (
             // Render this link if the user is not logged in
             <Link to='/connection' className="nav-link ">Se connecter</Link>
           )}
               
-            </motion.li>
+            </motion.li> 
+
+            {isLoggedIn && user &&(
+              <Link to='/' >
+              <motion.img
+                src={user.pic || logo} 
+                style={{
+                  width: '50px', // Adjust this value to set the desired width
+                  height: '50px', // Adjust this value to set the desired height
+                  borderRadius: '50%', // To make it a circular image like Facebook logo
+                }}
+                initial={{ opacity: 0, scale: 1 }} // Initial opacity and scale when loading
+                animate={{ opacity: 1, scale: 1 }} // Animation to full opacity and scale
+                transition={{ duration: 1 }} // Animation duration
+              />
+
+              </Link>
+
+              )}
+     
+             
           </ul>
 
         </div>

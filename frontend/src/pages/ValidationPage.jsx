@@ -1,5 +1,5 @@
-import { useLocation } from 'react-router-dom';
-import React, { useEffect , useState} from 'react';
+import { useLocation , Navigate } from 'react-router-dom';
+import React, { useEffect , useState } from 'react';
 import axios from 'axios';
  
 
@@ -13,8 +13,7 @@ const client = axios.create({
 
 function ValidationPage(){
 
-    const location = useLocation(); 
-    
+    const location = useLocation();  
     const [token, setToken] = useState('');
     const [id, setUserId] = useState('');
     const [typea, setTypea] = useState('');
@@ -23,6 +22,7 @@ function ValidationPage(){
       setToken(searchParams.get('token'));
       setUserId(searchParams.get('id'));
       setTypea(searchParams.get('typea')); 
+      
        
     }, [location.search]);
 
@@ -41,8 +41,12 @@ function ValidationPage(){
       .catch(error => {
         console.error('Registration failed:', error);
         
-      }); 
+      });  
   };
+  if(token.length === 0 || id.length === 0  || typea.length === 0 ){
+    console.log('errour : ')
+    return <Navigate to="*" />;
+  }
 
     return (
       <div>

@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Neucha&family=Outfit:wght@700&family=Poppins&display=swap');
+
+/* src/components/FAQ.css */
+.faq-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .faq-heading {
+    font-size: 36px;
+    font-family: Poppins;
+    color:  var(--noir);
+  }
+  
+  .faq-item {
+    width: 1000px; /* Adjust the width as needed */
+    margin-bottom: 20px;
+    padding: 10px;
+    border-bottom: 1px solid #ccc; /* Add a line under each question */
+    cursor: pointer;
+    transition: height 0.3s ease;
+    color:  var(--noir);
+    font-family: Poppins;
+  }
+  
+  .faq-item.active {
+    height: auto;
+    border-bottom: none; /* Remove the line when the question is expanded */
+  }
+  
+  .faq-item h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .faq-item p {
+    font-size: 16px;
+  }
+  

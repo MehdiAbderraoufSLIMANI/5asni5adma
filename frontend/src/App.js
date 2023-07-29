@@ -11,7 +11,7 @@ import ConsulterService from './pages/ConsulterService';
 import Inscription from './pages/Inscription/Inscription';
 import RegisterClient from './pages/Inscription/Register-client/RegisterClient'
 import RegisterWorker from './pages/Inscription/Register-worker/RegisterWorker'
-import FAQ from './pages/FAQ';
+import FAQ from './pages/FAQ/FAQ';
  
 import Login from './pages/Login/Login';
 import AboutUs from './pages/AboutUs';

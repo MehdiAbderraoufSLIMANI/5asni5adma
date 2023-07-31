@@ -34,6 +34,11 @@ const RegisterWorker = () => {
     e.preventDefault();
 
      
+    if (e.target.elements.password.value !== e.target.elements.password2.value) {
+      // If passwords don't match, show an error or handle it as needed
+      alert('Password and Confirm Password do not match.');
+      return;
+    } 
       setIsLoading(true); 
       regesterWorker(e);
       
@@ -100,7 +105,7 @@ const RegisterWorker = () => {
               </div>
               <div className="input-box">
                 <LockLogo className="icon"/>
-                <input type="password" className='input' required/>
+                <input type="password" className='input' name='password2' required/>
                 <label>Confirmer le mote de passe</label>
               </div>
             </div>

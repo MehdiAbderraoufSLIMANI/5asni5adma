@@ -15,7 +15,7 @@ const Login = () => {
 
 
     const [isLoading, setIsLoading] = useState(false);
-
+    const [isEmailFilled, setIsEmailFilled] = useState(false); 
   const handleLogin = (e) => {
     e.preventDefault();
 
@@ -25,7 +25,9 @@ const Login = () => {
       
      
   };
-
+  const handleChange = (e) => {
+    setIsEmailFilled(e.target.value.trim() !== ''); // Check if the input has any value (ignoring leading/trailing spaces)
+  };
   return (
     <div className="login-container">
       <div className='login-form'>
@@ -37,9 +39,9 @@ const Login = () => {
 
 
           <form className="user-info" onSubmit={handleLogin}>
-            <div className="input-box">
+            <div className={`input-box ${isEmailFilled ? 'filled' : ''}`}>
               <UserLogo className="icon"/>
-              <input type="email" className='email-input' required name="email" />
+              <input type="email" className='email-input' required name="email" onChange={handleChange}/>
               <label>Email</label>
             </div> 
             <div className="input-box">

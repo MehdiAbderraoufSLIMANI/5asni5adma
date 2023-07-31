@@ -8,36 +8,37 @@ import Pagination from '../../components/Pagination/Pagination';
 import StickyFilter from '../../components/StickyFilterBtn/StickyFilter';
 import './ListServices.css';
 import Skeleton from '../../components/Skeleton/Skeleton';
+
  
 
 import { client } from '../../App';
 export default function ListServices() {
 
   /*const TousAnnonces = [
-    { num: 1,id_artisan: 1, categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 2,id_artisan: 1, categorie: 'Peintre', service: 'peinture mur', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Ain Taya' },
-    { num: 3,id_artisan: 1, categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '4', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 4,id_artisan: 1, categorie: 'Menuisierie', service: 'armoire et lit', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 5,id_artisan: 1, categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 6,id_artisan: 1, categorie: 'Menuisierie', service: 'armoire et lit', img: '../images/peintre.jpg', rating: '1', wilaya: 'Jijel', commune: 'Taher' },
-    { num: 7,id_artisan: 1, categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 8,id_artisan: 2, categorie: 'Menuisierie', service: 'armoire et lit', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Sidi Moussa' },
-    { num: 9,id_artisan: 2, categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '5', wilaya: 'Jijel', commune: 'Taher' },
-    { num: 10,id_artisan: 3,  categorie: 'Peintre', service: 'peinture mur', img: '../images/peintre.jpg', rating: '2', wilaya: 'Alger', commune: 'Ain Taya' },
-    { num: 11,id_artisan: 3,  categorie: 'Peintre', service: 'peinture mur', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Ain Taya' },
-    { num: 12,id_artisan: 3,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 13,id_artisan: 3,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Sidi Moussa' },
-    { num: 14,id_artisan: 3,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 15,id_artisan: 3,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
+    { num: 1,id_artisan: 1, categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
+    { num: 2,id_artisan: 1, categorie: 'Peintre', service: 'peinture mur', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Ain Taya' },
+    { num: 3,id_artisan: 1, categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images_Backend/peintre.jpg', rating: '4', wilaya: 'Alger', commune: 'Kouba' },
+    { num: 4,id_artisan: 1, categorie: 'Menuisierie', service: 'armoire et lit', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
+    { num: 5,id_artisan: 1, categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
+    { num: 6,id_artisan: 1, categorie: 'Menuisierie', service: 'armoire et lit', img: '../images_Backend/peintre.jpg', rating: '1', wilaya: 'Jijel', commune: 'Taher' },
+    { num: 7,id_artisan: 1, categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
+    { num: 8,id_artisan: 2, categorie: 'Menuisierie', service: 'armoire et lit', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Sidi Moussa' },
+    { num: 9,id_artisan: 2, categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images_Backend/peintre.jpg', rating: '5', wilaya: 'Jijel', commune: 'Taher' },
+    { num: 10,id_artisan: 3,  categorie: 'Peintre', service: 'peinture mur', img: '../images_Backend/peintre.jpg', rating: '2', wilaya: 'Alger', commune: 'Ain Taya' },
+    { num: 11,id_artisan: 3,  categorie: 'Peintre', service: 'peinture mur', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Ain Taya' },
+    { num: 12,id_artisan: 3,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
+    { num: 13,id_artisan: 3,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Sidi Moussa' },
+    { num: 14,id_artisan: 3,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
+    { num: 15,id_artisan: 3,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
     
-    { num: 16,id_artisan: 4,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 17,id_artisan: 4,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 18,id_artisan: 4,  categorie: 'Peintre', service: 'peinture mur', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 19,id_artisan: 4,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 20,id_artisan: 5,  categorie: 'Peintre', service: 'peinture mur', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 21,id_artisan: 5,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 22,id_artisan: 5,  categorie: 'Peintre', service: 'peinture mur', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 23,id_artisan: 5,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
+    { num: 16,id_artisan: 4,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
+    { num: 17,id_artisan: 4,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
+    { num: 18,id_artisan: 4,  categorie: 'Peintre', service: 'peinture mur', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
+    { num: 19,id_artisan: 4,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
+    { num: 20,id_artisan: 5,  categorie: 'Peintre', service: 'peinture mur', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
+    { num: 21,id_artisan: 5,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
+    { num: 22,id_artisan: 5,  categorie: 'Peintre', service: 'peinture mur', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
+    { num: 23,id_artisan: 5,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
   ];*/
 
 
@@ -74,10 +75,17 @@ export default function ListServices() {
 
   const getTousAnnonce = async () => {
     try {
-      const response = await client.get('/api/Annonce/');
-      const data = response.data;
-      setAllannonces(data);
+ 
      
+      client.get('/api/Annonce/')
+      .then((response ) => {
+        setAllannonces(response.data);
+        setIsLoading(false);  
+      })
+      .catch((error) => { 
+        setIsLoading(false);
+      });
+
     } catch (error) {
       // If there's an error, user is not logged in
       return null;
@@ -211,8 +219,6 @@ export default function ListServices() {
   return (
     <div>
 
-      
-      
       <div className="services-header container-fluid">
         <h2>À la recherche d'un artisan talentueux et qualié pour vous aider ?</h2>
         <p> Ne cherchez plus ! Nous avons sélectionné pour vous les meilleurs artisans de votre région</p>

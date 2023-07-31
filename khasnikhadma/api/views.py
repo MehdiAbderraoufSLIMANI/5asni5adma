@@ -19,7 +19,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 
-
+from django.conf import settings
 
 
 #Annonce""""""""""""""""""""""""""""""""
@@ -56,17 +56,39 @@ class UserContactUs(APIView):
         if serializer.is_valid(raise_exception=True):
             serializer.create(data)
 
+#FAQ""""""""""""""""""""""""""""""""""""""""""""""""
+@api_view(['GET'])
+def FAQView(request):
+    queryset = models.FAQ.objects.all()
+    serializer = serializers.FAQSerializer(queryset ,many =True )
+    return Response(serializer.data) 
+
 #Login""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
-    def get_token(cls, Artisan):
-        token = super().get_token(Artisan)
+    def get_token(cls, acount):
+        token = super().get_token(acount)
 
-        # Add custom claims
-        token['email'] = Artisan.email
-        token['username'] = Artisan.username 
+        if acount.compte_type == "worker":
+            worker = Artisan.objects.get(email = acount.email)
+            # Add custom claims
+            token['email'] = worker.email
+            token['username'] = worker.username
+            
+            if len(str(worker.img)) != 0 :
+                token['pic'] = settings.SITE_URL + "/media/"+ str(worker.img) 
+        elif acount.compte_type == "client":
+            client = models.Client.objects.get(email = acount.email)
+            
+            token['email'] = client.email
+            token['username'] = client.username
+            if len(str(client.img)) != 0 : 
+                token['pic'] = settings.SITE_URL + "/media/"+ str(client.img) 
+        else :
+            token['email'] = acount.email
+            token['username'] = acount.username
         return token
     
 class MyTokenObtainPairView(TokenObtainPairView):
@@ -112,17 +134,32 @@ class UserData(APIView):
 
 
 #Register""""""""""""""""""""""""""""""""""""""""""""""""""
-class UserRegister(APIView):
+class WorkerRegister(APIView):
     permission_classes = (permissions.AllowAny,)
+    parser_classes = (MultiPartParser, FormParser,)
     def post(self, request):
         
         clean_data = request.data
-        serializer = serializers.RegisterSerializer(data=clean_data)
+        print("dddddddddd",clean_data)
+        serializer = serializers.WorkerRegisterSerializer(data=clean_data)
         if serializer.is_valid(raise_exception=True):
             user = serializer.create(clean_data)
             if user:
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(status=status.HTTP_400_BAD_REQUEST)
+class ClientRegister(APIView):
+    permission_classes = (permissions.AllowAny,)
+    def post(self, request):
+        
+        clean_data = request.data
+        serializer = serializers.ClientRegisterSerializer(data=clean_data)
+        if serializer.is_valid(raise_exception=True):
+            user = serializer.create(clean_data)
+            if user:
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+    
+ 
     
 class EmailValidation(APIView):
     permission_classes = (permissions.AllowAny,)

@@ -1,9 +1,13 @@
 // AnnonceForm.js
-import React, { useState } from "react";
-import { client } from '../App'
-import { Logedininfo } from "../conctions/AuthCon";
+import React, { useState ,useContext} from "react";
+import { client } from '../App' 
 
+import AuthContext from "../conctions/AuthContext";
 const Annoncetesting = () => {
+
+  let {user} = useContext(AuthContext)
+
+
   const [formData, setFormData] = useState({
     categorie: "",
     service: "",
@@ -49,9 +53,9 @@ const Annoncetesting = () => {
     
 
   
-    (async () => {
+   
       try {
-        const user = await Logedininfo();
+       
         formDataObj.append("artisan",  user['email']);
        
         console.log(formDataObj)
@@ -65,8 +69,7 @@ const Annoncetesting = () => {
           });
       } catch (error) {
         console.error("Error fetching user information:", error);
-      }
-    })();
+      } 
   };
   
 

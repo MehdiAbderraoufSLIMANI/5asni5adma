@@ -93,39 +93,38 @@ class PersonSerializer(serializers.ModelSerializer):
         
 
 #Register""""""""""""""""""""""""""""""""""""""""""""
-class RegisterSerializer(serializers.Serializer):
+class WorkerRegisterSerializer(serializers.Serializer):
  
     def create(self, clean_data):
         
-        if clean_data['compte_type'] == "worker":
-            
-            user_obj = models.Artisan.objects.create_artisan(
-                username=clean_data['username'],
-                email=clean_data['email'],
-                password=clean_data['password'],
-                nom=clean_data['nom'],
-                prenom=clean_data['prenom'],
-                tel=clean_data['tel'],
-                wilaya=clean_data['wilaya'],
-                commune=clean_data['commune'],
-                adresse=clean_data['adresse'],
-                rating=clean_data['rating'], 
-                isBanned=False
+        
+        
+        user_obj = models.Artisan.objects.create_artisan(
+            username=clean_data['username'],
+            email=clean_data['email'],
+            password=clean_data['password'],
+            nom=clean_data['nom'],
+            prenom=clean_data['prenom'],
+            tel=clean_data['telephone'],
+            wilaya=clean_data['wilaya'],
+            commune=clean_data['commune'],
+            adresse=clean_data['adresse'],
+            rating=0, 
+            isBanned=False,
+            img=clean_data['img']
 
-                ) 
-            user_obj.token_of_validation =  validations.generate_email_verification_token()
-            user_obj.email = clean_data['email']
-            
-            
-            validations.send_validation_email(user_obj.token_of_validation,user_obj.email,user_obj.id,user_obj.compte_type)
-            user_obj.save()
+            ) 
+        user_obj.token_of_validation =  validations.generate_email_verification_token()
+        user_obj.email = clean_data['email']
+        
+        
+        validations.send_validation_email(user_obj.token_of_validation,user_obj.email,user_obj.id,user_obj.compte_type)
+        user_obj.save()
         return user_obj
 
-    def validatee(self, data): 
-        if (data['typea']=="worker"):
-            user = models.Artisan.objects.get(id = data['id'])
-        else:
-            user = models.Client.objects.get(id = data['id'])
+    def validatee(self, data):  
+        user = models.Artisan.objects.get(id = data['id'])
+ 
         
         if (user.token_of_validation == data['token']):
             user.valid = True
@@ -135,7 +134,40 @@ class RegisterSerializer(serializers.Serializer):
             return False
    
 
+class ClientRegisterSerializer(serializers.Serializer):
+ 
+    def create(self, clean_data): 
+        user_obj = models.Client.objects.create_client(
+            username=clean_data['username'],
+            email=clean_data['email'],
+            password=clean_data['password'],
+            nom=clean_data['nom'],
+            prenom=clean_data['prenom'],
+            tel=clean_data['telephone'],
+            wilaya=clean_data['wilaya'],
+            commune=clean_data['commune'],
+            adresse=clean_data['adresse'], 
+            isBanned=False
 
+            ) 
+        user_obj.token_of_validation =  validations.generate_email_verification_token()
+        user_obj.email = clean_data['email']
+        
+            
+        validations.send_validation_email(user_obj.token_of_validation,user_obj.email,user_obj.id,user_obj.compte_type)
+        user_obj.save()
+        return user_obj
+
+    def validatee(self, data):  
+        user = models.Client.objects.get(id = data['id'])
+        
+        if (user.token_of_validation == data['token']):
+            user.valid = True
+            user.save()
+            return True
+        else:
+            return False
+   
  
 
 
@@ -190,6 +222,15 @@ class ContactUsSerializer(serializers.Serializer):
                 message=clean_data['message']) 
              
             theMessage.save()
+
+#FAQ""""""""""""""""""""""""""""""""""""""""""""
+
+class FAQSerializer(serializers.ModelSerializer):
+ 
+    class Meta:
+        model = models.FAQ
+        fields = '__all__'
+
 
 """
 class usertestSerializer(serializers.ModelSerializer):

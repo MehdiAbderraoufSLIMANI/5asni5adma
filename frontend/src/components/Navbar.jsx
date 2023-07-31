@@ -1,35 +1,31 @@
-import React, { useEffect, useState } from 'react'
+import React, {useEffect, useState } from 'react'
 import { NavLink,Link, useLocation } from 'react-router-dom'
 import { HashLink } from 'react-router-hash-link'
 import { motion } from 'framer-motion'; 
+import logo from '../resources/images/logo.png';
 
 
 import   {useContext} from 'react' 
-
+ 
 import AuthContext from '../conctions/AuthContext';
+
 export default function Navbar() {
 
   
-  let {isLoggedIn,logoutUser} = useContext(AuthContext)
+  let {isLoggedIn,logoutUser,user} = useContext(AuthContext)
 
+ 
   
   const handleLogout = () => {
     logoutUser()
      
   };
 
- 
-
-  const sampleLocation = useLocation();
- 
-
-
-  
 /*Backend
 Récupérer à partir de la table "anonce" toutes les categories existantes*/
   //testing
   const categories = ['Climatiseur', 'Menuisierie'];
-
+ 
 
   
 
@@ -38,17 +34,24 @@ Récupérer à partir de la table "anonce" toutes les categories existantes*/
 
 
 
-  //Récupérer l'url courante pour attribuer la classe 'active' au lien "Nos services" lorsqu'il est actif
-  
-  useEffect(() => {
-    sampleLocation.pathname.includes('/services') ? setIsActive(true) : setIsActive(false)
+  const sampleLocation = useLocation();
+
+  useEffect(()=> {
+    sampleLocation.pathname.includes('/services') ? setIsActive(true) : setIsActive(false);
   }, [sampleLocation])
-  
-  return (
+
+
+  //*********************************************************************************** */
+  const withoutNavFooterRoutes = ["/connection" , "/inscription", "/register-worker","/register-client"];
+  ///******************************************************************************* */
+
+  if (withoutNavFooterRoutes.some((item) => sampleLocation.pathname === item))   return null;
+
+  return(
     <nav className="navbar navbar-expand-xl ">
       <div className="container-fluid" style={{ paddingBottom: '0px' }}>
         <a className="navbar-brand"  >
-          <img src="../images/logo.png" alt="logo" width="130px" height="70px" />
+          <img src={logo} alt="logo" width="130px" height="70px" /> 
         </a>
         <div className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"><svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 10">
@@ -122,19 +125,45 @@ Récupérer à partir de la table "anonce" toutes les categories existantes*/
               }}
             >
               {isLoggedIn() ? (
-            // Render this link if the user is logged in
+                <div>
             <Link to='/connection' onClick={handleLogout}  className="nav-link">Déconnecté</Link>
+ 
+         
+            </div>
+
           ) : (
             // Render this link if the user is not logged in
             <Link to='/connection' className="nav-link ">Se connecter</Link>
           )}
               
-            </motion.li>
+            </motion.li> 
+
+            {isLoggedIn && user &&(
+              <Link to='/' >
+              <motion.img
+                src={user.pic || logo} 
+                style={{
+                  width: '50px', // Adjust this value to set the desired width
+                  height: '50px', // Adjust this value to set the desired height
+                  borderRadius: '50%', // To make it a circular image like Facebook logo
+                }}
+                initial={{ opacity: 0, scale: 1 }} // Initial opacity and scale when loading
+                animate={{ opacity: 1, scale: 1 }} // Animation to full opacity and scale
+                transition={{ duration: 1 }} // Animation duration
+              />
+
+              </Link>
+
+              )}
+     
+             
           </ul>
 
         </div>
       </div>
     </nav>
 
-  )
+  ) 
+          
+  
 }

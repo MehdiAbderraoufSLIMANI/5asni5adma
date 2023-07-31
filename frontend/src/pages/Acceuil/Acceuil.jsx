@@ -2,12 +2,16 @@ import React, { useEffect, useRef, useState } from 'react'
 import Typed from 'typed.js';
 import { motion } from 'framer-motion';
 import './Acceuil.css';
+import logo from '../../resources/images/logo.png';
+import acceuil from '../../resources/images/acceuil.png';
+import assistance from '../../resources/images/assistance.png';
+import tarif from '../../resources/images/tarif.png';
+import satisfaction from '../../resources/images/satisfaction.png';
  
 import { client } from '../../App'
  
 
 export default function Acceuil() {
-
 
 
  const [fullname, setFullname] = useState('');
@@ -53,24 +57,7 @@ export default function Acceuil() {
       typed.destroy();
     };
   }, []); 
-  
-  useEffect(() => {
-    // Get the JWT token from local storage
-    const token = localStorage.getItem('accessToken');
-    const headers = { Authorization: `Bearer ${token}` };
-    console.log(headers)
-    // Make the authenticated API request to get user data
-    client.get('/api/user-data/', { headers })
-      .then(response => {
-        // Set the user data in the state
-        console.log(response.data)
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }, []);
-
-
+   
 
 
 
@@ -86,7 +73,7 @@ export default function Acceuil() {
             <p style={{marginTop: '24px'}}>On vous propose plusieurs artisans algériens avec une variété de domaines, uniquement pour vous.</p>
           </div>
           <div className="col-md-6">
-            <img src="../images/acceuil.png" alt="artisans" height='130%' width='120%' />
+            <img src={acceuil} alt="artisans" height='130%' width='120%' />
           </div>
         </div>
       </div>
@@ -112,7 +99,7 @@ export default function Acceuil() {
           
           >
             <div className="img-container ">
-              <img src="../images/satisfaction.png" alt="feature" height='100%' width='100%' />
+              <img src={satisfaction} alt="feature" height='100%' width='100%' />
             </div>
             <p>100% satisfaction</p>
           </motion.div>
@@ -133,7 +120,7 @@ export default function Acceuil() {
           viewport={{once: true}}
           >
             <div className="img-container">
-              <img src="../images/tarif.png" alt="feature" height='100%' width='100%' />
+              <img src={tarif} alt="feature" height='100%' width='100%' />
             </div>
             <p>Meilleurs tarifs</p>
           </motion.div>
@@ -154,7 +141,7 @@ export default function Acceuil() {
           viewport={{once: true}}
           >
             <div className="img-container">
-              <img src="../images/assistance.png" alt="feature" height='100%' width='100%' />
+              <img src={assistance} alt="feature" height='100%' width='100%' />
             </div>
             <p>Assistance et disponibilité</p>
           </motion.div>
@@ -189,7 +176,7 @@ export default function Acceuil() {
 
           <div className="col-md-4 info-contact">
             <div className="img-container">
-              <img src="../images/logo.png" alt="logo" height='120%' width='100%' />
+              <img src={logo} alt="logo" height='120%' width='100%' />
             </div>
             <div className="coord mt-4">
               <div className='mb-2'>

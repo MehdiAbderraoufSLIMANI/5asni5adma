@@ -20,8 +20,7 @@ const Login = () => {
     e.preventDefault();
 
      
-      setIsLoading(true);
-      console.log("iam in")
+      setIsLoading(true); 
       loginUser(e);
       
      

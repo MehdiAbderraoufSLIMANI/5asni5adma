@@ -12,6 +12,7 @@ import {ReactComponent as CameraLogo} from "../../../resources/logos/camera-soli
 import jsonData from "../../../JSON/wilaya&commune.json"
 import {Link} from "react-router-dom"
 import "./RegisterWorker.css"
+import { motion } from 'framer-motion'
 import AuthContext from '../../../conctions/AuthContext'
 const RegisterWorker = () => {
   let {regesterWorker} = useContext(AuthContext)
@@ -23,10 +24,21 @@ const RegisterWorker = () => {
 
   const [commune, setCommune] = useState([])
   const selectedWilaya = useRef(null)
-
+  const [isLoading, setIsLoading] = useState(false);
   const handleChange = () => {
     setCommune(jsonData.filter(commune => commune.wilaya_name_ascii === selectedWilaya.current.value) )
   } 
+
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+
+     
+      setIsLoading(true); 
+      regesterWorker(e);
+      
+     
+  };
 
   return (
     <div className="worker-register-conn">
@@ -36,7 +48,7 @@ const RegisterWorker = () => {
             <p>inscription</p>
             <div className="line"></div>
           </div>
-          <form className="user-info" onSubmit={regesterWorker}>
+          <form className="user-info" onSubmit={handleRegister}>
           <div className="full-name">
               <div className="input-box">
                 <UserLogo className="icon"/>
@@ -106,7 +118,16 @@ const RegisterWorker = () => {
                 <input type="file" className='input' name='img' required/>
             </div>
             <div className="btn-submit">
-              <button type='submit' className='btn-register'>Inscription</button>
+            <motion.button
+            disabled={isLoading}
+            style={{ cursor: isLoading ? 'wait' : 'pointer' }}
+            whileHover={!isLoading ? { scale: 1.1 } : {}}
+            whileTap={!isLoading ? { scale: 0.9 } : {}}
+            type="submit"
+            className="btn-register"
+          >
+            {isLoading ? 'Please wait...' : 'Inscription'}
+          </motion.button>  
             </div>
             <div className="buttons">
  

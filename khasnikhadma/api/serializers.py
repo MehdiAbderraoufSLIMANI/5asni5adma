@@ -147,7 +147,8 @@ class ClientRegisterSerializer(serializers.Serializer):
             wilaya=clean_data['wilaya'],
             commune=clean_data['commune'],
             adresse=clean_data['adresse'], 
-            isBanned=False
+            isBanned=False,
+            img=clean_data['img']
 
             ) 
         user_obj.token_of_validation =  validations.generate_email_verification_token()

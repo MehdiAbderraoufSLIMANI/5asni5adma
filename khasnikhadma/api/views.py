@@ -139,8 +139,7 @@ class WorkerRegister(APIView):
     parser_classes = (MultiPartParser, FormParser,)
     def post(self, request):
         
-        clean_data = request.data
-        print("dddddddddd",clean_data)
+        clean_data = request.data 
         serializer = serializers.WorkerRegisterSerializer(data=clean_data)
         if serializer.is_valid(raise_exception=True):
             user = serializer.create(clean_data)
@@ -149,6 +148,7 @@ class WorkerRegister(APIView):
         return Response(status=status.HTTP_400_BAD_REQUEST)
 class ClientRegister(APIView):
     permission_classes = (permissions.AllowAny,)
+    parser_classes = (MultiPartParser, FormParser,)
     def post(self, request):
         
         clean_data = request.data
@@ -207,3 +207,5 @@ def clientView(request):
     queryset = models.Client.objects.all()
     serializer = serializers.ClientSerializer(queryset ,many =True )
     return Response(serializer.data)
+
+#adding element to db==================

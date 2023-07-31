@@ -1,16 +1,15 @@
 import React, { useRef, useState, useContext } from 'react'
 import {ReactComponent as UserLogo} from "../../../resources/logos/user-solid.svg"
 import {ReactComponent as LockLogo} from "../../../resources/logos/lock-solid.svg" 
- 
+import {ReactComponent as CameraLogo} from "../../../resources/logos/camera-solid.svg"
 import {ReactComponent as LocationLogo} from "../../../resources/logos/location-dot-solid.svg"
 import {ReactComponent as PhoneLogo} from "../../../resources/logos/phone-solid.svg"
 import {ReactComponent as AtLogo} from "../../../resources/logos/at-solid.svg"
 import jsonData from "../../../JSON/wilaya&commune.json"
 import {Link} from "react-router-dom"
-import "./RegisterClient.css"
-import { client } from '../../../App'
+import "./RegisterClient.css" 
 import AuthContext from '../../../conctions/AuthContext'
-
+import { motion } from "framer-motion"
 const RegisterClient = () => {
 
   let {regesterClient} = useContext(AuthContext)
@@ -18,7 +17,8 @@ const RegisterClient = () => {
   const [commune, setCommune] = useState([])
   const selectedWilaya = useRef(null)
  
- 
+  const [isLoading, setIsLoading] = useState(false);
+
   // Remove duplicates based on the "wilaya_name" property using Set
   const uniqueData = Array.from(new Set(jsonData.map((wilaya) => wilaya.wilaya_name_ascii))).map((wilaya_name_ascii) => {
     return jsonData.find((item) => item.wilaya_name_ascii === wilaya_name_ascii);
@@ -32,6 +32,16 @@ const RegisterClient = () => {
     
   } 
 
+  const handleRegister = (e) => {
+    e.preventDefault();
+
+     
+      setIsLoading(true); 
+      regesterClient(e);
+      
+     
+  };
+
   return (
     <div className="client-register-conn">
       <div className='register-form'>
@@ -40,7 +50,7 @@ const RegisterClient = () => {
             <p>inscription</p>
             <div className="line"></div>
           </div>
-          <form className="user-info" onSubmit={regesterClient}>
+          <form className="user-info" onSubmit={handleRegister}>
           <div className="full-name">
               <div className="input-box">
                 <UserLogo className="icon"/>
@@ -101,8 +111,22 @@ const RegisterClient = () => {
  
                 <label>Numéro de téléphone</label>
             </div>
+            <div className="input-box">
+                <CameraLogo className="icon"/>
+                <input type="file" className='input' name='img' required/>
+            </div>
             <div className="btn-submit">
-              <button type='submit' className='btn-register'>Inscription</button>
+            <motion.button
+            disabled={isLoading}
+            style={{ cursor: isLoading ? 'wait' : 'pointer' }}
+            whileHover={!isLoading ? { scale: 1.1 } : {}}
+            whileTap={!isLoading ? { scale: 0.9 } : {}}
+            type="submit"
+            className="btn-register"
+          >
+            {isLoading ? 'Please wait...' : 'Inscription'}
+          </motion.button>
+ 
             </div>
             <div className="buttons">
  

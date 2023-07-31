@@ -96,7 +96,8 @@ class MyUserManager(BaseUserManager):
                 wilaya,
                 commune,
                 adresse,  
-                isBanned):
+                isBanned,
+                img):
         
         if not email:
             raise ValueError('Users must have an email address')
@@ -114,7 +115,8 @@ class MyUserManager(BaseUserManager):
                 wilaya=wilaya,
                 commune=commune,
                 adresse=adresse, 
-                isBanned=isBanned
+                isBanned=isBanned,
+                img=img
         )
 
         
@@ -125,18 +127,22 @@ class MyUserManager(BaseUserManager):
 
  
 #Person""""""""""""""""""""""""""""""""
+from django.core.validators import MaxValueValidator, MinValueValidator
 class Person(AbstractBaseUser, PermissionsMixin):
+  
+
     username = models.CharField(max_length=20)
     email = models.EmailField(max_length=255,unique=True)
     nom = models.CharField(max_length=50)
     prenom = models.CharField(max_length=50)
-    tel = models.IntegerField()
+    tel = models.BigIntegerField(
+        validators=[MinValueValidator(1000000000),
+                    MaxValueValidator(9999999999)]
+    )
     isBanned = models.BooleanField(default=False)
     compte_type = models.CharField(max_length=20 ,editable=False) 
     token_of_validation = models.CharField(max_length=50,editable=False,default=' ')
-    valid = models.BooleanField(default=False)
-
-    password2 = models.CharField(max_length=255, verbose_name= 'Password confirmation', null=True) 
+    valid = models.BooleanField(default=False) 
     is_active = models.BooleanField(default=True,editable=False)
     is_staff = models.BooleanField(default=False,editable=False)
 

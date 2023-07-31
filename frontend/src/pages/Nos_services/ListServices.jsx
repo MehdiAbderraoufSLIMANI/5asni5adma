@@ -216,6 +216,7 @@ export default function ListServices() {
       <div className="services-header container-fluid">
         <h2>À la recherche d'un artisan talentueux et qualié pour vous aider ?</h2>
         <p> Ne cherchez plus ! Nous avons sélectionné pour vous les meilleurs artisans de votre région</p>
+        <div className="overlay"></div>
       </div>
 
       {showFilter && <div className='disabled'></div> }    

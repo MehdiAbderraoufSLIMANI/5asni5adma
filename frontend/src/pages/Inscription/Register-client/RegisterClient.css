@@ -7,20 +7,18 @@
     justify-content: center;
     align-items: center;
     padding: 120px 336px;
- 
-    padding-bottom: 90%;
-
+    padding-bottom: 50%;
  
 }
 
 
-.register-form{
+.registerclient-form{
     width: 888px;
     height: 908px;
     position: relative;
 }   
 
-.register-form .register-content{
+.registerclient-form .register-content{
     display: flex;
     width: 881.25px;
  
@@ -35,7 +33,7 @@
     box-shadow: 0px 1px 8px 0px var(--noir);
 }
 
-.register-form .register-content .inscription{
+.registerclient-form .register-content .inscription{
     display: flex;
     width: 272px;
     flex-direction: column;
@@ -43,7 +41,7 @@
     
 }
 
-.register-form .register-content .inscription p{
+.registerclient-form .register-content .inscription p{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -59,13 +57,13 @@
     line-height: normal;
     text-transform: capitalize;
 }
-.register-form .register-content .inscription .line{
+.registerclient-form .register-content .inscription .line{
     width: 80px;
     height: 6px;
     background-color: var(--rouge) ;
 }
 
-.register-form .register-content .user-info{
+.registerclient-form .register-content .user-info{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -75,7 +73,7 @@
     align-self: stretch;
 }
 
-.register-form .rectangle{
+.registerclient-form .rectangle{
     
     width: 880px;
  
@@ -130,6 +128,11 @@
 .input-box .input:active~label,
 .input-box .input:active~label
 {
+    top: -40px;
+}
+
+
+.input-box .email-label-clicked{
     top: -40px;
 }
 

@@ -1,24 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Neucha&family=Outfit:wght@700&family=Poppins&display=swap');
 
 .inscription-container{
- 
-
     width: 100%;
-    height: 100% !important;
     display: flex;  
     justify-content: center;
     align-items: center;
     padding: 120px 336px;
-    padding-bottom: 90%;
+    padding-bottom: 30%;
 }
-.register-form{
+.inscription-form{
     width: 872px;
-    height: 440px !important;
- 
     position: relative;
 }
 
-.register-form .rectangle{
+.inscription-form .rectangle{
     width: 864px;
     height: 432px;
     flex-shrink: 0;
@@ -31,7 +26,7 @@
 }
 
 
-.register-form .register-content{
+.inscription-form .register-content{
     display: flex;
     width: 864px;
     height: 432px;
@@ -44,7 +39,7 @@
 
 }
 
-.register-form .register-content .inscription{
+.inscription-form .register-content .inscription{
     display: flex;
     width: 272px;
     flex-direction: column;
@@ -52,7 +47,7 @@
     
 }
 
-.register-form .register-content .inscription p{
+.inscription-form .register-content .inscription p{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -68,7 +63,7 @@
     line-height: normal;
     text-transform: capitalize;
 }
-.register-form .register-content .inscription .line{
+.inscription-form .register-content .inscription .line{
     width: 80px;
     height: 6px;
     background-color: var(--rouge) ;

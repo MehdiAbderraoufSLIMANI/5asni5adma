@@ -117,7 +117,7 @@
 }
 .input-box .email-input:focus~label,
 .input-box .password-input:focus~label, 
-.input-box .email-input:valid~label,
+ 
 .input-box .password-input:valid~label,
 .input-box .email-input:active~label,
 .input-box .password-input:active~label

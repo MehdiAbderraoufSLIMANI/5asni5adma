@@ -44,7 +44,7 @@ export const AuthProvider = ({children}) => {
         setAuthTokens(null)
         setUser(null)
         localStorage.removeItem('authTokens')
-        history('/login')
+        history('/connection')
     }
 
     const isLoggedIn = () => {
@@ -54,18 +54,17 @@ export const AuthProvider = ({children}) => {
 
       let regesterClient = async (e)=> {
         e.preventDefault()
-        const formData = {
-            nom: e.target.elements.nom.value,
-            prenom: e.target.elements.prenom.value,
-            username: e.target.elements.username.value,
-            email: e.target.elements.email.value,
-            wilaya: e.target.elements.wilaya.value,
-            commune: e.target.elements.commune.value,
-            adresse: e.target.elements.adresse.value,
-            password: e.target.elements.password.value,
-            telephone: e.target.elements.telephone.value,
-          };
-    
+        const formData = new FormData();
+        formData.append("nom", e.target.elements.nom.value);
+        formData.append("prenom", e.target.elements.prenom.value);
+        formData.append("username", e.target.elements.username.value);
+        formData.append("email", e.target.elements.email.value);
+        formData.append("wilaya", e.target.elements.wilaya.value);
+        formData.append("commune", e.target.elements.commune.value);
+        formData.append("adresse",  e.target.elements.adresse.value);
+        formData.append("password", e.target.elements.password.value);
+        formData.append("telephone", e.target.elements.telephone.value);
+        formData.append("img", e.target.elements.img.files[0]); 
           client.post('/api/register-client/', formData)
           .then((response ) => {
             console.log('Registration successful!');
@@ -98,7 +97,7 @@ export const AuthProvider = ({children}) => {
             loginUser(e)
           })
           .catch((error) => { 
-            console.error('Registration failed:', error);
+            console.error('Registration react failed :', error);
             // Handle error as needed
           });
     };

@@ -3,7 +3,7 @@
     padding-top: 100px;
     min-height: 400px;
     text-align: center;
-    background-image: url('../../../public/images/nosServices.png');
+    background-image: url('../../resources/images/nosServices.png');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;

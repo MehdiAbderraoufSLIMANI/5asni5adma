@@ -90,8 +90,8 @@ const RegisterClient = () => {
             </div>
             <div className="input-box">
               <AtLogo className="icon"/>
-              <input type="email" className='input' name="email"  onChange={handlemail}  required/>
-              <label>Email</label>
+              <input onChange={handleEmailChange} type="email" className='input' required/>
+              <label className={!isInputEmpty? 'email-label-clicked' : '' }>Email</label>
             </div>
             <div className="input-box">
               <select onClick={handleChange} ref={selectedWilaya} className='wilaya-input' name='wilaya' required>
@@ -122,11 +122,7 @@ const RegisterClient = () => {
                 <label>Prénom</label>
               </div>
             </div>
-            <div className="input-box">
-              <AtLogo className="icon"/>
-              <input onChange={handleEmailChange} type="email" className='input' required/>
-              <label className={!isInputEmpty? 'email-label-clicked' : '' }>Email</label>
-            </div>
+
             <div className="password">
               <div className="input-box">
                 <LockLogo className="icon"/>

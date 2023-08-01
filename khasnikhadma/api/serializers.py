@@ -2,7 +2,7 @@ from django.forms import ValidationError
 from rest_framework import serializers
 from api import models,validations
 from django.contrib.auth import get_user_model, authenticate
-from django.utils import timezone
+
 
 
 #AnnonceCreate""""""""""""""""""""""""""""""""""""""""""""
@@ -16,8 +16,7 @@ class AnnonceCreateSerializer(serializers.Serializer):
                 service = clean_data['service'],
                 img_annonce =clean_data['img_annonce'],
                 description = clean_data['description'], 
-                artisan = user,
-                date_of_pub = timezone.now(),
+                artisan = user, 
             )       
         annonce_obj.save()
         return annonce_obj 

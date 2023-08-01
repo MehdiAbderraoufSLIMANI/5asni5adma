@@ -201,13 +201,14 @@ class Contact(models.Model):
         return self.fullname   
 
 #Annonces"""""""""""""""""""""""""""""""" 
+from django.utils import timezone
 def upload_path(instance, filename):
     return '/'.join(['annonce', str(instance.service), filename])
 class Annonce(models.Model):
-    date_of_pub = models.DateTimeField(verbose_name="date of publication")    
+    date_of_pub = models.DateTimeField(verbose_name="date of publication",default=timezone.now)    
     categorie = models.CharField(max_length=30)
-    service = models.CharField(max_length=20)
-    img_annonce = models.ImageField(verbose_name="img annonce", blank=True, null=True, upload_to=upload_path) 
+    service = models.CharField(max_length=30)
+    img_annonce = models.ImageField(verbose_name="img annonce", blank=True, null=True, default="annonce/vv/brooklyn99.jpg", upload_to=upload_path) 
     description = models.TextField()
     rating_annonce = models.FloatField(max_length=1, editable=False, default=0,verbose_name="rating annonce")
     artisan = models.ForeignKey(Artisan, on_delete=models.CASCADE)

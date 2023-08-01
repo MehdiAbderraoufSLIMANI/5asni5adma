@@ -209,3 +209,77 @@ def clientView(request):
     return Response(serializer.data)
 
 #adding element to db==================
+from django.shortcuts import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+from .models import Artisan, Annonce
+from django.conf import settings 
+from functools import wraps
+
+
+def debug_only(view_func):
+    @wraps(view_func)
+    def _wrapped_view(request, *args, **kwargs):
+        if settings.DEBUG:
+            return view_func(request, *args, **kwargs)
+        else:
+            return HttpResponse("This view is only active in debug mode.")
+    return _wrapped_view
+
+
+
+@csrf_exempt 
+@debug_only 
+def auto_create_announcements(request):
+    email_array = [
+        'njbj@mail.com', 'dddd@mail.com', 'ffh@mail.com', 'hhk@mail.com',
+        'dd@mail.com', 'haho123@mail.com', 'hoho123@mail.com', 'sami4@mail.com',
+        'uuu@gmail.com'
+    ]
+
+    announcements_data = [
+        {
+            'categorie': 'Photography',
+            'service': 'Portrait Photoshoot',
+            'description': 'Capturing the essence of a moment in time. Book a professional portrait photoshoot with our skilled artisan photographers.'
+        },
+        {
+            'categorie': 'Culinary Delights',
+            'service': 'Gourmet Cooking Class',
+            'description': 'Discover the art of cooking with our gourmet chef artisan. Learn to prepare exquisite dishes that will delight your taste buds.'
+        },
+        {
+            'categorie': 'Artistry',
+            'service': 'Custom Paintings',
+            'description': 'Turn your imagination into reality. Commission a unique and personalized painting crafted by our talented artisan artists.'
+        },
+        {
+            'categorie': 'Green Spaces',
+            'service': 'Zen Garden Design',
+            'description': 'Transform your outdoor space into a tranquil oasis with our artisan gardeners. Experience serenity in your own Zen garden.'
+        },
+        {
+            'categorie': 'Tech Innovations',
+            'service': 'Virtual Reality Experience',
+            'description': 'Embark on an immersive journey with our cutting-edge virtual reality experiences. Explore worlds beyond your wildest imagination.'
+        },
+        {
+            'categorie': 'Fashion & Style',
+            'service': 'Bespoke Tailoring',
+            'description': 'Elevate your wardrobe with custom-tailored clothing. Our artisan tailors will create garments that perfectly fit your unique style.'
+        }
+    ]
+
+    try:
+        for email in email_array:
+            artisan, created = Artisan.objects.get_or_create(email=email)
+
+            for data in announcements_data:
+                annonce = Annonce.objects.create(
+                    categorie=data['categorie'],
+                    service=data['service'],
+                    description=data['description'],
+                    artisan=artisan
+                )
+        return HttpResponse("Announcements created successfully")
+    except Exception as e:
+        return HttpResponse(f"An error occurred: {e}")

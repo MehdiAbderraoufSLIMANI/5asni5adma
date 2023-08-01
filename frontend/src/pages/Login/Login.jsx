@@ -12,6 +12,21 @@ import AuthContext  from '../../conctions/AuthContext'
 const Login = () => {
     
     let {loginUser} = useContext(AuthContext)
+    let [isInputEmpty, setIsInputEmpty] = useState(true)
+
+    const handleChange = (e) => {
+      e.preventDefault()
+
+      if(e.target.value !== ''){
+        setIsInputEmpty(false)
+      }else{
+        setIsInputEmpty(true)
+      }
+
+    }
+
+
+
 
 
     const [isLoading, setIsLoading] = useState(false);
@@ -25,7 +40,7 @@ const Login = () => {
       
      
   };
-  const handleChange = (e) => {
+  const handlemailChange = (e) => {
     setIsEmailFilled(e.target.value.trim() !== ''); // Check if the input has any value (ignoring leading/trailing spaces)
   };
   return (
@@ -41,9 +56,9 @@ const Login = () => {
           <form className="user-info" onSubmit={handleLogin}>
             <div className={`input-box ${isEmailFilled ? 'filled' : ''}`}>
               <UserLogo className="icon"/>
-              <input type="email" className='email-input' required name="email" onChange={handleChange}/>
-              <label>Email</label>
-            </div> 
+              <input type="email" onChange={handlemailChange} className='email-input' required name="email" />
+              <label className={!isInputEmpty? 'email-label-clicked' : ''}>Email</label>
+            </div>
             <div className="input-box">
               <LockLogo className="icon"/>
               <input type="password" className='password-input' required name="password"/>

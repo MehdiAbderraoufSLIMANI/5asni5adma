@@ -46,9 +46,19 @@ const RegisterWorker = () => {
       
      
   };
-  const handlemail = (e) => {
-    setIsEmailFilled(e.target.value.trim() !== ''); // Check if the input has any value (ignoring leading/trailing spaces)
-  };
+  let [isInputEmpty, setIsInputEmpty] = useState(true)
+
+    const handleEmailChange = (e) => {
+      e.preventDefault()
+
+      if(e.target.value !== ''){
+        setIsInputEmpty(false)
+      }else{
+        setIsInputEmpty(true)
+      }
+
+    }
+
   return (
     <div className="worker-register-conn">
       <div className='register-form'>
@@ -78,7 +88,7 @@ const RegisterWorker = () => {
 
             <div className={`input-box ${isEmailFilled ? 'filled' : ''}`}>
               <AtLogo className="icon"/>
-              <input type="email" className='input' name='email' onChange={handlemail} required/>
+              <input type="email" className='input' name='email' required/>
               <label>Email</label>
             </div>
 
@@ -99,8 +109,23 @@ const RegisterWorker = () => {
               <input type="text" className='input' name='adresse' required/>
               <label>Adresse de résidence</label>
             </div>
-
-
+            <div className="full-name">
+              <div className="input-box">
+                <UserLogo className="icon"/>
+                <input type="text" className='input' required/>
+                <label>Nom</label>
+              </div>
+              <div className="input-box">
+                <UserLogo className="icon"/>
+                <input type="text" className='input' required/>
+                <label>Prénom</label>
+              </div>
+            </div>
+            <div className="input-box">
+              <AtLogo className="icon"/>
+              <input type="email" onChange={handleEmailChange} className='input' required/>
+              <label className={!isInputEmpty? 'email-label-clicked' : '' }>Email</label>
+            </div>
             <div className="password">
               <div className="input-box">
                 <LockLogo className="icon"/>

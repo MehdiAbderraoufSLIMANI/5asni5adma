@@ -9,7 +9,7 @@
     align-items: center;
     padding: 120px 336px;
  
-    padding-bottom: 90%;
+    padding-bottom: 60%;
  
 
 }
@@ -135,6 +135,11 @@
     top: -40px;
   }
 
+
+
+.input-box .email-label-clicked{
+    top: -40px;
+}
 
 .input-box .input{
     width: 100%;

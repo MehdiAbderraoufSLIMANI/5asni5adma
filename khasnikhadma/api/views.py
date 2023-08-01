@@ -165,7 +165,7 @@ class EmailValidation(APIView):
     permission_classes = (permissions.AllowAny,)
     def post(self, request):
         data = request.data  
-        serializer = serializers.RegisterSerializer(data=data)
+        serializer = serializers.WorkerRegisterSerializer(data=data)
         if serializer.is_valid(raise_exception=True):
             valid = serializer.validatee(data)
             if valid:

@@ -25,8 +25,7 @@ const RegisterWorker = () => {
 
   const [commune, setCommune] = useState([])
   const selectedWilaya = useRef(null)
-  const [isLoading, setIsLoading] = useState(false);
-  const [isEmailFilled, setIsEmailFilled] = useState(false); 
+  const [isLoading, setIsLoading] = useState(false); 
   const handleChange = () => {
     setCommune(jsonData.filter(commune => commune.wilaya_name_ascii === selectedWilaya.current.value) )
   } 
@@ -80,17 +79,8 @@ const RegisterWorker = () => {
                 <label>Prénom</label>
               </div>
             </div>
-            <div className="input-box">
-              <UserLogo className="icon"/>
-              <input type="text" className='input' name='username' required/>
-              <label>Nom d'utilisateur</label>
-            </div>
 
-            <div className={`input-box ${isEmailFilled ? 'filled' : ''}`}>
-              <AtLogo className="icon"/>
-              <input type="email" className='input' name='email' required/>
-              <label>Email</label>
-            </div>
+ 
 
             <div className="input-box">
               <select onClick={handleChange} ref={selectedWilaya} className='wilaya-input' name='wilaya' required>
@@ -109,21 +99,21 @@ const RegisterWorker = () => {
               <input type="text" className='input' name='adresse' required/>
               <label>Adresse de résidence</label>
             </div>
-            <div className="full-name">
-              <div className="input-box">
-                <UserLogo className="icon"/>
-                <input type="text" className='input' required/>
-                <label>Nom</label>
-              </div>
-              <div className="input-box">
-                <UserLogo className="icon"/>
-                <input type="text" className='input' required/>
-                <label>Prénom</label>
-              </div>
+            <div className="input-box">
+                <PhoneLogo className="icon"/>
+ 
+                <input type="text" className='input' name='telephone' required/>
+ 
+                <label>Numéro de téléphone</label>
+            </div>
+            <div className="input-box">
+              <UserLogo className="icon"/>
+              <input type="text" className='input' name='username' required/>
+              <label>Nom d'utilisateur</label>
             </div>
             <div className="input-box">
               <AtLogo className="icon"/>
-              <input type="email" onChange={handleEmailChange} className='input' required/>
+              <input type="email" onChange={handleEmailChange} className='input' name="email" required/>
               <label className={!isInputEmpty? 'email-label-clicked' : '' }>Email</label>
             </div>
             <div className="password">
@@ -138,13 +128,7 @@ const RegisterWorker = () => {
                 <label>Confirmer le mote de passe</label>
               </div>
             </div>
-            <div className="input-box">
-                <PhoneLogo className="icon"/>
- 
-                <input type="text" className='input' name='telephone' required/>
- 
-                <label>Numéro de téléphone</label>
-            </div>
+
  
  
             <div className="input-box">
@@ -161,7 +145,7 @@ const RegisterWorker = () => {
             className="btn-register"
           >
             {isLoading ? 'Please wait...' : 'Inscription'}
-          </motion.button>  
+          </motion.button>   
             </div>
             <div className="buttons">
  

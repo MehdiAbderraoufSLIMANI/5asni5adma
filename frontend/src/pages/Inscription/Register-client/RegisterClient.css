@@ -133,6 +133,10 @@
     top: -40px;
 }
 
+.input-box.filled label {
+    top: -40px;
+  }
+
 .input-box .input{
     width: 100%;
     height: 100%;

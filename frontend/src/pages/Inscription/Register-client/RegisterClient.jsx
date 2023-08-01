@@ -74,7 +74,7 @@ const RegisterClient = () => {
             </div>
             <div className="input-box">
               <AtLogo className="icon"/>
-              <input type="email" className='input' name="email" required/>
+              <input type="email" className='input' name="email"  onChange={handlemail}  required/>
               <label>Email</label>
             </div>
             <div className="input-box">

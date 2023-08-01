@@ -14,6 +14,7 @@ import {Link} from "react-router-dom"
 import "./RegisterWorker.css"
 import { motion } from 'framer-motion'
 import AuthContext from '../../../conctions/AuthContext'
+import { handleError } from 'vue'
 const RegisterWorker = () => {
   let {regesterWorker} = useContext(AuthContext)
 
@@ -25,6 +26,7 @@ const RegisterWorker = () => {
   const [commune, setCommune] = useState([])
   const selectedWilaya = useRef(null)
   const [isLoading, setIsLoading] = useState(false);
+  const [isEmailFilled, setIsEmailFilled] = useState(false); 
   const handleChange = () => {
     setCommune(jsonData.filter(commune => commune.wilaya_name_ascii === selectedWilaya.current.value) )
   } 
@@ -44,7 +46,9 @@ const RegisterWorker = () => {
       
      
   };
-
+  const handlemail = (e) => {
+    setIsEmailFilled(e.target.value.trim() !== ''); // Check if the input has any value (ignoring leading/trailing spaces)
+  };
   return (
     <div className="worker-register-conn">
       <div className='register-form'>
@@ -72,9 +76,9 @@ const RegisterWorker = () => {
               <label>Nom d'utilisateur</label>
             </div>
 
-            <div className="input-box">
+            <div className={`input-box ${isEmailFilled ? 'filled' : ''}`}>
               <AtLogo className="icon"/>
-              <input type="email" className='input' name='email' required/>
+              <input type="email" className='input' name='email' onChange={handlemail} required/>
               <label>Email</label>
             </div>
 

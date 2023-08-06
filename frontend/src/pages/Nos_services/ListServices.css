@@ -4,36 +4,39 @@
     min-height: 400px;
     text-align: center;
     background-image: url('../../resources/images/nosServices.png');
-    background-position: center;
+    background-position: center center;
+    /*margin-top: -50px;*/
     background-size: cover;
-    background-repeat: no-repeat;
-    z-index: -1;
 }
-.services-header .overlay{
-    width: 100%;
-    height: 100%;
+@media all and (max-width: 1199px) {
+    .services-header {
+        margin-top: -50px;
+        min-height: 450px;
+    }
+}
+.services-header::before {
+    content: "";
     position: absolute;
     top: 0;
+    left: 0;
     right: 0;
-    background: linear-gradient(90deg, rgba(234, 76, 54, 0.70), rgba(196, 196, 196, 0.00));
-    z-index: -1;
-}
-
+    bottom: 0;
+    box-shadow: inset 250px 120px 200px rgba(238, 119, 8, 0.459); /*rgba(207, 40, 10, 0.459) */
+    z-index: 1; 
+  }
 .services-header h2 {
-    color: white;
+    color: var(--rouge);
     width: 80%; 
     font-size: 48px;
     font-weight: 700;
     margin: 0px auto;
     margin-bottom: 32px;
-    z-index: 1;
 }
 .services-header p {
     margin: 0 auto;
     color: white;
     width: 50%;
     font-size: 24px;
-    z-index: 1;
 }
 .main-content {
     background-color: #F2F2F2;

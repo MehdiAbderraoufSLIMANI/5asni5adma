@@ -32,6 +32,7 @@ nav {
     background-color: var(--noir) !important;
     min-height: 88px !important;
     padding-bottom: 0 !important;
+    z-index: 5;
 }
 
 nav .navbar-toggler {
@@ -66,7 +67,7 @@ nav ul.pageLinks li a:hover {
 
 
 
-@media all and (max-width: 1198px) {
+@media all and (max-width: 1199px) {
     nav ul li{
         text-align: center;
     }
@@ -91,7 +92,11 @@ nav ul.pageLinks li a:hover {
         width: 100%;
     }
     .App-header {
-        padding-bottom: 20px;
+        padding-bottom: 40px; /*20*/
+    }
+    nav ul li.redBtn {
+        margin-bottom: 20px;
+        margin-top: 15px;
     }
     
 }

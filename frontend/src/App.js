@@ -25,7 +25,7 @@ import axios from 'axios';
 
 import { AuthProvider } from './conctions/AuthContext';
 import PrivateRoute from './conctions/PrivateRoute';
-
+import Chattest2 from './testing/Chattest2';
 
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -93,9 +93,10 @@ function App() {
             <Route path='/ValidationPage' element={<ValidationPage />} />
             <Route path='/backendtest' element={<Backendtest />} />
             <Route path='/Annoncetesting' element={<Annoncetesting />} />
-
+            <Route path='/chat' element={<Chattest2 />} />    
             <Route path='*' element={<ErrorPage />} />           
           </Routes>
+
 
         </main>
 

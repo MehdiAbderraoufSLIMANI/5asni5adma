@@ -33,6 +33,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
+    "daphne",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,12 +42,30 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'api.apps.ApiConfig',
+    'chat.apps.ChatConfig',
     'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt',
     
 ]
 
+ASGI_APPLICATION = "khasnikhadma.asgi.application"  
+WSGI_APPLICATION = "khasnikhadma.wsgi.application"
+CHANNELS_WS_PROTOCOLS = ["websocket"]
+
+
+CORS_ALLOW_ALL_ORIGINS = True  # Allow requests from any origin
+CORS_ALLOW_CREDENTIALS = True  # Allow sending cookies from the frontend (if needed)
+CORS_ALLOW_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'] 
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],  
+        },
+    },
+}
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -142,8 +162,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'http://172.0.0.1:3000',
 ]
-
-CORS_ALLOW_CREDENTIALS = True
+ 
 
 AUTH_USER_MODEL = 'api.Person'
 

@@ -77,9 +77,22 @@ const RegisterClient = () => {
             </div>
             <div className="input-box">
               <AtLogo className="icon"/>
-              <input type="email" className='input' name="email" required/>
-              <label>Email</label>
+              <input onChange={handleEmailChange} type="email" name='email' className='input' required/>
+              <label className={!isInputEmpty? 'email-label-clicked' : '' }>Email</label>
             </div>
+            <div className="password">
+              <div className="input-box">
+                <LockLogo className="icon"/>
+                <input type="password" className='input' name='password' required/>
+                <label>Mot de passe</label>
+              </div>
+              <div className="input-box">
+                <LockLogo className="icon"/>
+                <input type="password" className='input' required/>
+                <label>Confirmer le mote de passe</label>
+              </div>
+            </div>
+            
             <div className="input-box">
               <select onClick={handleChange} ref={selectedWilaya} className='wilaya-input' name='wilaya' required>
                 {uniqueData.map(wilaya => <option value={wilaya.wilaya_name_ascii}>{wilaya.wilaya_name_ascii}</option>)}
@@ -96,35 +109,6 @@ const RegisterClient = () => {
  
               <input type="text" className='input' name='adresse' required/>
               <label>Adresse de résidence</label>
-            </div>
-            <div className="full-name">
-              <div className="input-box">
-                <UserLogo className="icon"/>
-                <input type="text" className='input' required/>
-                <label>Nom</label>
-              </div>
-              <div className="input-box">
-                <UserLogo className="icon"/>
-                <input type="text" className='input' required/>
-                <label>Prénom</label>
-              </div>
-            </div>
-            <div className="input-box">
-              <AtLogo className="icon"/>
-              <input onChange={handleEmailChange} type="email" className='input' required/>
-              <label className={!isInputEmpty? 'email-label-clicked' : '' }>Email</label>
-            </div>
-            <div className="password">
-              <div className="input-box">
-                <LockLogo className="icon"/>
-                <input type="password" className='input' name='password' required/>
-                <label>Mot de passe</label>
-              </div>
-              <div className="input-box">
-                <LockLogo className="icon"/>
-                <input type="password" className='input' required/>
-                <label>Confirmer le mote de passe</label>
-              </div>
             </div>
             <div className="input-box">
                 <PhoneLogo className="icon"/>

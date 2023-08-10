@@ -3,11 +3,12 @@
     padding-top: 100px;
     min-height: 400px;
     text-align: center;
-    background-image: url('../../../public/images/nosServices.png');
+    background-image: url('../../resources/images/nosServices.png');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    z-index: -1;
+    z-index: 0;
+   
 }
 .services-header .overlay{
     width: 100%;

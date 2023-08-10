@@ -1,0 +1,77 @@
+.form-container {
+    padding: 8px 32px;
+}
+.form-container h3 {
+    font-size: 32px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+.form-container form {
+    padding-left: 50px;
+    padding-top: 16px;
+}
+label.custom-file-label {
+    font-weight: 600;
+}
+.editBouton, .cancelBouton {
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 24px;
+    text-align: center;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: .3s ease-in-out;
+}
+
+.cancelBouton {
+    color: var(--rouge);
+    border: solid 1px var(--rouge);
+}
+ .editBouton {
+    margin-right: 20px;
+ }
+.editBouton, .cancelBouton:hover {
+    background-color: var(--noir);
+    border: solid 1px var(--rouge);
+    color: var(--rouge);
+}
+.editBouton:hover {
+    color: var(--lightGray);
+}
+.form-container .error {
+    color: red;
+    font-weight: 600;
+    margin-left: 8px;
+    display: block;
+    width: 80%;
+  }
+
+@media all and (max-width: 919px) {
+    .form-container {
+        margin: 0 auto;
+    }
+}
+.form-container .form-control, .form-container .form-select {
+    width: 85% !important;
+    background-color: white;
+    border-bottom: solid 2px var(--rouge);
+    border-radius: 0 !important;
+    transition: .3s ease-in-out;
+}
+.form-container .form-control:focus {
+    background-color: #e96453;
+    color: white;
+}
+.form-container i.bi-eye-slash-fill, .form-container i.bi-eye-fill {
+    font-size: 20px;
+    position: absolute;
+    top: 6px;
+    right: 9%;
+    cursor: pointer;
+}
+@media all and (max-width: 815px) {
+    .form-container i.bi-eye-slash-fill, .form-container i.bi-eye-fill {
+        position: absolute;
+        right: 6%;
+    }
+}

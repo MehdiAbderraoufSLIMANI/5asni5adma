@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { client } from '../../App';
-import faqImg from '../../resources/images/FAQ.png'
+import faqImg from '../../resources/images/FAQ.png';
 import './FAQ.css';
 
 const FAQ = () => {
@@ -37,7 +37,7 @@ const FAQ = () => {
         <div className="accordion" id="accordionExample">
           {
             faqData.map((faq, index) => (
-              <div className="accordion-item">
+              <div className="accordion-item" key={index}>
                 <h2 className="accordion-header">
                   <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target={`#collapse${index}`} aria-expanded="true" aria-controls={`#collapse${index}`} >
                     {faq.question}

@@ -37,13 +37,11 @@ const RegisterClient = () => {
 
     if (e.target.elements.password.value !== e.target.elements.password2.value) {
       // If passwords don't match, show an error or handle it as needed
-      alert('Password and Confirm Password do not match.');
+      alert('Le mot de passe et le mot de passe confirmé ne correspondent pas .');
       return;
     }
       setIsLoading(true); 
-      regesterClient(e);
-      
-     
+      regesterClient(e);  
   };
 
 

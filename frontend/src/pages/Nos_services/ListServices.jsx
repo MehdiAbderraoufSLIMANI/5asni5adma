@@ -41,6 +41,7 @@ export default function ListServices() {
     else {
       setAnnonces(allAnnonces);
     }
+    setCurrentPage(1);
     setIsLoading(false);    
     }
   }, [allAnnonces,categ]);

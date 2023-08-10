@@ -1,0 +1,28 @@
+ul.user-links {
+    display: none;
+}
+ul.user-dropdown {
+    margin-right: 120px;
+    display: block;
+}
+ul.user-dropdown img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background-color: white;
+}
+@media all and (max-width: 991px) {
+    ul.user-dropdown {
+        display: none;
+    }
+    ul.user-links {
+        display: block;
+        width: 80%;
+        margin-left: 19% ;
+    }
+}
+@media all and (max-width: 800px) {
+    ul.user-links {
+        margin-left: 21%;
+    }
+ }

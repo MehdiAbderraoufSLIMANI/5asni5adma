@@ -12,7 +12,9 @@ import {ReactComponent as CameraLogo} from "../../../resources/logos/camera-soli
 import jsonData from "../../../JSON/wilaya&commune.json"
 import {Link} from "react-router-dom"
 import "./RegisterWorker.css"
+import { motion } from 'framer-motion'
 import AuthContext from '../../../conctions/AuthContext'
+
 const RegisterWorker = () => {
   let {regesterWorker} = useContext(AuthContext)
 
@@ -23,12 +25,26 @@ const RegisterWorker = () => {
 
   const [commune, setCommune] = useState([])
   const selectedWilaya = useRef(null)
-
+  const [isLoading, setIsLoading] = useState(false); 
   const handleChange = () => {
     setCommune(jsonData.filter(commune => commune.wilaya_name_ascii === selectedWilaya.current.value) )
   } 
 
 
+  const handleRegister = (e) => {
+    e.preventDefault();
+
+     
+    if (e.target.elements.password.value !== e.target.elements.password2.value) {
+      // If passwords don't match, show an error or handle it as needed
+      alert('Password and Confirm Password do not match.');
+      return;
+    } 
+      setIsLoading(true); 
+      regesterWorker(e);
+      
+     
+  };
   let [isInputEmpty, setIsInputEmpty] = useState(true)
 
     const handleEmailChange = (e) => {
@@ -50,7 +66,7 @@ const RegisterWorker = () => {
             <p>inscription</p>
             <div className="line"></div>
           </div>
-          <form className="user-info" onSubmit={regesterWorker}>
+          <form className="user-info" onSubmit={handleRegister}>
           <div className="full-name">
               <div className="input-box">
                 <UserLogo className="icon"/>
@@ -63,29 +79,8 @@ const RegisterWorker = () => {
                 <label>Prénom</label>
               </div>
             </div>
-            <div className="input-box">
-              <UserLogo className="icon"/>
-              <input type="text" className='input' name='username' required/>
-              <label>Nom d'utilisateur</label>
-            </div>
 
-            <div className="input-box">
-              <AtLogo className="icon"/>
-              <input type="email" onChange={handleEmailChange} name='email' className='input' required/>
-              <label className={!isInputEmpty? 'email-label-clicked' : '' }>Email</label>
-            </div>
-            <div className="password">
-              <div className="input-box">
-                <LockLogo className="icon"/>
-                <input type="password" className='input' name='password' required/>
-                <label>Mot de passe</label>
-              </div>
-              <div className="input-box">
-                <LockLogo className="icon"/>
-                <input type="password" className='input' required/>
-                <label>Confirmer le mote de passe</label>
-              </div>
-            </div>
+ 
 
             <div className="input-box">
               <select onClick={handleChange} ref={selectedWilaya} className='wilaya-input' name='wilaya' required>
@@ -111,6 +106,29 @@ const RegisterWorker = () => {
  
                 <label>Numéro de téléphone</label>
             </div>
+            <div className="input-box">
+              <UserLogo className="icon"/>
+              <input type="text" className='input' name='username' required/>
+              <label>Nom d'utilisateur</label>
+            </div>
+            <div className="input-box">
+              <AtLogo className="icon"/>
+              <input type="email" onChange={handleEmailChange} className='input' name="email" required/>
+              <label className={!isInputEmpty? 'email-label-clicked' : '' }>Email</label>
+            </div>
+            <div className="password">
+              <div className="input-box">
+                <LockLogo className="icon"/>
+                <input type="password" className='input' name='password' required/>
+                <label>Mot de passe</label>
+              </div>
+              <div className="input-box">
+                <LockLogo className="icon"/>
+                <input type="password" className='input' name='password2' required/>
+                <label>Confirmer le mote de passe</label>
+              </div>
+            </div>
+
  
  
             <div className="input-box">
@@ -118,7 +136,16 @@ const RegisterWorker = () => {
                 <input type="file" className='input' name='img' required/>
             </div>
             <div className="btn-submit">
-              <button type='submit' className='btn-register'>Inscription</button>
+            <motion.button
+            disabled={isLoading}
+            style={{ cursor: isLoading ? 'wait' : 'pointer' }}
+            whileHover={!isLoading ? { scale: 1.1 } : {}}
+            whileTap={!isLoading ? { scale: 0.9 } : {}}
+            type="submit"
+            className="btn-register"
+          >
+            {isLoading ? 'Please wait...' : 'Inscription'}
+          </motion.button>   
             </div>
             <div className="buttons">
  

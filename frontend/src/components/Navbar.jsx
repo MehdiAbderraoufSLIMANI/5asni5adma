@@ -24,7 +24,7 @@ export default function Navbar() {
 /*Backend
 Récupérer à partir de la table "anonce" toutes les categories existantes*/
   //testing
-  const categories = ['Climatiseur', 'Menuisierie'];
+  const categories = ['Photography', 'Fashion & Style']   //['Climatiseur', 'Menuisierie'];
  
 
   
@@ -62,7 +62,7 @@ Récupérer à partir de la table "anonce" toutes les categories existantes*/
 
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 pageLinks">
             <li className="nav-item">
-              <NavLink to='/' className="nav-link">Acceuil</NavLink>
+              <NavLink to='/' className="nav-link">Accueil </NavLink>
             </li>
 
             <li className="nav-item dropdown">
@@ -80,7 +80,7 @@ Récupérer à partir de la table "anonce" toutes les categories existantes*/
             </li>
 
             <li className="nav-item">
-              <HashLink to='/#contact' smooth={true}  className="nav-link ">Nous Contacter</HashLink>  {/* scroll={(el) => el.scrollIntoView({ behavior: 'smooth', block: 'start' })} */}
+              <HashLink to='/#contact' smooth={true}  className="nav-link">Nous Contacter</HashLink>  
             </li>
 
 
@@ -105,7 +105,7 @@ Récupérer à partir de la table "anonce" toutes les categories existantes*/
               }}
             >
 
-              <Link to='/inscription' className="nav-link ">Rejoigner nous</Link>
+              <Link to='/inscription' className="nav-link">Rejoigner nous</Link>
            
              
              

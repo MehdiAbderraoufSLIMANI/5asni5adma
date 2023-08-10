@@ -14,16 +14,32 @@ const client = axios.create({
 function ValidationPage(){
 
     const location = useLocation();  
-    const [token, setToken] = useState('');
-    const [id, setUserId] = useState('');
-    const [typea, setTypea] = useState('');
+    const [token, setToken] = useState(null);
+    const [id, setUserId] = useState(null);
+    const [typea, setTypea] = useState(null);
     useEffect(() => {
-      const searchParams = new URLSearchParams(location.search);
-      setToken(searchParams.get('token'));
-      setUserId(searchParams.get('id'));
-      setTypea(searchParams.get('typea')); 
       
-       
+
+      
+      const searchParams = new URLSearchParams(location.search);
+      const newToken = searchParams.get('token');
+      const newId = searchParams.get('id');
+      const newTypea = searchParams.get('typea');
+  
+      // Set state only if the parameters are not empty
+      if (newToken && newId && newTypea) {
+        setToken(newToken);
+        setUserId(newId);
+        setTypea(newTypea);
+      }
+      console.log(token)
+  
+         // Cleanup function to handle unmounting
+    return () => { 
+      setToken(null);
+      setUserId(null);
+      setTypea(null);
+    };
     }, [location.search]);
 
   function validSubmit(event){
@@ -43,13 +59,13 @@ function ValidationPage(){
         
       });  
   };
-  if(token.length === 0 || id.length === 0  || typea.length === 0 ){
-    console.log('errour : ')
-    return <Navigate to="*" />;
-  }
+ 
+  const shouldRedirect = token === null || id === null || typea === null;
 
     return (
+      
       <div>
+      
         <form onSubmit={e => validSubmit(e)}>
         <div>valide</div>
         <input type="submit" value="Register" />

@@ -25,6 +25,7 @@ import axios from 'axios';
 
 import { AuthProvider } from './conctions/AuthContext';
 import PrivateRoute from './conctions/PrivateRoute';
+import ScrollToTop from './components/ScrollToTop';
 
 
 axios.defaults.xsrfCookieName = 'csrftoken';
@@ -63,6 +64,7 @@ function App() {
   return (
     <div className="App">
       <Router>
+      <ScrollToTop />
       <AuthProvider>
       
         <header className="App-header">
@@ -72,7 +74,7 @@ function App() {
         <GoTop scrollRate={scrollRate} />  
              
         <main>
-          
+        
           <Routes> 
           
             <Route path='/services' element={<ListServices />} />
@@ -104,6 +106,7 @@ function App() {
            <Footer />
         </footer> 
         </AuthProvider>
+        
       </Router>
 
     </div>

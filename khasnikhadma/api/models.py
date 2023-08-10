@@ -96,7 +96,8 @@ class MyUserManager(BaseUserManager):
                 wilaya,
                 commune,
                 adresse,  
-                isBanned):
+                isBanned,
+                img):
         
         if not email:
             raise ValueError('Users must have an email address')
@@ -114,7 +115,8 @@ class MyUserManager(BaseUserManager):
                 wilaya=wilaya,
                 commune=commune,
                 adresse=adresse, 
-                isBanned=isBanned
+                isBanned=isBanned,
+                img=img
         )
 
         
@@ -125,18 +127,22 @@ class MyUserManager(BaseUserManager):
 
  
 #Person""""""""""""""""""""""""""""""""
+from django.core.validators import MaxValueValidator, MinValueValidator
 class Person(AbstractBaseUser, PermissionsMixin):
+  
+
     username = models.CharField(max_length=20)
     email = models.EmailField(max_length=255,unique=True)
     nom = models.CharField(max_length=50)
     prenom = models.CharField(max_length=50)
-    tel = models.IntegerField()
+    tel = models.BigIntegerField(
+        validators=[MinValueValidator(1000000000),
+                    MaxValueValidator(9999999999)]
+    )
     isBanned = models.BooleanField(default=False)
     compte_type = models.CharField(max_length=20 ,editable=False) 
     token_of_validation = models.CharField(max_length=50,editable=False,default=' ')
-    valid = models.BooleanField(default=False)
-
-    password2 = models.CharField(max_length=255, verbose_name= 'Password confirmation', null=True) 
+    valid = models.BooleanField(default=False) 
     is_active = models.BooleanField(default=True,editable=False)
     is_staff = models.BooleanField(default=False,editable=False)
 
@@ -195,13 +201,14 @@ class Contact(models.Model):
         return self.fullname   
 
 #Annonces"""""""""""""""""""""""""""""""" 
+from django.utils import timezone
 def upload_path(instance, filename):
     return '/'.join(['annonce', str(instance.service), filename])
 class Annonce(models.Model):
-    date_of_pub = models.DateTimeField(verbose_name="date of publication")    
+    date_of_pub = models.DateTimeField(verbose_name="date of publication",default=timezone.now)    
     categorie = models.CharField(max_length=30)
-    service = models.CharField(max_length=20)
-    img_annonce = models.ImageField(verbose_name="img annonce", blank=True, null=True, upload_to=upload_path) 
+    service = models.CharField(max_length=30)
+    img_annonce = models.ImageField(verbose_name="img annonce", blank=True, null=True, default="annonce/vv/brooklyn99.jpg", upload_to=upload_path) 
     description = models.TextField()
     rating_annonce = models.FloatField(max_length=1, editable=False, default=0,verbose_name="rating annonce")
     artisan = models.ForeignKey(Artisan, on_delete=models.CASCADE)

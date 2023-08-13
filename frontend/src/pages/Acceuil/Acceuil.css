@@ -1,10 +1,13 @@
 .acceuil-intro {
     background-color: var(--noir);
     color: white;
-    /*padding: 180px 12%;
-    padding-bottom: 250px;*/
     padding: 221px 248px 308px 248px;
     min-height: 450px;
+}
+@media all and (max-width: 1199px) {
+    .acceuil-intro {
+        margin-top: -50px;
+    }
 }
 .acceuil-intro h1 {
     font-size: 48px;

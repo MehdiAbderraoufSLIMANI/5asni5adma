@@ -7,7 +7,7 @@ import Acceuil from './pages/Acceuil/Acceuil';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ListServices from './pages/Nos_services/ListServices';
-import ConsulterService from './pages/ConsulterService';
+import ConsulterService from './pages/ConsulterService/ConsulterService';
 import Inscription from './pages/Inscription/Inscription';
 import RegisterClient from './pages/Inscription/Register-client/RegisterClient'
 import RegisterWorker from './pages/Inscription/Register-worker/RegisterWorker'

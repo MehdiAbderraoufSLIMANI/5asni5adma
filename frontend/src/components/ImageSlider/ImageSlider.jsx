@@ -6,6 +6,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation'
 import './ImageSlider.css'
 import {Pagination , Navigation} from "swiper/modules"
+import { delay } from 'framer-motion';
 
 
 
@@ -17,10 +18,11 @@ const ImageSlider = ({images}) => {
     <Swiper
         modules={[Navigation, Pagination]}
         navigation
-        pagination={{ clickable: true }}
-        loop = {true}
+        pagination={{ clickable: true }}  
         spaceBetween={32}
         slidesPerView={3}
+        autoplay={{delay: 5000}}
+        grabCursor={true}
         >
         {images.map((image, index) => (
             <SwiperSlide key={index}>

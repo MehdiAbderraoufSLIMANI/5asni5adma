@@ -25,7 +25,7 @@
 .swiper-button-prev,
 .swiper-button-next
 {
-    color: var(--rouge);
+   color: var(--rouge);
 }
 
 .swiper-pagination-bullet-active{

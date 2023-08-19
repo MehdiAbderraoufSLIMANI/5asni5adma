@@ -2,10 +2,13 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import {ReactComponent as ConnectedLogo} from "../../resources/logos/connected.svg"
 import {ReactComponent as Star} from "../../resources/logos/star.svg"
+import {ReactComponent as StarEmpty} from "../../resources/logos/empty-star.svg"
 import {ReactComponent as LocationLogo} from "../../resources/logos/location-dot-solid.svg"
 import {ReactComponent as PhoneLogo} from "../../resources/logos/phone-solid.svg"
+import {ReactComponent as PaperPlaneLogo} from "../../resources/logos/paper-plane-regular.svg"
 import profileImg from "../../resources/images/profile-picture.svg"
 import ImageSlider from '../../components/ImageSlider/ImageSlider'
+import Comment from '../../components/Comment/Comment'
 
 // slider images
 import image1 from "../../resources/images/Rectangle 325.png"
@@ -63,6 +66,44 @@ const ConsulterService = () => {
             </div>
             <div className="image-slider">
                 <ImageSlider images={images}/>
+            </div>
+            <hr/>
+            <div className="contacter-worker">
+                <p>Contacter et discuter le prix</p>
+                <div className="btn-contact">
+                    <div className="phone-icon">
+                        <PhoneLogo className="phone-logo"/>
+                    </div>
+                    <div className="paper-icon">
+                        <PaperPlaneLogo className='plane-logo'/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div className="comment-section">
+            <p>1566 commentaire</p>
+            <div className="comment-user">
+                <div className="rating">
+                    <p>Lisser un avis</p>
+                    <div className="stars">
+                        <Star className="start-filled"/>
+                        <Star className="start-filled"/>
+                        <Star className="start-filled"/>
+                        <StarEmpty className="star-empty"/>
+                        <StarEmpty className="star-empty"/>
+                    </div>
+                </div>
+                <div className="comment-input">
+                    <input className='input' type="text" required/>
+                    <label>ajouter un commentaire</label>
+                </div>
+            </div>
+            <div className='comments'>
+                <Comment/>
+                <Comment/>
+                <Comment/>
+                <Comment/>
             </div>
         </div>
     </div>

@@ -17,6 +17,7 @@
     "react-scripts": "5.0.1",
     "react-scroll": "^1.8.9",
     "react-spinners": "^0.13.8",
+    "swiper": "^10.1.0",
     "typed.js": "^2.0.16",
     "web-vitals": "^2.1.4"
   },

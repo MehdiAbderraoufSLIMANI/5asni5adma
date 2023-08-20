@@ -81,7 +81,6 @@ const RegisterClient = () => {
                 <label>Prénom</label>
               </div>
             </div>
-
             <div className="input-box">
               <select onClick={handleChange} ref={selectedWilaya} className='wilaya-input' name='wilaya' required>
                 {uniqueData.map(wilaya => <option value={wilaya.wilaya_name_ascii}>{wilaya.wilaya_name_ascii}</option>)}

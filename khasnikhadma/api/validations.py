@@ -45,7 +45,7 @@ def send_validation_email(token,email,id,type_account):
     email_text = strip_tags(activation_link)  # Strip HTML tags for the plain text version
 
     # Send the email
-    print(email)
+    
     send_mail(subject = email_subject,
               message = email_text,
               from_email = from_email,

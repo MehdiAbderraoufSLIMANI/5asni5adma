@@ -2,18 +2,43 @@ import React, { useEffect, useRef, useState } from 'react'
 import Typed from 'typed.js';
 import { motion } from 'framer-motion';
 import './Acceuil.css';
-
-
+import logo from '../../resources/images/logo.png';
+import acceuil from '../../resources/images/acceuil.png';
+import assistance from '../../resources/images/assistance.png';
+import tarif from '../../resources/images/tarif.png';
+import satisfaction from '../../resources/images/satisfaction.png';
+ 
+import { client } from '../../App'
+ 
 
 export default function Acceuil() {
+
 
  const [fullname, setFullname] = useState('');
  const [userEmail, setUserEmail] = useState('');
  const [message, setMessage] = useState('');
  
+
+
+
  const contactSubmitHandler = (e) => {
   e.preventDefault();
-  console.log(fullname,userEmail,message)
+
+  const jsondata = {
+    fullname: fullname,
+    userEmail: userEmail,
+    message: message,
+
+  }
+
+  client.post('/api/contectus/',jsondata)
+  .catch(error => {
+    console.error('Registration failed:', error);
+     
+  });
+  setFullname('');
+  setUserEmail('');
+  setMessage(''); 
  }
  
 
@@ -31,7 +56,13 @@ export default function Acceuil() {
       // Destroy Typed instance during cleanup to stop animation
       typed.destroy();
     };
-  }, []);
+  }, []); 
+   
+
+
+
+
+
   return (
     <div>
       <div className="acceuil-intro container-fluid">
@@ -42,7 +73,7 @@ export default function Acceuil() {
             <p style={{marginTop: '24px'}}>On vous propose plusieurs artisans algériens avec une variété de domaines, uniquement pour vous.</p>
           </div>
           <div className="col-md-6">
-            <img src="../images/acceuil.png" alt="artisans" height='130%' width='120%' />
+            <img src={acceuil} alt="artisans" height='130%' width='120%' />
           </div>
         </div>
       </div>
@@ -68,7 +99,7 @@ export default function Acceuil() {
           
           >
             <div className="img-container ">
-              <img src="../images/satisfaction.png" alt="feature" height='100%' width='100%' />
+              <img src={satisfaction} alt="feature" height='100%' width='100%' />
             </div>
             <p>100% satisfaction</p>
           </motion.div>
@@ -89,7 +120,7 @@ export default function Acceuil() {
           viewport={{once: true}}
           >
             <div className="img-container">
-              <img src="../images/tarif.png" alt="feature" height='100%' width='100%' />
+              <img src={tarif} alt="feature" height='100%' width='100%' />
             </div>
             <p>Meilleurs tarifs</p>
           </motion.div>
@@ -110,7 +141,7 @@ export default function Acceuil() {
           viewport={{once: true}}
           >
             <div className="img-container">
-              <img src="../images/assistance.png" alt="feature" height='100%' width='100%' />
+              <img src={assistance} alt="feature" height='100%' width='100%' />
             </div>
             <p>Assistance et disponibilité</p>
           </motion.div>
@@ -118,7 +149,7 @@ export default function Acceuil() {
         </div>
       </div>
 
-      <div id="contact" className='container-fluid text-light'>
+      <div id='contact'  className='container-fluid text-light'>  
         <div className="row justify-content-center align-items-center">
           <div className="col-md-6 contact-form">
             <h1 className='display-4'>Nous contacter</h1>
@@ -133,9 +164,8 @@ export default function Acceuil() {
                 <input type="email" className="form-control" placeholder='Votre email' value={userEmail} onChange={(e)=>setUserEmail(e.target.value)} />
               </div>
 
-              <div className="form-floating mb-5">
-                <textarea className="form-control" placeholder="Ecriver un message..." id="floatingTextarea" value={message} onChange={(e)=>setMessage(e.target.value)}></textarea>
-                <label htmlFor="floatingTextarea" style={{color: 'var(--noir)'}}>Message...</label>
+              <div className="mb-5">
+                <textarea placeholder="Entrez votre message ici..." className="form-control" value={message} onChange={(e)=>setMessage(e.target.value)}></textarea>
               </div>
 
               <button type="submit" className="btn envoyerMsg">Envoyer</button>
@@ -146,7 +176,7 @@ export default function Acceuil() {
 
           <div className="col-md-4 info-contact">
             <div className="img-container">
-              <img src="../images/logo.png" alt="logo" height='120%' width='100%' />
+              <img src={logo} alt="logo" height='120%' width='100%' />
             </div>
             <div className="coord mt-4">
               <div className='mb-2'>

@@ -4,7 +4,7 @@
 :root {
     --noir: #1C1F1E;
     --rouge: #EA4C36;
-    --lightGray: rgb(228, 225, 225);
+    --lightGray: rgb(228, 225, 225); 
     --font: 'Poppins', sans-serif;
 }
 /* pour utiliser une couleur dans un sélecteur: var(--noir)*/
@@ -20,17 +20,19 @@
     position: relative;
     min-height: 100vh;
     width: 100%;
+    background-color: var(--lightGray);
     /*padding-bottom: 500px;*/
     font-family: var(--font);
 }
 .App-header {
-    background-color: var(--noir);
     padding-top: 0px;
     min-height: 88px;
 }
 nav {
+    background-color: var(--noir) !important;
     min-height: 88px !important;
     padding-bottom: 0 !important;
+    z-index: 5;
 }
 
 nav .navbar-toggler {
@@ -65,7 +67,7 @@ nav ul.pageLinks li a:hover {
 
 
 
-@media all and (max-width: 1198px) {
+@media all and (max-width: 1199px) {
     nav ul li{
         text-align: center;
     }
@@ -89,7 +91,13 @@ nav ul.pageLinks li a:hover {
         margin-left: 3px;/*145*/
         width: 100%;
     }
-
+    .App-header {
+        padding-bottom: 40px; /*20*/
+    }
+    nav ul li.redBtn {
+        margin-bottom: 20px;
+        margin-top: 15px;
+    }
     
 }
 
@@ -134,10 +142,15 @@ nav ul li.redBtn {
     position: absolute;
     bottom: 0px;
     font-size: 18px;
-    background-color: var(--noir);
     width: 100%;
     min-height: 260px;
-    padding-top: 25px;
+}
+.App-footer .footer-container {
+    background-color: var(--noir);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding-top: 20px;
 }
 .App-footer .footer-top {
     display: flex;
@@ -170,3 +183,6 @@ nav ul li.redBtn {
 .dropdown-menu {
     display: block !important;
   }
+
+
+ 

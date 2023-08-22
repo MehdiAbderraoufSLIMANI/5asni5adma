@@ -1,5 +1,5 @@
-import { useLocation } from 'react-router-dom';
-import React, { useEffect} from 'react';
+import { useLocation , Navigate } from 'react-router-dom';
+import React, { useEffect , useState } from 'react';
 import axios from 'axios';
  
 
@@ -13,25 +13,43 @@ const client = axios.create({
 
 function ValidationPage(){
 
-    const location = useLocation();
-    let token,id,typea;
+    const location = useLocation();  
+    const [token, setToken] = useState(null);
+    const [id, setUserId] = useState(null);
+    const [typea, setTypea] = useState(null);
     useEffect(() => {
+      
+
+      
       const searchParams = new URLSearchParams(location.search);
-      token = searchParams.get('token');
-      id = searchParams.get('id');
-      typea = searchParams.get('typea');
-       
+      const newToken = searchParams.get('token');
+      const newId = searchParams.get('id');
+      const newTypea = searchParams.get('typea');
+  
+      // Set state only if the parameters are not empty
+      if (newToken && newId && newTypea) {
+        setToken(newToken);
+        setUserId(newId);
+        setTypea(newTypea);
+      }
+      console.log(token)
+  
+         // Cleanup function to handle unmounting
+    return () => { 
+      setToken(null);
+      setUserId(null);
+      setTypea(null);
+    };
     }, [location.search]);
 
   function validSubmit(event){
     event.preventDefault();
-
-    const jas = { 
-        token: token,
-        id: id,
-        typea: typea,
-    }
-    client.post('/api/valid/', jas  )
+ 
+    client.post('/api/valid/',  { 
+      token: token,
+      id: id,
+      typea: typea,
+  }  )
       .then(response => {
         console.log('Registration successful:', response.data);
         
@@ -39,12 +57,15 @@ function ValidationPage(){
       .catch(error => {
         console.error('Registration failed:', error);
         
-      });
-    console.log(jas);
+      });  
   };
+ 
+  const shouldRedirect = token === null || id === null || typea === null;
 
     return (
+      
       <div>
+      
         <form onSubmit={e => validSubmit(e)}>
         <div>valide</div>
         <input type="submit" value="Register" />

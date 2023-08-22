@@ -1,0 +1,99 @@
+.disabled {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 5;
+    background-color: rgba(95, 93, 93, 0.404);
+}
+
+.filter-container {
+    width: 300px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: block;
+    z-index: 10;
+    padding: 16px 8px;
+    background-color: var(--noir);
+    padding-bottom: 96px;
+    box-shadow: 3px 2px 15px black;
+}
+.filter-container .filter-header {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    color: white;
+    position: relative;
+}
+.filter-container .filter-header h2 {
+    font-weight: 600;   
+    margin-right: 8px;
+}
+.filter-container .filter-header i.bi-x-lg {
+   position: absolute; 
+   top: 0;
+   right: 8px;
+   cursor: pointer;
+}
+
+.filter-container form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 24px auto;
+}
+.filter-container form select {
+    margin-bottom: 16px;
+    
+    width: 100%;
+    border: none;
+    background-color: var(--noir);
+    color: white;
+    border-bottom: solid 1px white;
+    font-size: 16px;
+    height: 44px;
+    padding: 8px 16px;
+}
+.filter-container form select option {
+    background-color: #3D3F3E; 
+}
+
+.filter-container .clearFilterBtn, .filter-container .valider {
+    background-color: var(--rouge);
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 20px;
+}
+.filter-container .clearFilterBtn {
+    padding: 8px;
+    margin-left: 155px;
+    margin-bottom: 72px;
+    width: 40%;
+    transition: .4s ease;
+}
+.filter-container .clearFilterBtn:hover, .filter-container .valider:hover {
+    background-color: transparent;
+    border: solid 1px var(--rouge);
+}
+.filter-container .valider {
+    padding: 8px 24px;
+    width: 80%;
+    margin: 64px auto;
+    transition: .4s ease;
+}
+.filter-container form {
+    position: relative;
+}
+.filter-container form .alert {
+    position: absolute;
+    top: 52px;
+    left: 24px;
+    height: 40px;
+    padding: 8px 8px;
+    width: 80%;
+    text-align: center;
+}

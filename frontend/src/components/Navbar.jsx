@@ -1,35 +1,50 @@
-import React, { useEffect, useState } from 'react'
-import { NavLink, Link, useLocation } from 'react-router-dom'
+import React, {useEffect, useState, useContext } from 'react'
+import { NavLink,Link, useLocation } from 'react-router-dom'
 import { HashLink } from 'react-router-hash-link'
-import { motion } from 'framer-motion';
+import { motion } from 'framer-motion'; 
+import logo from '../resources/images/logo.png';
+import AuthContext from '../conctions/AuthContext';
+
+
+//import AuthContext from '../conctions/AuthContext';
 
 export default function Navbar() {
 
-/*Récupérer à partir de la table "anonce" toutes les categories existantes*/
+  
+  let {isLoggedIn} = useContext(AuthContext)
+
+ 
+/*Backend
+Récupérer à partir de la table "anonce" toutes les categories existantes*/
   //testing
-  const categories = ['Climatiseur', 'Menuisierie'];
-
-
-  
-
-
+  const categories = ['Photography', 'Fashion & Style']   //['Climatiseur', 'Menuisierie'];
+ 
 
   
+
   const [showDropdown, setShowDropdown] = useState(false);
   const [isActive, setIsActive] = useState(false);
 
 
-  //Récupérer l'url courante pour attribuer la classe 'active' au lien "Nos services" lorsqu'il est actif
+
   const sampleLocation = useLocation();
-  useEffect(() => {
-    sampleLocation.pathname.includes('/services') ? setIsActive(true) : setIsActive(false)
+
+  useEffect(()=> {
+    sampleLocation.pathname.includes('/services') ? setIsActive(true) : setIsActive(false);
   }, [sampleLocation])
+
+
+  //*********************************************************************************** */
+  const withoutNavFooterRoutes = ["/connection" , "/inscription", "/register-worker","/register-client"];
+  ///******************************************************************************* */
+
+  if (isLoggedIn() || withoutNavFooterRoutes.some((item) => sampleLocation.pathname === item) ) {  return null;}
   
-  return (
+  else { return(
     <nav className="navbar navbar-expand-xl ">
       <div className="container-fluid" style={{ paddingBottom: '0px' }}>
-        <a className="navbar-brand">
-          <img src="../images/logo.png" alt="logo" width="130px" height="70px" />
+        <a className="navbar-brand"  >
+          <img src={logo} alt="logo" width="130px" height="70px" /> 
         </a>
         <div className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"><svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 10">
@@ -40,10 +55,10 @@ export default function Navbar() {
 
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 pageLinks">
             <li className="nav-item">
-              <NavLink to='/' className="nav-link">Acceuil</NavLink>
+              <NavLink to='/' className="nav-link">Accueil </NavLink>
             </li>
 
-            <li class="nav-item dropdown">
+            <li className="nav-item dropdown">
               <a href='#' onClick={() => setShowDropdown(!showDropdown)} className={`nav-link dropdown-toggle ${isActive? 'active' :''}`}>
                 Nos services
               </a>
@@ -58,10 +73,14 @@ export default function Navbar() {
             </li>
 
             <li className="nav-item">
-              <HashLink to='/#contact' className="nav-link ">Nous Contacter</HashLink>
+              <HashLink to='/#contact' smooth={true}  className="nav-link">Nous Contacter</HashLink>  
             </li>
+
+
           </ul>
           <ul className="navbar-nav  mb-2 mb-lg-0 pushRight"  >
+
+            
             <motion.li className="nav-item redBtn"
               whileHover={{
                 scale: 1.1,
@@ -72,8 +91,11 @@ export default function Navbar() {
                 scale: 1
               }}
             >
-              <Link to='/inscription' className="nav-link ">Rejoigner nous</Link>
-            </motion.li>
+
+              <Link to='/inscription' className="nav-link">Rejoigner nous</Link>
+           
+          </motion.li>
+        
 
             <motion.li className="nav-item redBtn"
               whileHover={{
@@ -85,13 +107,19 @@ export default function Navbar() {
                 scale: 1
               }}
             >
-              <Link to='/connection' className="nav-link ">Se connecter</Link>
-            </motion.li>
+            
+            <Link to='/connection' className="nav-link ">Se connecter</Link>
+        
+              
+            </motion.li> 
+             
           </ul>
 
         </div>
       </div>
     </nav>
 
-  )
+  ) 
+            }      
+  
 }

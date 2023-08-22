@@ -1,0 +1,127 @@
+.profil-con .disabled {
+    width: 100%;
+    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: var(--lightGray);
+    z-index: 5;
+}
+.profile-container {
+    margin-top: 115px;
+}
+.profile-container img {
+    height: 100% ;
+    width: 100% ;
+    border-radius: 50%;
+    margin: 0 auto;
+    box-shadow: 0px 0px 15px var(--noir);
+}
+.profile-container .bio-container {
+    min-height: 536px;
+    min-width: 400px;
+    margin-left: 30px;
+}
+.profile-container .img-container {
+    position: relative;
+    height: 384px;
+    width: 384px;
+}
+.profile-container .img-container .ball-container {
+    position: absolute;
+    bottom: 58px;
+    right: 20px;
+    height: 38px;
+    width: 38px;
+    border-radius: 50%;
+    border: solid 2px white;
+    background-color: var(--lightGray);
+}
+.profile-container .img-container .ball-container .greenBall {
+  position: absolute;
+  bottom: 3px;
+  right: 3px;
+  height: 80%;
+  width: 80%;
+  border-radius: 50%;
+  background-color: #16CD75;
+}
+.img-container .full-name {
+ color: black;
+ font-size: 16px;
+ font-weight: 600;
+ text-align: center;
+ margin-top: 16px;
+ margin-bottom: 5px;
+}
+.img-container .username {
+ color: rgba(0, 0, 0, 0.70);
+ font-size: 16px;
+ text-align: center;
+}
+.bio-container .adress-container {
+ margin-top: 23%;
+}
+.bio-container .adress-container span {
+    font-size: 16px;
+}
+.bio-container .adress-container i {
+    width: 24px;
+    height: 24px;
+    color: var(--rouge);
+}
+.bio-container .adress-container .adress {
+    font-weight: 600;
+    margin-left: 120px;
+    color: black;
+}
+.allInfo h3 {
+    font-size: 32px;
+}
+.info-container {
+    min-height: 380px;
+    margin-top: 24px;
+    background-color: white;
+    border-radius: 24px;
+    box-shadow: 0px 0px 15px var(--noir);
+    margin-right: 30px;
+    padding: 48px;
+}
+.info-container hr {
+   color: var(--rouge); 
+   margin-top: 20px;
+}
+.info-container .label {
+    font-size: 16px;
+    font-weight: 600;
+    color: black;
+}
+.info-container .info {
+    font-size: 16px;
+    color: var(--noir);
+}
+@media all and (max-width: 919px) {
+    .bio-container,  .allInfo {
+        margin: 0 auto !important;
+    }
+    .allInfo .editBtn {
+        width: 200px;
+    }
+}  
+
+.allInfo .editBtn {
+    background-color: var(--rouge);
+    color: white;
+    font-size: 16px;
+    width: 240px;
+    margin-top: 56px;
+    text-align: center;
+    padding: 16px 48px;
+    border-radius: 8px;
+    transition: .3s ease-in-out;
+} 
+.allInfo .editBtn:hover {
+    background-color: var(--noir);
+    border: solid 1px var(--rouge);
+    color: var(--rouge);
+}

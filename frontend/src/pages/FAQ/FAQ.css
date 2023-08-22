@@ -1,0 +1,68 @@
+  .faq-container {
+    margin-bottom: 500px;
+    margin-top: -50px;
+    min-height: 600px;
+    padding-top: 150px;
+  }
+  .faq-banner {
+    background-image: url('../../resources/images/FAQ.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    min-height: 380px;
+    width: 100%;
+    text-align: center;
+    padding-top: 130px;
+  }
+ @media all and (max-width: 1199px) {
+  .faq-banner {
+    margin-top: -50px;
+    padding-top: 100px;
+  }
+  
+ }
+  
+  .faq-header {
+    width: 80%;
+    margin: 0 auto;
+    color: var(--noir);
+  }
+  .faq-header h3 {
+    font-size: 48px;
+    margin-bottom: 20px;
+  }
+  .faq-content {
+    padding: 30px 0px;
+  }
+  .faq-content .accordion {
+    width: 90% !important;
+    margin: 0 auto;
+    --bs-accordion-btn-icon: url('../../resources/images/expand.png');
+    --bs-accordion-btn-active-icon: url('../../resources/images/expand.png');
+
+  }
+  .faq-content .accordion .accordion-item {
+    color: var(--noir) !important;
+    margin-bottom: 20px !important;
+  }
+  .accordion-item {
+    box-shadow: 0px 0px 10px var(--noir) !important;
+    border: none !important;
+  }
+
+  .accordion-button:not(.collapsed) {
+    color: var(--noir) !important;
+    background-color:  white !important;
+  }
+  .accordion-body {
+    background-color: var(--rouge) !important; 
+    color: white ; 
+  }
+  .imag-container {
+    height: 500px;
+    background-color: #f1bcb5;
+    margin-top: 20px; 
+    padding-top: 50px;
+    border-radius: 20% 40% 30% 60% ;
+  }

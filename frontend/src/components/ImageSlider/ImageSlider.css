@@ -1,0 +1,33 @@
+.swiper{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding: 1%;
+    justify-content: center;
+
+}
+
+.swiper-slide {
+    border-radius: 8px;
+    width: 100%;
+    height: 90%;
+}
+
+
+.swiper-slide img{
+    width: 100%;
+    border-radius: 8px;
+    height: 100%;
+    size: cover;
+}  
+
+
+.swiper-button-prev,
+.swiper-button-next
+{
+   color: var(--rouge);
+}
+
+.swiper-pagination-bullet-active{
+    background-color: var(--rouge);
+}

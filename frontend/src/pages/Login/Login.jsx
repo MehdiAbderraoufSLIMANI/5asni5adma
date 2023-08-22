@@ -36,8 +36,10 @@ const Login = () => {
 
      
       setIsLoading(true); 
-      loginUser(e);
-      
+      const er = loginUser(e);
+      if (er != 200){
+        setIsLoading(false); 
+      }
      
   };
   const handlemailChange = (e) => {
@@ -73,7 +75,7 @@ const Login = () => {
             type="submit"
             className="btn-login"
           >
-            {isLoading ? 'Please wait...' : 'Connexion'}
+            {isLoading ? 'attendez...' : 'Connexion'}
           </motion.button>
             </div>
             <div className="buttons">

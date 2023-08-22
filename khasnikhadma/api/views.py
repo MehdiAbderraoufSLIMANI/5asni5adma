@@ -225,16 +225,36 @@ def debug_only(view_func):
             return HttpResponse("This view is only active in debug mode.")
     return _wrapped_view
 
-
+import random,string
 
 @csrf_exempt 
 @debug_only 
 def auto_create_announcements(request):
+    def generate_random_password():
+        characters = string.ascii_letters + string.digits
+        return ''.join(random.choice(characters) for _ in range(8))
+
+    def generate_random_prenom():
+        first_names = ['Ella', 'Noah', 'Luna', 'Max', 'Aria', 'Leo', 'Zara', 'Ezra', 'Nora', 'Finn', 'Mila', 'Remy', 'Juno']
+        last_names = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez']
+
+        return random.choice(first_names) + ' ' + random.choice(last_names)
+
+    def generate_random_adresse():
+        streets = ['Maple Street', 'Willow Avenue', 'Cedar Lane', 'Oak Court', 'Elm Drive', 'Pine Road', 'Birch Street']
+        cities = ['Algiers', 'Oran', 'Constantine', 'Annaba', 'Batna', 'Tlemcen', 'Sétif', 'Béjaïa', 'Blida']
+
+        return str(random.randint(100, 999)) + ' ' + random.choice(streets) + ', ' + random.choice(cities)
+ 
+
     email_array = [
         'njbj@mail.com', 'dddd@mail.com', 'ffh@mail.com', 'hhk@mail.com',
         'dd@mail.com', 'haho123@mail.com', 'hoho123@mail.com', 'sami4@mail.com',
         'uuu@gmail.com'
     ]
+
+    wilaya_list = ['Algiers', 'Oran', 'Constantine', 'Annaba', 'Batna', 'Tlemcen', 'Sétif', 'Béjaïa', 'Blida']
+    commune_list = ['Alger Centre', 'Mohammadia', 'Hussein Dey', 'Oran Centre', 'Sidi M\'Hamed', 'Annaba Centre', 'Batna Centre', 'Sétif Centre', 'Béjaïa Centre']
 
     announcements_data = [
         {
@@ -269,9 +289,28 @@ def auto_create_announcements(request):
         }
     ]
 
+
     try:
         for email in email_array:
-            artisan, created = Artisan.objects.get_or_create(email=email)
+            password = generate_random_password()
+            username = email
+            wilaya = random.choice(wilaya_list)
+            commune = random.choice(commune_list)
+
+            artisan, created = Artisan.objects.get_or_create(
+                username=username,
+                email=email,
+                password=password,
+                nom=f"Artisan {username.split('@')[0]}",
+                prenom=generate_random_prenom(),
+                tel="1000000001",
+                wilaya=wilaya,
+                commune=commune,
+                adresse=generate_random_adresse(),
+                rating=0,
+                isBanned=False,
+                img='artisan/erg/355735836_562763682491934_2425908606717361938_n.jpg'
+            )
 
             for data in announcements_data:
                 annonce = Annonce.objects.create(

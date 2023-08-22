@@ -25,7 +25,8 @@ import axios from 'axios';
 
 import { AuthProvider } from './conctions/AuthContext';
 import PrivateRoute from './conctions/PrivateRoute';
-import Chattest2 from './testing/Chattest2';
+import Chatcomponent from './testing/Chatcomponent';
+import RoomSelector from './testing/RoomSelector';
 
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -74,7 +75,7 @@ function App() {
         <main>
           
           <Routes> 
-          
+
             <Route path='/services' element={<ListServices />} />
             <Route path='/services/:categ' element={<ListServices />} />
             <Route path='/service/:numAnn/:idArtisan' element={<ConsulterService />} />
@@ -90,11 +91,15 @@ function App() {
             <Route path='/register-client' element={<RegisterClient />} />
             <Route path='/connection' element={<Login />} />
             <Route path='/about us' element={<AboutUs />} />
+            <Route path='*' element={<ErrorPage />} />  
+
+
             <Route path='/ValidationPage' element={<ValidationPage />} />
             <Route path='/backendtest' element={<Backendtest />} />
             <Route path='/Annoncetesting' element={<Annoncetesting />} />
-            <Route path='/chat' element={<Chattest2 />} />    
-            <Route path='*' element={<ErrorPage />} />           
+            <Route path='/chat/:numAnn/:idArtisan' element={<Chatcomponent />} />
+            <Route path='/room/:numAnn/:idArtisan' element={<RoomSelector />} />
+         
           </Routes>
 
 

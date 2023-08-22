@@ -36,6 +36,7 @@ export const AuthProvider = ({children}) => {
             history('/')
         }else{
             alert('Something went wrong!')
+            return response.status
         }
     }
 
@@ -69,10 +70,13 @@ export const AuthProvider = ({children}) => {
           .then((response ) => {
             console.log('Registration successful!');
             loginUser(e)
+            return true
           })
           .catch((error) => { 
-            console.error('Registration failed:', error);
-            // Handle error as needed
+ 
+            alert('Something went wrong!')
+            return false
+      
           });
     };
 

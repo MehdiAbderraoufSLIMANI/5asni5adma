@@ -4,10 +4,11 @@ import { Link } from 'react-router-dom';
 import './Annonce.css';
 
 export default function Annonce({ ann }) {
+  //mahdi badal hadi bach ytasti al chat ida chaft had al comment ab3atli f messanger nfahmak {`/service/${ann.num}/${ann.id_artisan}`}
   return (
 
     <div className="col-md-5 col-lg-3 annonce-container">
-      <Link to={`/service/${ann.num}/${ann.id_artisan}`}>
+      <Link to={`/chat/${ann.num}/${ann.id_artisan}`}>
         <img src={"http://127.0.0.1:8000/media/"+ann.img} height='330px' width='100%' />  
         <h4> {ann.service} </h4>
       </Link>

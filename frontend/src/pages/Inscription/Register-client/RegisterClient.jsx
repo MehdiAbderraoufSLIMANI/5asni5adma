@@ -41,7 +41,10 @@ const RegisterClient = () => {
       return;
     }
       setIsLoading(true); 
-      regesterClient(e);
+      const err = regesterClient(e);
+      if(!err){
+        setIsLoading(false);
+      }
       
      
   };
@@ -115,7 +118,7 @@ const RegisterClient = () => {
             </div>
             <div className="input-box">
               <AtLogo className="icon"/>
-              <input onChange={handleEmailChange} type="email" className='input' required/>
+              <input onChange={handleEmailChange} type="email" className='input' name="email" required/>
               <label className={!isInputEmpty? 'email-label-clicked' : '' }>Email</label>
             </div>
 

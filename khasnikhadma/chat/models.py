@@ -1,8 +1,7 @@
 from django.db import models
 
 # Create your models here.
-from django.db import models
-
+from api.models import Artisan,Client,Annonce 
 class Message(models.Model):
     username = models.CharField(max_length=255)
     content = models.TextField()
@@ -11,3 +10,10 @@ class Message(models.Model):
     class Meta:
         db_table = "chat_message"
         ordering = ('timestamp',)
+
+class Room(models.Model):
+    roomName = models.CharField(verbose_name="Room Name",max_length=100,default="")
+
+    artisan_id = models.ManyToManyField(Artisan)
+    client_id = models.ManyToManyField(Client)
+    annonce_id = models.ManyToManyField(Annonce)

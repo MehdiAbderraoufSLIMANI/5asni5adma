@@ -8,7 +8,7 @@ export default function Footer() {
     const sampleLocation = useLocation();
 
     //*********************************************************************************** */
-  const withoutNavFooterRoutes = ["/connection" , "/inscription", "/register-worker","/register-client"];
+  const withoutNavFooterRoutes = ["/connection" , "/inscription", "/register-worker","/register-client","/chat"];
   ///******************************************************************************* */
 
   if (withoutNavFooterRoutes.some((item) => sampleLocation.pathname === item))   return null;

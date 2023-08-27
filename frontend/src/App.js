@@ -30,6 +30,7 @@ import PrivateRoute from './conctions/PrivateRoute';
 import ScrollToTop from './components/ScrollToTop';
 import { AuthProvider } from './conctions/AuthContext';
 import ProfilClient from './pages/Profil_client/ProfilClient';
+import ConsulterProfile from './pages/ConsulterProfile/ConsulterProfile';
 
  
 
@@ -89,6 +90,7 @@ function App() {
               <Route path='/services' element={<ListServices />} />
               <Route path='/services/:categ' element={<ListServices />} />
               <Route path='/service/:numAnn/:idArtisan' element={<ConsulterService />} />
+              <Route path='/service/:numAnn/:idArtisan/profile' element={<ConsulterProfile />} />
               <Route path='/FAQ' element={<FAQ />} />
               <Route path='/inscription' element={<Inscription />} />
 

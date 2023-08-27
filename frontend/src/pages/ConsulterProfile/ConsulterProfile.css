@@ -1,0 +1,248 @@
+@import url('https://fonts.googleapis.com/css2?family=Neucha&family=Outfit:wght@700&family=Poppins&display=swap');
+
+.container-consulter-profile{
+    display: flex;
+    width: 944px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 64px;
+    padding-bottom: 40%;
+    margin: 64px auto;
+}
+
+.container-consulter-profile .first-section{
+    background: #EFEFEF;
+    width: 100%;
+    display: flex;
+    padding: 8px 32px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.container-consulter-profile .first-section > p{
+    width: 100%;
+    height: 72px;
+    color: var(--rouge);
+
+    /* Big titles/head */
+    font-family: Poppins;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: capitalize;
+}
+
+.container-consulter-profile .first-section .profile{
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+    width: 100%;
+    height: 144px;
+}
+.container-consulter-profile .first-section .profile img{
+    border-radius: 50%;
+    width: 144px;
+    height: 100%;
+}
+
+.container-consulter-profile .first-section .profile .worker-info{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+}
+
+
+.container-consulter-profile .first-section .profile .worker-info .name{
+    display: flex;
+    width: 208px;
+    gap: 5px;
+}
+
+.container-consulter-profile .first-section .profile .worker-info .name > p:nth-child(1){
+    color: var(--rouge);
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: stretch;
+}
+
+.container-consulter-profile .first-section .profile .worker-info .name > p:nth-child(2){
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: stretch;
+    color: rgba(0, 0, 0, 0.80);
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.container-consulter-profile .first-section .profile .worker-info > p{
+    color: #646262;
+    text-align: justify;
+
+    /* normal text */
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.container-consulter-profile .first-section .profile .worker-info .rating{
+    display: flex;
+    width: 48px;
+    justify-content: center;
+    gap: 1px;
+    height: 100%;
+}
+
+.container-consulter-profile .first-section .profile .worker-info .rating .star{
+    height: 24px; 
+    fill: #EA4C36;
+}
+
+.container-consulter-profile .first-section .profile .worker-info .rating >p{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1 0 0;
+    align-self: stretch;
+    color: var(--rouge);
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.container-consulter-profile .first-section .contactMeBtn{
+    display: flex;
+    width: 224px;
+    height: 56px;
+    padding: 8px 16px;
+    justify-content: center;
+    border-radius: 8px;
+    border: 1px solid var(--rouge);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.container-consulter-profile .first-section .contactMeBtn a{
+    text-align: center;
+    /* Big titles/button-text */
+    font-family: Poppins;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;   
+    text-decoration: none;
+    color: var(--rouge);
+    align-self: stretch;
+    transition: all 0.3s ease-in-out;
+
+}
+.container-consulter-profile .first-section .contactMeBtn a:hover{
+    color: #fff;
+}
+
+.container-consulter-profile .first-section .contactMeBtn:hover{
+    
+    background-color: var(--rouge);
+}
+
+.container-consulter-profile .second-sec{
+    display: flex;
+    width: 100%;
+    padding: 32px 16px;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    flex: 1 0 0;
+    border-radius: 5px;
+    border: 2px solid #EA4C36;
+}
+
+.container-consulter-profile .second-sec .info-about-worker{
+    display: flex;
+    height: 137px;
+    align-items: flex-start;
+    gap: 8px;
+    width: 100%;
+}
+
+.container-consulter-profile .second-sec .info-about-worker .first,
+.container-consulter-profile .second-sec .info-about-worker .second{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.container-consulter-profile .second-sec .info-about-worker .first >p,
+.container-consulter-profile .second-sec .info-about-worker .second >p{
+    align-self: stretch;
+    color: rgba(0, 0, 0, 0.70);
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.container-consulter-profile .second-sec .info-about-worker .first >p >span,
+.container-consulter-profile .second-sec .info-about-worker .second >p >span{
+    color: #000;
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.container-consulter-profile .second-sec .line{
+    background: rgba(234, 76, 54, 0.70);
+    width: 100%;
+    height: 1px;
+}
+
+.container-consulter-profile .second-sec .details{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.container-consulter-profile .second-sec .details p{
+    color: rgba(0, 0, 0, 0.80);
+    text-align: justify;
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    align-self: stretch;
+}
+
+
+
+

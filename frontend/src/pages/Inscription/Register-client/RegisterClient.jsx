@@ -10,6 +10,18 @@ import {Link} from "react-router-dom"
 import "./RegisterClient.css" 
 import AuthContext from '../../../conctions/AuthContext'
 import { motion } from "framer-motion"
+
+
+import ScaleLoader from 'react-spinners/ScaleLoader'
+
+const override = {
+  display: "block",
+  margin: "21% auto",
+  width: "80px",
+  borderColor: "red",
+};
+
+
 const RegisterClient = () => {
 
   let {regesterClient} = useContext(AuthContext)
@@ -66,7 +78,16 @@ const RegisterClient = () => {
     }
 
   return (
+    
     <div className="client-register-conn">
+
+    {isLoading && 
+      <div className="disabled">
+          <ScaleLoader color="#EA4C36" loading={isLoading} size={150}  cssOverride={override} />
+      </div>
+    }
+
+    {!isLoading && 
       <div className='registerclient-form'>
         <div className="register-content">
           <div className="inscription">
@@ -163,7 +184,8 @@ const RegisterClient = () => {
           </form>
         </div>
         <div className="rectangle"></div>
-      </div>   
+      </div> 
+    }  
     </div>
   )
 }

@@ -24,15 +24,36 @@ from django.conf import settings
 from rest_framework import generics
 from rest_framework import permissions
 #profilupdated""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-class ProfileClientUpdateView(generics.UpdateAPIView):
-    serializer_class = models.Client
-    permission_classes = [permissions.IsAuthenticated]
 
-    def get_object(self):
-        return self.request.user  # Assuming the user is updating their own profile
+from rest_framework.permissions import AllowAny
+from rest_framework.decorators import permission_classes
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def ProfileClientUpdateView(request, ):
+    try:
+        client = models.Client.objects.get(email=request.user)
 
-    def perform_update(self, serializer):
-        serializer.save()
+        # Update the client object with the data from the request
+        client.adresse = request.data.get('adresse', client.adresse)
+        client.commune = request.data.get('commune', client.commune)
+        client.email = request.data.get('email', client.email)
+        client.nom = request.data.get('nom', client.nom)
+        client.prenom = request.data.get('prenom', client.prenom)
+        client.tel = request.data.get('tel', client.tel)
+        client.username = request.data.get('username', client.username)
+        client.wilaya = request.data.get('wilaya', client.wilaya)
+        client.img = request.data.get('img', client.img)
+
+        # Save the updated client object
+        client.save()
+
+        # Serialize the updated data (if needed)
+        serializer = serializers.ProfileClientUpdateSerializer(client)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except models.Client.DoesNotExist:
+        return Response({'detail': 'Client not found'}, status=status.HTTP_404_NOT_FOUND)
+ 
 
 #Annonce""""""""""""""""""""""""""""""""
 @api_view(['GET'])
@@ -125,6 +146,16 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
             token['adresse'] = acount.adresse
         return token
     
+"""
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        user = self.user  
+
+        if user: 
+            login(self.context['request'], user)  
+
+        return data
+"""    
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
@@ -138,6 +169,7 @@ class Login(APIView):
 
         if user is not None:
             login(request, user)
+            print(user," loged in \n\n\n")
             refresh = RefreshToken.for_user(user)
             return Response({
                 'refresh': str(refresh),

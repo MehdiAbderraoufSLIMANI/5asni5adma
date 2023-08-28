@@ -14,7 +14,17 @@ import {Link} from "react-router-dom"
 import "./RegisterWorker.css"
 import { motion } from 'framer-motion'
 import AuthContext from '../../../conctions/AuthContext'
- 
+
+import ScaleLoader from 'react-spinners/ScaleLoader'
+
+const override = {
+  display: "block",
+  margin: "21% auto",
+  width: "80px",
+  borderColor: "red",
+};
+
+
 const RegisterWorker = () => {
   let {regesterWorker} = useContext(AuthContext)
 
@@ -60,6 +70,12 @@ const RegisterWorker = () => {
 
   return (
     <div className="worker-register-conn">
+    {isLoading && 
+      <div className="disabled">
+          <ScaleLoader color="#EA4C36" loading={isLoading} size={150}  cssOverride={override} />
+      </div>
+    }
+     {!isLoading && 
       <div className='register-form'>
         <div className="register-content">
           <div className="inscription">
@@ -158,8 +174,10 @@ const RegisterWorker = () => {
           </form>
         </div>
         <div className="rectangle"></div>
-      </div>   
+      </div>
+       }   
     </div>
+ 
   )
 }
 

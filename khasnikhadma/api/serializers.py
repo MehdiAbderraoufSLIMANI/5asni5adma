@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model, authenticate
 #profilUpdate"""""""""""""""""""""""""""""""""""""""""""""
 
 
-class YourProfileSerializer(serializers.ModelSerializer):
+class ProfileClientUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Client
         fields = ['nom', 'prenom', 'username', 'email', 'wilaya', 'commune', 'adresse', 'tel', 'img']

@@ -5,7 +5,6 @@ import ScaleLoader from 'react-spinners/ScaleLoader'
 import EditClientForm from './EditClientForm'
 import './ProfilClient.css';
 
-import { client } from '../../App'
 
 const override = {
   display: "block",
@@ -15,17 +14,13 @@ const override = {
 };
 
 export default function ProfilClient() {
-  let { user ,EditProfil} = useContext(AuthContext);
-  /*Backend
-  Récupérer toutes les données du client --> Client.objects.get(email = user.email) + utiliser sessions pour savoir si le client est actif
- */
-  //testing
-  const userData = {
+  let { user ,EditProfil,logoutUser} = useContext(AuthContext);
+   
+  const someData = {
     id: user.id, username: user.username, email: user.email, password: '123456',
     nom: user.nom, prenom: user.prenom, tel: user.tel, wilaya: user.wilaya, commune: user.commune, adresse: user.adresse
   }
-  
-  const [currentUser, setCurrentUser] = useState(userData);
+  const [currentUser, setCurrentUser] = useState(someData);
 
 
 
@@ -58,8 +53,8 @@ export default function ProfilClient() {
     },1500)
   }
 
-  const submitEditHandler = ( data) => { 
-    console.log(data);
+  const submitEditHandler = (data) => {
+ 
  
       setIsLoading(true);
       /* Backend
@@ -70,12 +65,10 @@ export default function ProfilClient() {
       et supprimer le bloc 'setTimeout()' qui se trouve en bas
      //////////////////////////////////////////////////
        */
-     EditProfil( data)
-      
-     setTimeout(()=> {
+     EditProfil(data);
      setIsLoading(false);
-     setShowEditForm(false);
-      }, 1500)
+     logoutUser();
+    
    
     
   }

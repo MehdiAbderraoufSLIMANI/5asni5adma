@@ -25,9 +25,14 @@ export default function EditClientForm({ submitEditHandler, currentUser, cancelH
         setValue('tel', currentUser.tel);
         setValue('wilaya', currentUser.wilaya);
         setValue('adresse', currentUser.adresse);
+        setValue('commune', currentUser.commune); 
     }, [setValue]);
 
     const listWilayas = [...new Set(algeriaData.map(data => data.wilaya_name_ascii))];
+
+    const listcommunes = [...new Set(algeriaData.map(data => data.commune_name_ascii))];
+
+
 
     const [showPassword, setShowPassword] = useState(false);
     const [showPassword2, setShowPassword2] = useState(false);
@@ -36,7 +41,8 @@ export default function EditClientForm({ submitEditHandler, currentUser, cancelH
         cancelHandler();
     }
 
-    const editHandler = ( data) => { 
+    const editHandler = (data) => {
+        
         submitEditHandler( data);
     }
     return (
@@ -70,7 +76,31 @@ export default function EditClientForm({ submitEditHandler, currentUser, cancelH
                     {errors.username && (<small className='error'>{errors.username.message}</small>)}
                 </div>
                 
- 
+                {/* 
+               
+                <div className="mb-3" style={{position: 'relative'}}>
+                    <input type={showPassword2 ? 'text' : 'password'} className="form-control" placeholder='Nouveau mot de passe'
+                        {...register("Newpassword", {
+                            pattern: {
+                                value: /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,15}$/ ,
+                                message: 'Mot de passe doit contenir 8-15 characters, au moins : 1 lettre majuscule, 1 nombre, 1 charactère spécial'
+                            }
+                        })}
+                        onKeyUp={() => trigger('Newpassword')} />
+                    {errors.Newpassword && (<small className='error'>{errors.Newpassword.message}</small>)}
+                    {showPassword2 ? <i className="bi bi-eye-fill" onClick={() => setShowPassword2(false)}></i> : <i className="bi bi-eye-slash-fill" onClick={() => setShowPassword2(true)}></i>}
+                </div>
+                   
+                <div className="mb-3">
+                    <input type="password" className="form-control" placeholder='Confirmer nouveau Mot de passe'
+                        {...register("confirmMDP", {
+                            validate: (value) => {if (NewpasswordValue != null) return value === NewpasswordValue || 'Le mot de passe confirmé doit correspondre au nouveau mot de passe';
+                                                  else return true}
+                        })}
+                        onKeyUp={() => trigger('confirmMDP')} />
+                    {errors.confirmMDP && (<small className='error'>{errors.confirmMDP.message}</small>)}
+                </div>
+                */ }
                 <div className="mb-3">
                     <input type="email" className="form-control" placeholder='Email'
                         {...register("email", {
@@ -113,19 +143,18 @@ export default function EditClientForm({ submitEditHandler, currentUser, cancelH
                 </div>
 
                 <div className="mb-3">
-                    <select defaultValue='commune' name="communes" className='form-select'
+                    <select defaultValue='commune' name="communes" className='form-select '
                         {...register("commune", {
                             validate: value => value !== 'commune' || 'Veuillez choisir une commune'
                         })}
                         onKeyUp={() => trigger('commune')}>
-                        <option value='commune' >commune</option>
+                        <option value='commune'>wilaya</option>
                         {
-                            algeriaData.map(data => {
-                                if (data.wilaya_name_ascii === wilayaValue) {
-                                    return <option key={data.id} value={data.commune_name_ascii}>{data.commune_name_ascii}</option>
-                                }
-                            })
+                            listcommunes.map((commune, index) =>
+                                <option key={index} value={commune} >{`${index + 1} - ${commune}`}</option>
+                            )
                         }
+
                     </select>
                     {errors.commune && (<small className='error'>{errors.commune.message}</small>)}
                 </div>

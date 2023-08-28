@@ -21,6 +21,18 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from django.conf import settings
 
+from rest_framework import generics
+from rest_framework import permissions
+#profilupdated""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+class ProfileClientUpdateView(generics.UpdateAPIView):
+    serializer_class = models.Client
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self):
+        return self.request.user  # Assuming the user is updating their own profile
+
+    def perform_update(self, serializer):
+        serializer.save()
 
 #Annonce""""""""""""""""""""""""""""""""
 @api_view(['GET'])
@@ -76,6 +88,14 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
             # Add custom claims
             token['email'] = worker.email
             token['username'] = worker.username
+            token['nom'] = worker.nom
+            token['prenom'] = worker.prenom
+            token['tel'] = worker.tel
+            token['wilaya'] = worker.wilaya
+            token['commune'] = worker.commune
+            token['adresse'] = worker.adresse
+            token['rating'] = worker.rating
+
             
             if len(str(worker.img)) != 0 :
                 token['pic'] = settings.SITE_URL + "/media/"+ str(worker.img) 
@@ -84,11 +104,25 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
             
             token['email'] = client.email
             token['username'] = client.username
+            token['account_type'] = client.compte_type
+            token['nom'] = client.nom
+            token['prenom'] = client.prenom
+            token['tel'] = client.tel
+            token['wilaya'] = client.wilaya
+            token['commune'] = client.commune
+            token['adresse'] = client.adresse
             if len(str(client.img)) != 0 : 
                 token['pic'] = settings.SITE_URL + "/media/"+ str(client.img) 
         else :
             token['email'] = acount.email
             token['username'] = acount.username
+            token['account_type'] = acount.compte_type
+            token['nom'] = acount.nom
+            token['prenom'] = acount.prenom
+            token['tel'] = acount.tel
+            token['wilaya'] = acount.wilaya
+            token['commune'] = acount.commune
+            token['adresse'] = acount.adresse
         return token
     
 class MyTokenObtainPairView(TokenObtainPairView):
@@ -207,6 +241,8 @@ def clientView(request):
     queryset = models.Client.objects.all()
     serializer = serializers.ClientSerializer(queryset ,many =True )
     return Response(serializer.data)
+
+
 
 #adding element to db==================
 from django.shortcuts import HttpResponse

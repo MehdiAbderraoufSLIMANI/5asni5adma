@@ -14,7 +14,7 @@ import {Link} from "react-router-dom"
 import "./RegisterWorker.css"
 import { motion } from 'framer-motion'
 import AuthContext from '../../../conctions/AuthContext'
-
+ 
 const RegisterWorker = () => {
   let {regesterWorker} = useContext(AuthContext)
 

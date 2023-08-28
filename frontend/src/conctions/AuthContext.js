@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from 'react'
 import jwt_decode from "jwt-decode";
+ 
 import { useNavigate } from 'react-router-dom'
 import { client } from '../App';
 
@@ -45,10 +46,10 @@ export const AuthProvider = ({children}) => {
         setUser(null)
         localStorage.removeItem('authTokens')
         history('/')
-    }
+    } 
 
     const isLoggedIn = () => {
-        return authTokens !== null;
+        return authTokens != null;
       };
 
 
@@ -71,7 +72,7 @@ export const AuthProvider = ({children}) => {
             loginUser(e)
           })
           .catch((error) => { 
-            console.error('Registration failed:', error);
+            return error;
             // Handle error as needed
           });
     };
@@ -102,10 +103,38 @@ export const AuthProvider = ({children}) => {
           });
     };
 
+    let EditProfil = async (data)=> {
+    
+        try {
+            const response = client.put('/api/profile/update/', data );
+            console.log('Profile updated successfully:', response.data);
+            
+            
+            const decoded_token = localStorage.getItem('authTokens') ? jwt_decode( localStorage.getItem('authTokens')) : null 
+             
+            if(decoded_token){
+            decoded_token['email'] = data.email
+            decoded_token['username'] = data.username
+            decoded_token['nom'] = data.nom
+            decoded_token['prenom'] = data.prenom
+            decoded_token['tel'] = data.tel
+            decoded_token['wilaya'] = data.wilaya
+            decoded_token['commune'] = data.commune
+            decoded_token['adresse'] = data.adresse  
+            
+            const new_token = jwt.encode(decoded_token)
+        }
+        } catch (error) {
+            console.error('Profile update failed:', error);
+            // Handle error and display an error message to the user
+        }
+    };
+
 
     let contextData = {
         user:user,
         authTokens:authTokens,
+        EditProfiln:EditProfil,
         setAuthTokens:setAuthTokens,
         setUser:setUser,
         loginUser:loginUser,

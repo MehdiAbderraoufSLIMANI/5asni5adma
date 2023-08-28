@@ -5,6 +5,7 @@ import ScaleLoader from 'react-spinners/ScaleLoader'
 import EditClientForm from './EditClientForm'
 import './ProfilClient.css';
 
+import { client } from '../../App'
 
 const override = {
   display: "block",
@@ -14,16 +15,17 @@ const override = {
 };
 
 export default function ProfilClient() {
-  let { user } = useContext(AuthContext);
+  let { user ,EditProfil} = useContext(AuthContext);
   /*Backend
   Récupérer toutes les données du client --> Client.objects.get(email = user.email) + utiliser sessions pour savoir si le client est actif
  */
   //testing
-  const someData = {
-    id: 4, username: 'badrooo_dev', email: 'test@gmail.com', password: '123456',
-    nom: 'bengaid', prenom: 'badro', tel: '0555555555', wilaya: 'Alger', commune: 'kouba', adresse: 'kouba,Alger'
+  const userData = {
+    id: user.id, username: user.username, email: user.email, password: '123456',
+    nom: user.nom, prenom: user.prenom, tel: user.tel, wilaya: user.wilaya, commune: user.commune, adresse: user.adresse
   }
-  const [currentUser, setCurrentUser] = useState(someData);
+  
+  const [currentUser, setCurrentUser] = useState(userData);
 
 
 
@@ -56,12 +58,9 @@ export default function ProfilClient() {
     },1500)
   }
 
-  const submitEditHandler = (data) => {
+  const submitEditHandler = ( data) => { 
     console.log(data);
-    if(currentUser.password !== data.Oldpassword) {
-      alert("Ancien mot de passe incorrect ! Réesayer de nouveau");
-    } 
-    else {
+ 
       setIsLoading(true);
       /* Backend
       update client in database
@@ -71,12 +70,13 @@ export default function ProfilClient() {
       et supprimer le bloc 'setTimeout()' qui se trouve en bas
      //////////////////////////////////////////////////
        */
+     EditProfil( data)
       
      setTimeout(()=> {
      setIsLoading(false);
      setShowEditForm(false);
       }, 1500)
-    }
+   
     
   }
 

@@ -37,11 +37,16 @@ const RegisterClient = () => {
 
     if (e.target.elements.password.value !== e.target.elements.password2.value) {
       // If passwords don't match, show an error or handle it as needed
-      alert('Le mot de passe et le mot de passe confirmé ne correspondent pas .');
+      alert('Password and Confirm Password do not match.');
       return;
     }
       setIsLoading(true); 
-      regesterClient(e);  
+      const err = regesterClient(e);
+      if(!err){
+        setIsLoading(false);
+      }
+      
+     
   };
 
 
@@ -81,6 +86,7 @@ const RegisterClient = () => {
                 <label>Prénom</label>
               </div>
             </div>
+
             <div className="input-box">
               <select onClick={handleChange} ref={selectedWilaya} className='wilaya-input' name='wilaya' required>
                 {uniqueData.map(wilaya => <option value={wilaya.wilaya_name_ascii}>{wilaya.wilaya_name_ascii}</option>)}
@@ -112,7 +118,7 @@ const RegisterClient = () => {
             </div>
             <div className="input-box">
               <AtLogo className="icon"/>
-              <input onChange={handleEmailChange} type="email" className='input' required/>
+              <input onChange={handleEmailChange} type="email" className='input' name="email" required/>
               <label className={!isInputEmpty? 'email-label-clicked' : '' }>Email</label>
             </div>
 

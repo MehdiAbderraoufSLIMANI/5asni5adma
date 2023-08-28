@@ -23,5 +23,6 @@ urlpatterns = [
     path('api/token/', views.MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('auto-create-announcements/', views.auto_create_announcements, name='auto_create_announcements'),
+    path('api/profile/update/',views.ProfileClientUpdateView.as_view(),name="profile_client_update"),
      
 ]

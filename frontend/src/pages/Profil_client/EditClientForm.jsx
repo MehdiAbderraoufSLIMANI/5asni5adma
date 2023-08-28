@@ -36,8 +36,8 @@ export default function EditClientForm({ submitEditHandler, currentUser, cancelH
         cancelHandler();
     }
 
-    const editHandler = (data) => {
-        submitEditHandler(data);
+    const editHandler = ( data) => { 
+        submitEditHandler( data);
     }
     return (
         <div className="col-md-6 col-sm-6 form-container">
@@ -69,39 +69,8 @@ export default function EditClientForm({ submitEditHandler, currentUser, cancelH
                         onKeyUp={() => trigger('username')} />
                     {errors.username && (<small className='error'>{errors.username.message}</small>)}
                 </div>
-                <div className="mb-3" style={{position: 'relative'}}>
-                    <input type={showPassword ? 'text' : 'password'} className="form-control" placeholder='Ancien mot de passe'
-                        {...register("Oldpassword", {
-                            required: 'Le mot de passe est obligatoire',
-                        })}
-                        onKeyUp={() => trigger('Oldpassword')} />
-                    {errors.Oldpassword && (<small className='error'>{errors.Oldpassword.message}</small>)}
-                    {showPassword ? <i className="bi bi-eye-fill" onClick={() => setShowPassword(false)}></i> : <i className="bi bi-eye-slash-fill" onClick={() => setShowPassword(true)}></i>}
-                </div>
-
-                <div className="mb-3" style={{position: 'relative'}}>
-                    <input type={showPassword2 ? 'text' : 'password'} className="form-control" placeholder='Nouveau mot de passe'
-                        {...register("Newpassword", {
-                            pattern: {
-                                value: /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,15}$/ ,
-                                message: 'Mot de passe doit contenir 8-15 characters, au moins : 1 lettre majuscule, 1 nombre, 1 charactère spécial'
-                            }
-                        })}
-                        onKeyUp={() => trigger('Newpassword')} />
-                    {errors.Newpassword && (<small className='error'>{errors.Newpassword.message}</small>)}
-                    {showPassword2 ? <i className="bi bi-eye-fill" onClick={() => setShowPassword2(false)}></i> : <i className="bi bi-eye-slash-fill" onClick={() => setShowPassword2(true)}></i>}
-                </div>
-
-                <div className="mb-3">
-                    <input type="password" className="form-control" placeholder='Confirmer nouveau Mot de passe'
-                        {...register("confirmMDP", {
-                            validate: (value) => {if (NewpasswordValue != null) return value === NewpasswordValue || 'Le mot de passe confirmé doit correspondre au nouveau mot de passe';
-                                                  else return true}
-                        })}
-                        onKeyUp={() => trigger('confirmMDP')} />
-                    {errors.confirmMDP && (<small className='error'>{errors.confirmMDP.message}</small>)}
-                </div>
-
+                
+ 
                 <div className="mb-3">
                     <input type="email" className="form-control" placeholder='Email'
                         {...register("email", {

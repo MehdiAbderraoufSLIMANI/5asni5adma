@@ -1,5 +1,5 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
 import {ReactComponent as ConnectedLogo} from "../../resources/logos/connected.svg"
 import {ReactComponent as Star} from "../../resources/logos/star.svg"
 import {ReactComponent as StarEmpty} from "../../resources/logos/empty-star.svg"
@@ -22,7 +22,9 @@ import image5 from "../../resources/images/Rectangle 324.png"
 
 import './ConsulterService.css'
 
-const ConsulterService = () => {    
+const ConsulterService = () => {  
+    
+    const [displayed, setDisplayed] = useState(false)
 
     const images = [image1, image2, image3, image4, image5]
 
@@ -31,10 +33,14 @@ const ConsulterService = () => {
         <div className="card">
             <div className="first-section">
                 <div className="profile">
-                    <div className="profile-img">
+                    <div className="profile-img" onClick={() => setDisplayed(!displayed)}>
                         <img src={profileImg} alt="profile-pic"/>
                         <ConnectedLogo className='connected-logo' />
                     </div>
+                    <ul className={`dropdown-list ${displayed? 'visible' : ''}`}>
+                            <li><Link>Afficher image de profile</Link></li>
+                            <li><Link to="./profile">Afficher le profile</Link></li>
+                    </ul>
                     <div className="info-worker">
                         <div className="name-rating">
                             <p>Nom&Prénom</p>

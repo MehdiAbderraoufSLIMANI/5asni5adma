@@ -26,6 +26,7 @@ Récupérer à partir de la table "anonce" toutes les categories existantes*/
     sampleLocation.pathname.includes('/services') ? setIsActive(true) : setIsActive(false);
   }, [sampleLocation])
 
+  
   if(isLoggedIn() && user && user.account_type=='client')   //account_type = 'worker' || 'client'
   return (
     <nav className="navbar navbar-expand-lg ">

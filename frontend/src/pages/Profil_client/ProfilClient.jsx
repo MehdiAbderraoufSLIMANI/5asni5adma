@@ -86,8 +86,17 @@ export default function ProfilClient() {
 
         {!isLoading && 
         <div className="col-md-4 col-sm-3 bio-container">
+          
+          { (showEditForm && !isLoading) ?(
           <div className='img-container'>
+            <img src={(user && user.pic) ? user.pic : defaultPic} alt='pic' /> 
+            
+          </div>
+          ):(
+            <div className='img-container'>
+          
             <img src={(user && user.pic) ? user.pic : defaultPic} alt='pic' />
+          
             <div className="ball-container">
               <div className="greenBall"></div>
             </div>
@@ -95,10 +104,14 @@ export default function ProfilClient() {
             <p className='username'> @{currentUser.username} </p>
           </div>
 
-          <div className="adress-container">
-            <i className="bi bi-geo-alt-fill ms-4 me-2"></i><span>De</span>
-            <span className='adress'> {`${currentUser.commune}, ${currentUser.wilaya}`} </span>
+
+          )  } 
+            { (!showEditForm ) &&
+            <div className="adress-container">
+             <i className="bi bi-geo-alt-fill ms-4 me-2"></i><span>De</span>
+             <span className='adress'> {`${currentUser.commune}, ${currentUser.wilaya}`} </span>
           </div>
+              }
 
         </div>
         }

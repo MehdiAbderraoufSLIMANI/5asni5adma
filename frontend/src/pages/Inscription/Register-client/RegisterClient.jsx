@@ -158,7 +158,7 @@ const RegisterClient = () => {
 
             <div className="input-box">
                 <CameraLogo className="icon"/>
-                <input type="file" className='input' name='img' required/>
+                <input type="file" className='input' name='img' accept="image/*" required/>
             </div>
             <div className="btn-submit">
             <motion.button

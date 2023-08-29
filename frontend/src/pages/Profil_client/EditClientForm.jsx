@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './EditClientForm.css'
 import algeriaData from '../../JSON/wilaya&commune.json'
 import { useForm, useWatch } from 'react-hook-form'
-
+ 
 export default function EditClientForm({ submitEditHandler, currentUser, cancelHandler }) {
 
     const { register, handleSubmit, setValue, formState: { errors }, control, trigger } = useForm();
@@ -42,10 +42,15 @@ export default function EditClientForm({ submitEditHandler, currentUser, cancelH
     }
 
     const editHandler = (data) => {
-        
-        submitEditHandler( data);
+ 
+       data.profileImage = data.profileImage[0];
+        submitEditHandler(data);
     }
-    return (
+
+
+
+
+     return (
         <div className="col-md-6 col-sm-6 form-container">
             <h3>Editer profil</h3>
             <form onSubmit={handleSubmit(editHandler)}>
@@ -76,6 +81,14 @@ export default function EditClientForm({ submitEditHandler, currentUser, cancelH
                     {errors.username && (<small className='error'>{errors.username.message}</small>)}
                 </div>
                 
+
+
+
+
+
+
+
+
                 {/* 
                
                 <div className="mb-3" style={{position: 'relative'}}>
@@ -178,7 +191,11 @@ export default function EditClientForm({ submitEditHandler, currentUser, cancelH
 
                 <div className="custom-file mb-3">
                     <label className="custom-file-label" htmlFor="profileImage">Modifier l'image de profil</label>
-                    <input type="file" className="custom-file-input form-control" id="profileImage" accept="image/*" />
+                    <input type="file" className="custom-file-input form-control" id="profileImage" accept="image/*"
+                    
+                    {...register("profileImage")}
+                  
+                    />
                 </div>
 
 
@@ -188,6 +205,9 @@ export default function EditClientForm({ submitEditHandler, currentUser, cancelH
                 </div>
 
             </form>
+
+        
+
         </div>
     )
 }

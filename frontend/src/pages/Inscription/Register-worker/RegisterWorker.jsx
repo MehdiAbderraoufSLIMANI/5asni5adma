@@ -50,9 +50,11 @@ const RegisterWorker = () => {
       alert('Password and Confirm Password do not match.');
       return;
     } 
-      setIsLoading(true); 
-      regesterWorker(e);
-      
+    setIsLoading(true); 
+    const err = regesterWorker(e);
+      if(!err){
+        setIsLoading(false);
+      }
      
   };
   let [isInputEmpty, setIsInputEmpty] = useState(true)
@@ -149,7 +151,7 @@ const RegisterWorker = () => {
  
             <div className="input-box">
                 <CameraLogo className="icon"/>
-                <input type="file" className='input' name='img' required/>
+                <input type="file" className='input' name='img' accept="image/*" required/>
             </div>
             <div className="btn-submit">
             <motion.button

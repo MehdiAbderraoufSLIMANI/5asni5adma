@@ -26,8 +26,10 @@ from rest_framework import permissions
 #profilupdated""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 from rest_framework.permissions import AllowAny
-from rest_framework.decorators import permission_classes
+from rest_framework.decorators import permission_classes,parser_classes
+from django.core.files.uploadedfile import InMemoryUploadedFile
 @api_view(['PUT'])
+@parser_classes([MultiPartParser, FormParser])
 @permission_classes([IsAuthenticated])
 def ProfileClientUpdateView(request, ):
     try:
@@ -42,7 +44,11 @@ def ProfileClientUpdateView(request, ):
         client.tel = request.data.get('tel', client.tel)
         client.username = request.data.get('username', client.username)
         client.wilaya = request.data.get('wilaya', client.wilaya)
-        client.img = request.data.get('img', client.img)
+        if isinstance(request.data["img"], InMemoryUploadedFile):
+            client.img = request.data.get('img', client.img)
+      
+        
+        
 
         # Save the updated client object
         client.save()

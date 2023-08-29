@@ -134,7 +134,7 @@ export const AuthProvider = ({children}) => {
             loginUser(e)
           })
           .catch((error) => { 
-            console.error('Registration react failed :', error);
+            return error;
           
           });
     };
@@ -152,7 +152,7 @@ export const AuthProvider = ({children}) => {
         formData.append("tel", data.tel);
         formData.append("username", data.username);
         formData.append("wilaya", data.wilaya);
-        formData.append("img", user.img);
+        formData.append("img", data.profileImage);
        
         try {
             console.log(authTokens)

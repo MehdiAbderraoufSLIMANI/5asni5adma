@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.models import User,AbstractUser
 
 from django.contrib.auth.models import Permission
-from .models import Artisan,Client,MyUserManager ,Contact,Annonce,Person,FAQ
+from .models import Artisan,Client, Image_annonce,MyUserManager ,Contact,Annonce,Person,FAQ
 from django.contrib.auth.forms import UserChangeForm
  
  
@@ -55,12 +55,14 @@ admin.site.register(Contact)
 from django.utils.html import format_html
 @admin.register(Annonce)
 class AnnonceAdmin(admin.ModelAdmin):
+    """ 
     def image_tag(self, obj):
 
         return format_html('<img src="{}" style="max-width:200px; max-height:200px"/>'.format(obj.img_annonce.url))
-
-    list_display = ("id", "date_of_pub", "categorie", "service","image_tag"  )
+    """
+    list_display = ("id", "date_of_pub", "categorie", "service", )
  
+admin.site.register(Image_annonce)
 #Permission""""""""""""""""""""""""""""""""
 admin.site.register(Permission)
 

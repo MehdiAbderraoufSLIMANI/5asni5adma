@@ -23,11 +23,24 @@ from django.conf import settings
 
 from rest_framework import generics
 from rest_framework import permissions
-#profilupdated""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-from rest_framework.permissions import AllowAny
 from rest_framework.decorators import permission_classes,parser_classes
 from django.core.files.uploadedfile import InMemoryUploadedFile
+#One Annonce"""""""""""""""""""""""""""""""""""""""""""""""""""""""""" 
+
+from rest_framework.permissions import AllowAny
+@permission_classes([IsAuthenticated])
+@api_view(['GET'])
+def oneAnnonceView(request,numAnn):
+    queryset = models.Annonce.objects.get(id=numAnn)
+    serializer = serializers.oneAnnonceSerializer(queryset ,many =False)
+    return Response(serializer.data)
+
+
+
+
+#profilupdated""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
 @api_view(['PUT'])
 @parser_classes([MultiPartParser, FormParser])
 @permission_classes([IsAuthenticated])

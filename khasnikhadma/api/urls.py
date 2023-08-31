@@ -24,5 +24,6 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('auto-create-announcements/', views.auto_create_announcements, name='auto_create_announcements'),
     path('api/profile/update/', views.ProfileClientUpdateView, name='profile-client-update'),
+    path('api/oneannonce/<str:numAnn>/', views.oneAnnonceView, name='one-Annonce'),
      
 ]

@@ -14,6 +14,7 @@ import { delay } from 'framer-motion';
 
 
 const ImageSlider = ({images}) => {
+ 
   return (
     <Swiper
         modules={[Navigation, Pagination]}
@@ -22,11 +23,11 @@ const ImageSlider = ({images}) => {
         spaceBetween={32}
         slidesPerView={3}
         autoplay={{delay: 5000}}
-        grabCursor={true}
+         grabCursor={true}
         >
         {images.map((image, index) => (
             <SwiperSlide key={index}>
-              <img src={image} alt={`Slide ${index}`} />
+              <img src={'http://127.0.0.1:8000'+image} alt={`Slide ${index}`} />
             </SwiperSlide>
         ))}
     </Swiper>

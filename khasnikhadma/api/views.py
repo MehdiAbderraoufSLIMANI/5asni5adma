@@ -39,37 +39,44 @@ def oneAnnonceView(request,numAnn):
 
 
 #profilupdated""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
+from django.contrib.auth.hashers import check_password
 
 @api_view(['PUT'])
 @parser_classes([MultiPartParser, FormParser])
 @permission_classes([IsAuthenticated])
 def ProfileClientUpdateView(request, ):
     try:
+        
         client = models.Client.objects.get(email=request.user)
-
-        # Update the client object with the data from the request
-        client.adresse = request.data.get('adresse', client.adresse)
-        client.commune = request.data.get('commune', client.commune)
-        client.email = request.data.get('email', client.email)
-        client.nom = request.data.get('nom', client.nom)
-        client.prenom = request.data.get('prenom', client.prenom)
-        client.tel = request.data.get('tel', client.tel)
-        client.username = request.data.get('username', client.username)
-        client.wilaya = request.data.get('wilaya', client.wilaya)
-        if isinstance(request.data["img"], InMemoryUploadedFile):
-            client.img = request.data.get('img', client.img)
-      
+        password_matches = check_password(request.data["oldpassword"], client.password)
+        if(password_matches):
+            
+            client.adresse = request.data.get('adresse', client.adresse)
+            client.commune = request.data.get('commune', client.commune)
+            client.email = request.data.get('email', client.email)
+            client.nom = request.data.get('nom', client.nom)
+            client.prenom = request.data.get('prenom', client.prenom)
+            client.tel = request.data.get('tel', client.tel)
+            client.username = request.data.get('username', client.username)
+            client.wilaya = request.data.get('wilaya', client.wilaya)
+            
+            if isinstance(request.data["img"], InMemoryUploadedFile):
+                client.img = request.data.get('img', client.img)
         
-        
+            
+            if "Newpassword" in request.data:
+                client.set_password(request.data['Newpassword'])
+         
 
-        # Save the updated client object
-        client.save()
+            # Save the updated client object
+            client.save()
 
-        # Serialize the updated data (if needed)
-        serializer = serializers.ProfileClientUpdateSerializer(client)
+            # Serialize the updated data (if needed)
+            serializer = serializers.ProfileClientUpdateSerializer(client)
 
-        return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else :
+            return Response({"error": "password is wrong"}, status=status.HTTP_400_BAD_REQUEST)
     except models.Client.DoesNotExist:
         return Response({'detail': 'Client not found'}, status=status.HTTP_404_NOT_FOUND)
  
@@ -116,14 +123,16 @@ def FAQView(request):
     return Response(serializer.data) 
 
 #Login""""""""""""""""""""""""""""""""""""""""""""""""""
-
+from rest_framework.exceptions import AuthenticationFailed
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+   
     @classmethod
     def get_token(cls, acount):
         token = super().get_token(acount)
 
         if acount.compte_type == "worker":
+ 
             worker = Artisan.objects.get(email = acount.email)
             # Add custom claims
             token['email'] = worker.email
@@ -154,6 +163,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
             if len(str(client.img)) != 0 : 
                 token['pic'] = settings.SITE_URL + "/media/"+ str(client.img) 
         else :
+ 
             token['email'] = acount.email
             token['username'] = acount.username
             token['account_type'] = acount.compte_type
@@ -163,21 +173,14 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
             token['wilaya'] = acount.wilaya
             token['commune'] = acount.commune
             token['adresse'] = acount.adresse
+
         return token
     
-"""
-    def validate(self, attrs):
-        data = super().validate(attrs)
-        user = self.user  
-
-        if user: 
-            login(self.context['request'], user)  
-
-        return data
-"""    
+ 
 class MyTokenObtainPairView(TokenObtainPairView):
+ 
     serializer_class = MyTokenObtainPairSerializer
-
+"""
 class Login(APIView):
     permission_classes = ()
     
@@ -202,7 +205,7 @@ class Login(APIView):
         else:
             return Response({'error': 'Invalid email or password.'}, status=status.HTTP_401_UNAUTHORIZED)
 
-
+"""
 class UserData(APIView):
     permission_classes = [IsAuthenticated]
 

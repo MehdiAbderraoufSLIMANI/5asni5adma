@@ -14,29 +14,33 @@ const Login = () => {
     let {loginUser} = useContext(AuthContext)
     let [isInputEmpty, setIsInputEmpty] = useState(true)
 
-    const handleChange = (e) => {
-      e.preventDefault()
-
-      if(e.target.value !== ''){
-        setIsInputEmpty(false)
-      }else{
-        setIsInputEmpty(true)
-      }
-
-    }
+ 
 
 
 
 
 
     const [isLoading, setIsLoading] = useState(false);
-    const [isEmailFilled, setIsEmailFilled] = useState(false); 
-  const handleLogin = (e) => {
+    const [isEmailFilled, setIsEmailFilled] = useState(false);
+    
+    
+    const [errorr, seterror] = useState("");
+  const handleLogin = async (e) => {
     e.preventDefault();
+    setIsLoading(true); 
+     try {
+      await loginUser(e);
 
+     } catch (error) {
+      const err = error.response.data.detail
+      seterror(err)
+
+      
+       
+      setIsLoading(false); 
+     }
      
-      setIsLoading(true); 
-      loginUser(e);
+     
       
      
   };
@@ -63,7 +67,11 @@ const Login = () => {
               <LockLogo className="icon"/>
               <input type="password" className='password-input' required name="password"/>
               <label>Mot de passe</label>
+
+              
             </div>
+            <label className="errour-label">{errorr}</label>
+            
             <div className="btn-submit">
             <motion.button
             disabled={isLoading}

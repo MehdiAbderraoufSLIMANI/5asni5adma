@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Neucha&family=Outfit:wght@700&family=Poppins&display=swap');
-
+.disabled {
+    width: 100%;
+    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: var(--lightGray);
+    z-index: 5;
+}
 .container-consulter-profile{
     display: flex;
     width: 944px;

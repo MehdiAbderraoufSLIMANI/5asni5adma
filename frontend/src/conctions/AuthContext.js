@@ -1,15 +1,52 @@
 import { createContext, useState, useEffect } from 'react'
 import jwt_decode from "jwt-decode";
-import { useNavigate } from 'react-router-dom'
-import { client } from '../App';
+ 
+import { useNavigate } from 'react-router-dom' 
 
+import axios from 'axios';
+
+import dayjs from 'dayjs'
 const AuthContext = createContext()
 
 export default AuthContext;
 
 
 export const AuthProvider = ({children}) => {
+
+
+    const baseURL = 'http://127.0.0.1:8000'
+
+
     let [authTokens, setAuthTokens] = useState(()=> localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null)
+    
+    const client = axios.create({
+        baseURL,
+        headers:{Authorization: `Bearer ${authTokens?.access}`}
+    });
+
+    
+    client.interceptors.request.use(async req => {
+    if(!authTokens){
+        authTokens = localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null
+        req.headers.Authorization = `Bearer ${authTokens?.access}`
+    }
+
+    const user = jwt_decode(authTokens.access)
+    const isExpired = dayjs.unix(user.exp).diff(dayjs()) < 1;
+
+    if(!isExpired) return req
+
+    const response = await axios.post(`${baseURL}/api/token/refresh/`, {
+        refresh: authTokens.refresh
+      });
+
+    localStorage.setItem('authTokens', JSON.stringify(response.data))
+    req.headers.Authorization = `Bearer ${response.data.access}`
+    return req
+})
+
+
+
 
     let [user, setUser] = useState(()=> localStorage.getItem('authTokens') ? jwt_decode(localStorage.getItem('authTokens')) : null)
     
@@ -45,10 +82,10 @@ export const AuthProvider = ({children}) => {
         setUser(null)
         localStorage.removeItem('authTokens')
         history('/')
-    }
+    } 
 
     const isLoggedIn = () => {
-        return authTokens !== null;
+        return authTokens != null;
       };
 
 
@@ -71,7 +108,7 @@ export const AuthProvider = ({children}) => {
             loginUser(e)
           })
           .catch((error) => { 
-            console.error('Registration failed:', error);
+            return error;
             // Handle error as needed
           });
     };
@@ -97,15 +134,52 @@ export const AuthProvider = ({children}) => {
             loginUser(e)
           })
           .catch((error) => { 
-            console.error('Registration react failed :', error);
-            // Handle error as needed
+            return error;
+          
           });
+    };
+
+    let EditProfil = async (data)=> {
+       
+
+        const formData = new FormData();
+ 
+        formData.append("adresse", data.adresse);
+        formData.append("commune", data.commune);
+        formData.append("email", data.email);
+        formData.append("nom", data.nom);
+        formData.append("prenom", data.prenom);
+        formData.append("tel", data.tel);
+        formData.append("username", data.username);
+        formData.append("wilaya", data.wilaya);
+        formData.append("img", data.profileImage);
+       
+        try {
+            console.log(authTokens)
+            const response = client.put(`/api/profile/update/`, formData);
+            console.log('Profile updated successfully:', response );
+            
+            
+        
+            
+        } catch (error) {
+            if (error.response.status === 401) {
+                console.error('Authentication failed:', error);
+                // Handle authentication errors, e.g., redirect to login
+              } else {
+                console.error('Profile update failed:', error);
+                // Handle other errors and display an error message to the user
+              }
+        }
+      
+
     };
 
 
     let contextData = {
         user:user,
         authTokens:authTokens,
+        EditProfil:EditProfil,
         setAuthTokens:setAuthTokens,
         setUser:setUser,
         loginUser:loginUser,

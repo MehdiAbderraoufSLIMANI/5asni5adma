@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './EditClientForm.css'
 import algeriaData from '../../JSON/wilaya&commune.json'
 import { useForm, useWatch } from 'react-hook-form'
-
+ 
 export default function EditClientForm({ submitEditHandler, currentUser, cancelHandler }) {
 
     const { register, handleSubmit, setValue, formState: { errors }, control, trigger } = useForm();
@@ -25,9 +25,14 @@ export default function EditClientForm({ submitEditHandler, currentUser, cancelH
         setValue('tel', currentUser.tel);
         setValue('wilaya', currentUser.wilaya);
         setValue('adresse', currentUser.adresse);
+        setValue('commune', currentUser.commune); 
     }, [setValue]);
 
     const listWilayas = [...new Set(algeriaData.map(data => data.wilaya_name_ascii))];
+
+    const listcommunes = [...new Set(algeriaData.map(data => data.commune_name_ascii))];
+
+
 
     const [showPassword, setShowPassword] = useState(false);
     const [showPassword2, setShowPassword2] = useState(false);
@@ -37,9 +42,15 @@ export default function EditClientForm({ submitEditHandler, currentUser, cancelH
     }
 
     const editHandler = (data) => {
+ 
+       data.profileImage = data.profileImage[0];
         submitEditHandler(data);
     }
-    return (
+
+
+
+
+     return (
         <div className="col-md-6 col-sm-6 form-container">
             <h3>Editer profil</h3>
             <form onSubmit={handleSubmit(editHandler)}>
@@ -69,16 +80,17 @@ export default function EditClientForm({ submitEditHandler, currentUser, cancelH
                         onKeyUp={() => trigger('username')} />
                     {errors.username && (<small className='error'>{errors.username.message}</small>)}
                 </div>
-                <div className="mb-3" style={{position: 'relative'}}>
-                    <input type={showPassword ? 'text' : 'password'} className="form-control" placeholder='Ancien mot de passe'
-                        {...register("Oldpassword", {
-                            required: 'Le mot de passe est obligatoire',
-                        })}
-                        onKeyUp={() => trigger('Oldpassword')} />
-                    {errors.Oldpassword && (<small className='error'>{errors.Oldpassword.message}</small>)}
-                    {showPassword ? <i className="bi bi-eye-fill" onClick={() => setShowPassword(false)}></i> : <i className="bi bi-eye-slash-fill" onClick={() => setShowPassword(true)}></i>}
-                </div>
+                
 
+
+
+
+
+
+
+
+                {/* 
+               
                 <div className="mb-3" style={{position: 'relative'}}>
                     <input type={showPassword2 ? 'text' : 'password'} className="form-control" placeholder='Nouveau mot de passe'
                         {...register("Newpassword", {
@@ -91,7 +103,7 @@ export default function EditClientForm({ submitEditHandler, currentUser, cancelH
                     {errors.Newpassword && (<small className='error'>{errors.Newpassword.message}</small>)}
                     {showPassword2 ? <i className="bi bi-eye-fill" onClick={() => setShowPassword2(false)}></i> : <i className="bi bi-eye-slash-fill" onClick={() => setShowPassword2(true)}></i>}
                 </div>
-
+                   
                 <div className="mb-3">
                     <input type="password" className="form-control" placeholder='Confirmer nouveau Mot de passe'
                         {...register("confirmMDP", {
@@ -101,7 +113,7 @@ export default function EditClientForm({ submitEditHandler, currentUser, cancelH
                         onKeyUp={() => trigger('confirmMDP')} />
                     {errors.confirmMDP && (<small className='error'>{errors.confirmMDP.message}</small>)}
                 </div>
-
+                */ }
                 <div className="mb-3">
                     <input type="email" className="form-control" placeholder='Email'
                         {...register("email", {
@@ -144,19 +156,18 @@ export default function EditClientForm({ submitEditHandler, currentUser, cancelH
                 </div>
 
                 <div className="mb-3">
-                    <select defaultValue='commune' name="communes" className='form-select'
+                    <select defaultValue='commune' name="communes" className='form-select '
                         {...register("commune", {
                             validate: value => value !== 'commune' || 'Veuillez choisir une commune'
                         })}
                         onKeyUp={() => trigger('commune')}>
-                        <option value='commune' >commune</option>
+                        <option value='commune'>wilaya</option>
                         {
-                            algeriaData.map(data => {
-                                if (data.wilaya_name_ascii === wilayaValue) {
-                                    return <option key={data.id} value={data.commune_name_ascii}>{data.commune_name_ascii}</option>
-                                }
-                            })
+                            listcommunes.map((commune, index) =>
+                                <option key={index} value={commune} >{`${index + 1} - ${commune}`}</option>
+                            )
                         }
+
                     </select>
                     {errors.commune && (<small className='error'>{errors.commune.message}</small>)}
                 </div>
@@ -180,7 +191,11 @@ export default function EditClientForm({ submitEditHandler, currentUser, cancelH
 
                 <div className="custom-file mb-3">
                     <label className="custom-file-label" htmlFor="profileImage">Modifier l'image de profil</label>
-                    <input type="file" className="custom-file-input form-control" id="profileImage" accept="image/*" />
+                    <input type="file" className="custom-file-input form-control" id="profileImage" accept="image/*"
+                    
+                    {...register("profileImage")}
+                  
+                    />
                 </div>
 
 
@@ -190,6 +205,9 @@ export default function EditClientForm({ submitEditHandler, currentUser, cancelH
                 </div>
 
             </form>
+
+        
+
         </div>
     )
 }

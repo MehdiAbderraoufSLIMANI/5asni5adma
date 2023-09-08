@@ -11,7 +11,7 @@
 
 .card{
     display: flex;
-    width: 944px;
+    width: 100%;
     height: auto;
     padding: 16px;
     flex-direction: column;
@@ -27,7 +27,8 @@
     display: flex;
     align-items: flex-start;
     gap: 64px;
-    align-self: stretch;
+    width: 100%;
+    height: fit-content;
 
 }
 
@@ -125,6 +126,8 @@
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+
+
 }
 
 
@@ -135,7 +138,6 @@
     align-items: center;
     flex-shrink: 0;
     align-self: stretch;
-
 }
 
 
@@ -205,13 +207,13 @@
 
 .categorie{
     border-radius: 8px;
+    align-self: stretch;
     background: #CBCFD0;
     display: flex;
     height: 40px;
     padding: 8px;
     justify-content: center;
     align-items: center;
-    flex: 1 0 0;
 }
 
 .categorie > p{
@@ -261,6 +263,7 @@
     flex: 1 0 0;
     align-self: stretch;  
     color: #646262;
+    width: 100%;
 
     /* normal text */
     font-family: Poppins;
@@ -268,6 +271,7 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    text-align: justify;
 }
 
 .card .image-slider{
@@ -301,6 +305,8 @@
     flex-direction: column;
     justify-content: center;
     align-self: stretch;
+
+   
 
 
     color: #EA4C36;
@@ -341,13 +347,23 @@
 .contacter-worker .btn-contact .phone-icon .phone-logo,
 .contacter-worker .btn-contact .paper-icon .plane-logo{
     fill: var(--rouge);
-    width: 24px;
-    height: 24px;
+    width: 100%;
+    height: 100%;
+}
+
+.contacter-worker .btn-contact .phone-icon:hover,
+.contacter-worker .btn-contact .paper-icon:hover{
+    background-color: var(--rouge);
+}
+
+.contacter-worker .btn-contact .phone-icon:hover .phone-logo,
+.contacter-worker .btn-contact .paper-icon:hover .plane-logo{
+    fill: #fff
 }
 
 
 .comment-section{
-    width: 944px;
+    width: 100%;
     padding: 16px;
     margin: 24px auto;
     display: flex;
@@ -355,13 +371,12 @@
     gap: 16px;
 }
 
-.comment-section >p:nth-child(1){
+.comment-section >h3{
     color: #000;
     /* normal text */
     font-family: Poppins;
-    font-size: 16px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 700;
     line-height: normal;
 }
 
@@ -380,8 +395,9 @@
 
 .comment-user .rating{
     display: flex;
-    width: 30%; 
+    width: 40%; 
     height: 100%;
+
 }
 
 .comment-user .rating >p{
@@ -399,21 +415,23 @@
 
 .comment-user .rating .stars{
     display: flex;
-    width: 70%;
+    width: 60%;
     height: 100%;
     align-items: center;
 }
 
-.rating .stars>*{
+.comment-user .rating .stars>*{
     width: 24px;
     height: 24px;
+    flex: 1 0 0;
+    align-self: stretch;
 }
 
-.rating .stars .star-filled{
+.comment-user .rating .stars .star-filled{
     fill: #EA4C36;
 }
 
-.rating .stars .star-empty{
+.comment-user .rating .stars .star-empty{
     stroke-width: 1px;
     stroke: var(--rouge);
 }
@@ -460,6 +478,192 @@
     box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
 
+}
+
+
+@media screen and (max-width: 1728px){
+
+    .container-service-details{
+        width: 1257px;
+    }
+    .first-section{
+        gap: 200px;
+    }
+}
+
+
+@media screen and (max-width: 1499px){
+    .container-service-details{
+        width: 1072px;
+    }
+    .first-section{
+        gap: 176px;
+    }
+}
+
+@media screen and (max-width: 1280px){
+    .container-service-details{
+        width: 1008px;
+    }
+
+    .first-section{
+        gap: 80px;
+    }
+}
+
+@media screen and (max-width: 1024px){
+    .container-service-details{
+        width: 752px;
+    }
+    .card{
+        height: 672px;
+    }
+    .first-section{
+        gap: 0px;
+    }
+    .profile{
+        width: 496px;
+        gap: 16px;
+    }
+    .profile > .dropdown-list.visible{
+        width: 50%;
+    }
+    .name-rating{
+        width: 256px;
+    }
+
+    .name-rating>p{
+        font-size: 24px;
+    }
+    .name-rating .rating{
+        width: 72px
+    }
+
+    .info-worker .title p {
+        font-size: 16px;
+    }
+    .name-rating .rating .star-logo{
+        height: 32px;
+        width: 32px;
+    }
+    .card .image-slider{
+        height: 200px;
+    }
+}
+
+@media screen and (max-width: 744px){
+    .container-service-details{
+        width: 504px;
+    }
+    .card{
+        height: 632px;
+        gap: 24px;
+    }
+    .first-section{
+        flex-direction: column;
+        gap: 8px;
+    }
+    .info-worker{
+        gap: 0;
+    }
+    
+    .name-rating{
+        width: 185px;
+    }
+    .name-rating >p{
+        font-size: 16px;
+        width: fit-content;
+        height: fit-content;
+    }
+    .name-rating .rating{
+        width: 100%;
+        flex: 1 0 0;
+        height: 100%;
+    }
+    .name-rating .rating .star-logo{
+        width: 16px;
+        height: 16px;
+    }
+
+    .name-rating .rating >p{
+        font-size: 16px;
+    }
+    .info-worker .title p {
+        font-size: 14px;
+    }
+
+    .adresse p,
+    .phone-number p{
+        font-size: 12px;
+    }
+
+    .categorie{
+        width: 175px;
+    }
+
+    .categorie p{
+        font-size: 14px;
+    }
+
+    .card .image-slider{
+        height: 136px;
+    }
+
+    .card .contacter-worker >p{
+        width: 281px;
+        font-size: 18px;
+    }
+
+    .contacter-worker .btn-contact{
+        width: 120px;
+    }
+    .comment-section >h3{
+        font-size: 16px;
+    }
+
+    .comment-user .rating{
+        width: 250px;
+        height: 24px;
+        gap: 0px;
+    }
+
+    .comment-user .rating > p{
+        font-size: 14px;
+        width: 100%;
+        
+    }
+    .comment-user .rating .stars{
+        display: flex;
+        align-items: flex-start;
+        flex: 1 0 0;
+        align-self: stretch;
+    }   
+
+    .comment-user .rating .stars>*{
+        width: 20px;
+        height: 24px;
+    }
+
+    .comment-user .comment-input{
+        width: 240px;
+    }
+
+    .comment-user .comment-input label{
+        font-size: 14px;
+    }
+
+    
+}
+
+
+@media (max-width: 475px){
+    .container-service-details{
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
 }
 
 

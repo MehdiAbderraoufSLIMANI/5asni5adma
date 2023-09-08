@@ -45,7 +45,7 @@ const ConsulterService = () => {
                         <div className="name-rating">
                             <p>Nom&Prénom</p>
                             <div className="rating">
-                                <Star className='start-logo'/>
+                                <Star className='star-logo'/>
                                 <p>5.0</p>  
                             </div>
                         </div>
@@ -88,7 +88,7 @@ const ConsulterService = () => {
         </div>
 
         <div className="comment-section">
-            <p>1566 commentaire</p>
+            <h3>1566 commentaire</h3>
             <div className="comment-user">
                 <div className="rating">
                     <p>Lisser un avis</p>

@@ -15,6 +15,16 @@ import "./RegisterWorker.css"
 import { motion } from 'framer-motion'
 import AuthContext from '../../../conctions/AuthContext'
 
+import ScaleLoader from 'react-spinners/ScaleLoader'
+
+const override = {
+  display: "block",
+  margin: "21% auto",  
+  width: "80px",
+  borderColor: "red",
+};
+
+
 const RegisterWorker = () => {
   let {regesterWorker} = useContext(AuthContext)
 
@@ -40,9 +50,11 @@ const RegisterWorker = () => {
       alert('Password and Confirm Password do not match.');
       return;
     } 
-      setIsLoading(true); 
-      regesterWorker(e);
-      
+    setIsLoading(true); 
+    const err = regesterWorker(e);
+      if(!err){
+        setIsLoading(false);
+      }
      
   };
   let [isInputEmpty, setIsInputEmpty] = useState(true)
@@ -60,6 +72,12 @@ const RegisterWorker = () => {
 
   return (
     <div className="worker-register-conn">
+    {isLoading && 
+      <div className="disabled">
+          <ScaleLoader color="#EA4C36" loading={isLoading} size={150}  cssOverride={override} />
+      </div>
+    }
+     {!isLoading && 
       <div className='register-form'>
         <div className="register-content">
           <div className="inscription">
@@ -133,7 +151,7 @@ const RegisterWorker = () => {
  
             <div className="input-box">
                 <CameraLogo className="icon"/>
-                <input type="file" className='input' name='img' required/>
+                <input type="file" className='input' name='img' accept="image/*" required/>
             </div>
             <div className="btn-submit">
             <motion.button
@@ -158,8 +176,10 @@ const RegisterWorker = () => {
           </form>
         </div>
         <div className="rectangle"></div>
-      </div>   
+      </div>
+       }   
     </div>
+ 
   )
 }
 

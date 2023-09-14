@@ -7,7 +7,7 @@ import Acceuil from './pages/Acceuil/Acceuil';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ListServices from './pages/Nos_services/ListServices';
-import ConsulterService from './pages/ConsulterService';
+import ConsulterService from './pages/ConsulterService/ConsulterService';
 import Inscription from './pages/Inscription/Inscription';
 import RegisterClient from './pages/Inscription/Register-client/RegisterClient'
 import RegisterWorker from './pages/Inscription/Register-worker/RegisterWorker'
@@ -30,6 +30,8 @@ import PrivateRoute from './conctions/PrivateRoute';
 import ScrollToTop from './components/ScrollToTop';
 import { AuthProvider } from './conctions/AuthContext';
 import ProfilClient from './pages/Profil_client/ProfilClient';
+import ConsulterProfile from './pages/ConsulterProfile/ConsulterProfile';
+
  
 
 axios.defaults.xsrfCookieName = 'csrftoken';
@@ -88,6 +90,7 @@ function App() {
               <Route path='/services' element={<ListServices />} />
               <Route path='/services/:categ' element={<ListServices />} />
               <Route path='/service/:numAnn/:idArtisan' element={<ConsulterService />} />
+              <Route path='/service/:numAnn/:idArtisan/profile' element={<ConsulterProfile />} />
               <Route path='/FAQ' element={<FAQ />} />
               <Route path='/inscription' element={<Inscription />} />
 

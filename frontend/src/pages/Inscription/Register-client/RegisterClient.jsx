@@ -10,6 +10,18 @@ import {Link} from "react-router-dom"
 import "./RegisterClient.css" 
 import AuthContext from '../../../conctions/AuthContext'
 import { motion } from "framer-motion"
+
+
+import ScaleLoader from 'react-spinners/ScaleLoader'
+
+const override = {
+  display: "block",
+  margin: "21% auto",
+  width: "80px",
+  borderColor: "red",
+};
+
+
 const RegisterClient = () => {
 
   let {regesterClient} = useContext(AuthContext)
@@ -37,11 +49,16 @@ const RegisterClient = () => {
 
     if (e.target.elements.password.value !== e.target.elements.password2.value) {
       // If passwords don't match, show an error or handle it as needed
-      alert('Le mot de passe et le mot de passe confirmé ne correspondent pas .');
+      alert('Password and Confirm Password do not match.');
       return;
     }
       setIsLoading(true); 
-      regesterClient(e);  
+      const err = regesterClient(e);
+      if(!err){
+        setIsLoading(false);
+      }
+      
+     
   };
 
 
@@ -61,7 +78,16 @@ const RegisterClient = () => {
     }
 
   return (
+    
     <div className="client-register-conn">
+
+    {isLoading && 
+      <div className="disabled">
+          <ScaleLoader color="#EA4C36" loading={isLoading} size={150}  cssOverride={override} />
+      </div>
+    }
+
+    {!isLoading && 
       <div className='registerclient-form'>
         <div className="register-content">
           <div className="inscription">
@@ -113,7 +139,7 @@ const RegisterClient = () => {
             </div>
             <div className="input-box">
               <AtLogo className="icon"/>
-              <input onChange={handleEmailChange} type="email" className='input' required/>
+              <input onChange={handleEmailChange} type="email" className='input' name="email" required/>
               <label className={!isInputEmpty? 'email-label-clicked' : '' }>Email</label>
             </div>
 
@@ -132,7 +158,7 @@ const RegisterClient = () => {
 
             <div className="input-box">
                 <CameraLogo className="icon"/>
-                <input type="file" className='input' name='img' required/>
+                <input type="file" className='input' name='img' accept="image/*" required/>
             </div>
             <div className="btn-submit">
             <motion.button
@@ -158,7 +184,8 @@ const RegisterClient = () => {
           </form>
         </div>
         <div className="rectangle"></div>
-      </div>   
+      </div> 
+    }  
     </div>
   )
 }

@@ -168,8 +168,11 @@
     position: relative;
 }
 .about-us-container .equipe .tiret {
-    height: 20px;
-    width: 70px;
+    height: 3px;
+    width: 250px;
+    margin: 0 auto;
+    margin-bottom: 48px !important;
+    /*margin-left: 25px;*/
     background-color: var(--rouge);
 }
 .equipe-header {
@@ -185,7 +188,7 @@
 }
 .equipe-staff {
     position: absolute;
-    top: 40%;
+    top: 42%;
     left: 0;
     width: 100%;
 }

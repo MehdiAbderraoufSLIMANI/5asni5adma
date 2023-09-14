@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Neucha&family=Outfit:wght@700&family=Poppins&display=swap');
+
+
+.single-comment{
+    display: flex;
+    padding: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    align-self: stretch;
+    border-bottom: 1px solid var(--rouge);
+}
+
+.single-comment .img-comment{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.single-comment .img-comment .image{
+    background-color: #D9D9D9;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+
+.single-comment .img-comment .comment-prof-infos{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.single-comment .img-comment .comment-prof-infos > p:nth-child(1){
+    display: flex;
+    width: 104px;
+    height: 24px;
+    flex-direction: column;
+    justify-content: center;
+    color: #000;
+
+    /* normal text */
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+
+}
+
+.single-comment .img-comment .comment-prof-infos > p:nth-child(2){
+    color: rgba(0, 0, 0, 0.70);
+
+    /* normal text */
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+
+}
+
+.single-comment .stars{
+    display: flex;
+    align-items: flex-start;
+}
+
+.single-comment .stars>*{
+    width: 24px;
+    height: 24px;
+}
+
+.single-comment .stars .star-filled{
+    fill: #EA4C36;
+}
+
+.single-comment .stars .star-empty{
+    stroke-width: 1px;
+    stroke: var(--rouge);
+}
+
+.single-comment .comment-context{
+    align-self: stretch;
+    color: #000;
+
+    /* normal text */
+    text-align: justify;
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+
+
+

@@ -14,14 +14,11 @@ const override = {
 };
 
 export default function ProfilClient() {
-  let { user } = useContext(AuthContext);
-  /*Backend
-  Récupérer toutes les données du client --> Client.objects.get(email = user.email) + utiliser sessions pour savoir si le client est actif
- */
-  //testing
+  let { user ,EditProfil,logoutUser} = useContext(AuthContext);
+   
   const someData = {
-    id: 4, username: 'badrooo_dev', email: 'test@gmail.com', password: '123456',
-    nom: 'bengaid', prenom: 'badro', tel: '0555555555', wilaya: 'Alger', commune: 'kouba', adresse: 'kouba,Alger'
+    id: user.id, username: user.username, email: user.email, password: '123456',
+    nom: user.nom, prenom: user.prenom, tel: user.tel, wilaya: user.wilaya, commune: user.commune, adresse: user.adresse
   }
   const [currentUser, setCurrentUser] = useState(someData);
 
@@ -57,11 +54,8 @@ export default function ProfilClient() {
   }
 
   const submitEditHandler = (data) => {
-    console.log(data);
-    if(currentUser.password !== data.Oldpassword) {
-      alert("Ancien mot de passe incorrect ! Réesayer de nouveau");
-    } 
-    else {
+ 
+ 
       setIsLoading(true);
       /* Backend
       update client in database
@@ -71,12 +65,11 @@ export default function ProfilClient() {
       et supprimer le bloc 'setTimeout()' qui se trouve en bas
      //////////////////////////////////////////////////
        */
-      
-     setTimeout(()=> {
+     EditProfil(data);
      setIsLoading(false);
-     setShowEditForm(false);
-      }, 1500)
-    }
+     logoutUser();
+    
+   
     
   }
 
@@ -93,8 +86,17 @@ export default function ProfilClient() {
 
         {!isLoading && 
         <div className="col-md-4 col-sm-3 bio-container">
+          
+          { (showEditForm && !isLoading) ?(
           <div className='img-container'>
+            <img src={(user && user.pic) ? user.pic : defaultPic} alt='pic' /> 
+            
+          </div>
+          ):(
+            <div className='img-container'>
+          
             <img src={(user && user.pic) ? user.pic : defaultPic} alt='pic' />
+          
             <div className="ball-container">
               <div className="greenBall"></div>
             </div>
@@ -102,10 +104,14 @@ export default function ProfilClient() {
             <p className='username'> @{currentUser.username} </p>
           </div>
 
-          <div className="adress-container">
-            <i className="bi bi-geo-alt-fill ms-4 me-2"></i><span>De</span>
-            <span className='adress'> {`${currentUser.commune}, ${currentUser.wilaya}`} </span>
+
+          )  } 
+            { (!showEditForm ) &&
+            <div className="adress-container">
+             <i className="bi bi-geo-alt-fill ms-4 me-2"></i><span>De</span>
+             <span className='adress'> {`${currentUser.commune}, ${currentUser.wilaya}`} </span>
           </div>
+              }
 
         </div>
         }

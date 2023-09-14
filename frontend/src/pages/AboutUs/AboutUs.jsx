@@ -92,8 +92,8 @@ export default function AboutUs() {
       </div>
 
       <div className="equipe container-fluid">
-        <h1>Rencontrer notre équipe</h1>
-        <div className="tiret"></div>
+        <h1 className='text-center'>Rencontrer notre équipe</h1>
+        <div className="tiret text-center"></div>
 
         <div className="row equipe-header">
           <h2>Nous sômmes super professionnels dans nos compétences</h2>

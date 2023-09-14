@@ -3,6 +3,13 @@ from rest_framework import serializers
 from api import models,validations
 from django.contrib.auth import get_user_model, authenticate
 
+#profilUpdate"""""""""""""""""""""""""""""""""""""""""""""
+
+
+class ProfileClientUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Client
+        fields = ['nom', 'prenom', 'username', 'email', 'wilaya', 'commune', 'adresse', 'tel', 'img']
 
 
 #AnnonceCreate""""""""""""""""""""""""""""""""""""""""""""

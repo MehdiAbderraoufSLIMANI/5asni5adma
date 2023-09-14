@@ -15,7 +15,7 @@ import FAQ from './pages/FAQ/FAQ';
 import NavbarClient from './components/NavbarClient/NavbarClient';
 
 import Login from './pages/Login/Login';
-import AboutUs from './pages/AboutUs';
+import AboutUs from './pages/AboutUs/AboutUs';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import ValidationPage from './pages/ValidationPage';
 import InboxClient from './pages/BoiteRecepClient/InboxClient';

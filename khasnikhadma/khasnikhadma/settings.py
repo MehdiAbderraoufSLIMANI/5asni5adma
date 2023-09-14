@@ -90,8 +90,8 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': '5astni5admaadmin',
         'HOST': '127.0.0.1', 
-        'PORT': '5432',
-    }
+        'PORT': '5432', # libre--> 5433  projet--> 'PORT': '5432',
+    } 
 }
 
 
@@ -140,7 +140,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
-    'http://172.0.0.1:3000',
+    'http://172.0.0.1:3000', 
 ]
 
 CORS_ALLOW_CREDENTIALS = True

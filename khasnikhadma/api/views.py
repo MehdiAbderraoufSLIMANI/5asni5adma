@@ -76,6 +76,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
             # Add custom claims
             token['email'] = worker.email
             token['username'] = worker.username
+            token['account_type'] = worker.compte_type 
             
             if len(str(worker.img)) != 0 :
                 token['pic'] = settings.SITE_URL + "/media/"+ str(worker.img) 
@@ -84,6 +85,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
             
             token['email'] = client.email
             token['username'] = client.username
+            token['account_type'] = client.compte_type
             if len(str(client.img)) != 0 : 
                 token['pic'] = settings.SITE_URL + "/media/"+ str(client.img) 
         else :

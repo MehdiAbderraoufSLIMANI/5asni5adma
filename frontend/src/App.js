@@ -19,6 +19,7 @@ import AboutUs from './pages/AboutUs/AboutUs';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import ValidationPage from './pages/ValidationPage';
 import InboxClient from './pages/BoiteRecepClient/InboxClient';
+import ProfileWorker from './pages/profile_worker/ProfileWorker';
 
 import Backendtest from './pages/Backendtest';
 import Annoncetesting from './testing/Annoncetesting';
@@ -106,7 +107,8 @@ function App() {
               <Route path='/ValidationPage' element={<ValidationPage />} />
               <Route path='/backendtest' element={<Backendtest />} />
               <Route path='/Annoncetesting' element={<Annoncetesting />} />
-              <Route path='/profil/client' element={<ProfilClient />} />   
+              <Route path='/profil/client' element={<ProfilClient />} />  
+              <Route path='/profil/worker' element={<ProfileWorker />}/> 
               <Route path='/inbox/client' element={<InboxClient />} />
 
               <Route path='*' element={<ErrorPage />} />

@@ -1,0 +1,435 @@
+@import url('https://fonts.googleapis.com/css2?family=Neucha&family=Outfit:wght@700&family=Poppins&display=swap');
+
+
+.container-profil-worker{
+    width: 1112px;
+    margin: 108px auto;
+    display: flex;
+    justify-content: flex-start;
+    gap: 56px;
+    padding-bottom: 50%;
+}
+.info{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 48px;
+    width: 392px;
+}
+.basic-info{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 24px; 
+    padding: 16px 32px;
+    background: #FFF;
+    box-shadow: 2px 3px 19px 0px rgba(0, 0, 0, 0.30);
+}
+
+.image{
+    width: 200px;
+    height: 200px;
+    position: relative;
+}
+
+.image img{
+    background-color: rgba(63, 61, 61, 0.541);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.image .connected-logo{
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.username-full-name{
+    display: flex;
+    flex-direction: column;
+    height: 48px;
+    width: 100%;
+    align-items: center;
+}
+
+.username-full-name > p:nth-child(1){
+    color: #000;
+    text-align: center;
+
+    /* normal text */
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.username-full-name > p:nth-child(2){
+    color: rgba(0, 0, 0, 0.70);
+    text-align: center;
+    /* normal text */
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-top: -16px;
+}
+
+.edit-profil-btn{
+    width: 100%;
+    height: 56px;
+    border-radius: 8px;
+    background: #EA4C36;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.edit-profil-btn p{
+    width: 100%;
+    color: #E5E5E5;
+    text-align: center;
+    margin-top: 16px;
+
+    /* normal text */
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.edit-profil-btn:hover{
+    background-color: var(--noir);
+}
+
+.basic-info .line{
+    width: 100%;
+    height: 1px;
+    background: #EA4C36;
+}
+
+.infos-secondaire{
+    width: 100%;
+    height: 96px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.location-sec{
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.location-sec .location{
+    display: flex;
+    gap: 8px;
+    align-self: stretch;    
+}
+
+.location-sec .location .location-logo{
+    width: 24px;
+    height: 24px;
+    fill: var(--rouge); 
+    margin-top: 2px;
+}
+
+.location-sec .location > p{
+    color: #000;
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.location-sec .location-txt{
+    display: flex;
+    align-items: center;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.location-sec .location-txt >p{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1 0 0;
+    align-self: stretch;
+    color: #000;
+    text-align: right;
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.basic-info2{
+    width: 100%;
+    padding: 16px 32px;
+    height: 100%;
+    background: #FFF;
+    box-shadow: 2px 3px 19px 0px rgba(0, 0, 0, 0.30);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+}
+
+.basic-info2 .education{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.basic-info2 .education>p:nth-child(1){
+    color: #000;
+    font-family: Poppins;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+.basic-info2 .education>p:nth-child(2){
+    color: rgba(0, 0, 0, 0.56);
+
+    /* normal text */
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.basic-info2 .line{
+    width: 100%;
+    height: 1px;
+    background-color: var(--rouge);
+}
+
+.basic-info2 .skills{
+    width: 100%;
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.basic-info2 .skills >p{
+    width: 100%;
+    color: #000;
+    font-family: Poppins;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}   
+
+.skills-list{
+    display: flex;
+    padding: 8px 16px;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 8px;
+    width: 100%;
+    height: 100%;
+    flex-wrap: wrap;
+}
+
+.skills-list .skill{
+    display: flex;    
+    height: 40px;
+    padding: 8px 16px;
+    justify-content: center;
+    border-radius: 32px;
+    background: #707070;
+}
+
+.skills-list .skill p{
+    color: #FFF;
+    text-align: center;
+
+    /* normal text */
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.gigs{
+    width: calc(1112px - 400px);
+    height: 907px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.gigs-container{
+    width: 100%;
+    max-height: calc(907px - 32px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    overflow-y: auto;
+}
+
+.gig{
+    width: 100%;
+    height: 240px;
+    border-radius: 8px;
+    display: flex;
+    padding: 16px;
+    align-items: flex-start;
+    background: var(--noir);
+    gap: 16px;
+}
+
+.gig .image-container{
+    width: 563px;
+    height: 100%;
+    overflow: hidden;
+}
+
+.gig img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gig .gig-description{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    align-self: stretch;
+}
+
+.gig-description >p:nth-child(1){
+    width: 100%;
+    color: #FFF;
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.gig-description >p:nth-child(2){
+    width: 100%;
+    color: #FFF;
+    text-align: justify;
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.gig-description .gig-category{
+    display: flex;
+    width: 100%;
+    height: 40px;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.gig-description .gig-category p{
+    color: rgba(255, 255, 255, 0.60);
+    text-align: right;
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.gig .dots{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    cursor: pointer;
+    position: relative;
+}
+
+.gig .dots .drop-list{
+   display: none;
+}
+
+.gig .dots .drop-list.visible{
+    position: absolute;
+    top: 24px;
+    right: 8px;
+    width: 152px;
+    height: 65px;
+    display: block;
+}
+
+.gig .dots .drop-list ul{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+    width: 100%;
+    height: 100%;
+}
+
+
+.gig .dots .drop-list ul li{
+    display: flex;
+    background-color: #ffffffe7;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 32px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.gig .dots .drop-list ul li a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    color: black;
+    text-decoration: none;
+}
+
+.gig .dots .drop-list ul li a:hover{
+    background-color: var(--rouge);
+    color: #fff;
+}
+
+.add-btn{
+    border-radius: 63px;
+    background: var(--rouge);
+    display: flex;
+    width: 32px;
+    height: 32px;
+    padding: 8px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.add-btn .plus-logo{
+    width: 16px;
+    height: 16px;
+    fill: white;
+}
+

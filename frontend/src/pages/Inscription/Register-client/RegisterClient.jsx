@@ -41,7 +41,6 @@ const RegisterClient = () => {
   const handleChange = () => {
     setCommune(jsonData.filter(commune => commune.wilaya_name_ascii === selectedWilaya.current.value)
     )
-    
   } 
 
   const handleRegister = (e) => {

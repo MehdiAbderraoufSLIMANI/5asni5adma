@@ -32,6 +32,7 @@ import ScrollToTop from './components/ScrollToTop';
 import { AuthProvider } from './conctions/AuthContext';
 import ProfilClient from './pages/Profil_client/ProfilClient';
 import ConsulterProfile from './pages/ConsulterProfile/ConsulterProfile';
+import EditProfilWorker from './pages/profile_worker/EditProfilWorker';
 
  
 
@@ -109,6 +110,7 @@ function App() {
               <Route path='/Annoncetesting' element={<Annoncetesting />} />
               <Route path='/profil/client' element={<ProfilClient />} />  
               <Route path='/profil/worker' element={<ProfileWorker />}/> 
+              <Route path='/profil/worker/editer' element={<EditProfilWorker />}/> 
               <Route path='/inbox/client' element={<InboxClient />} />
 
               <Route path='*' element={<ErrorPage />} />

@@ -415,7 +415,7 @@
     color: #fff;
 }
 
-.add-btn{
+.add-btn{ 
     border-radius: 63px;
     background: var(--rouge);
     display: flex;

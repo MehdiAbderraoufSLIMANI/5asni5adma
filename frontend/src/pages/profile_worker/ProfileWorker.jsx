@@ -8,10 +8,13 @@ import { ReactComponent as LocationLogo } from "../../resources/logos/location-d
 import { ReactComponent as UserLogo } from "../../resources/logos/user-solid.svg"
 import { ReactComponent as PlusLogo } from "../../resources/logos/plus-solid.svg"
 import { ReactComponent as Dot } from "../../resources/logos/dot.svg"
+import { useNavigate } from 'react-router-dom'
 
 
 const ProfileWorker = () => {
 
+
+    const navigate = useNavigate()
     const [visible, setVisible] = useState(false)
 
   return (
@@ -26,7 +29,7 @@ const ProfileWorker = () => {
                     <p>Nom & Prénom</p>
                     <p>@Nom d'utilisateur</p>
                 </div>
-                <div className="edit-profil-btn">
+                <div onClick={()=>{navigate('./editer')}} className="edit-profil-btn">
                     <p>Modifier mon profile</p>
                 </div>
                 <div className="line"></div>

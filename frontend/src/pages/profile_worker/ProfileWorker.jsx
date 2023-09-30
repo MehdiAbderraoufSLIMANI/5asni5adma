@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./ProfileWorker.css"
 import {Link} from "react-router-dom"
 import photoProfile from '../../resources/images/nadhir.jpeg'
@@ -13,8 +13,13 @@ import { useNavigate } from 'react-router-dom'
 
 const ProfileWorker = () => {
 
-
     const navigate = useNavigate()
+
+    let handleEditingEvent = () => {
+        navigate('./editer')
+    }
+
+    
     const [visible, setVisible] = useState(false)
 
   return (
@@ -29,7 +34,7 @@ const ProfileWorker = () => {
                     <p>Nom & Prénom</p>
                     <p>@Nom d'utilisateur</p>
                 </div>
-                <div onClick={()=>{navigate('./editer')}} className="edit-profil-btn">
+                <div onClick={handleEditingEvent} className="edit-profil-btn">
                     <p>Modifier mon profile</p>
                 </div>
                 <div className="line"></div>
@@ -107,7 +112,7 @@ const ProfileWorker = () => {
                     </div>
                 </div>
             </div>   
-            <div className="add-btn">
+            <div onClick={() => {navigate("./gig")}} className="add-btn">
                 <PlusLogo className="plus-logo"/>
             </div>
         </div>

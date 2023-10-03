@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import './EditClientForm.css'
+import './EditWorkerForm.css'
 import algeriaData from '../../JSON/wilaya&commune.json'
 import { useForm, useWatch } from 'react-hook-form'
  
-export default function EditClientForm({ submitEditHandler, currentUser, cancelHandler }) {
+export default function EditWorkerForm({ submitEditHandler, currentUser, cancelHandler }) {
 
     const { register, handleSubmit, setValue, formState: { errors }, control, trigger ,setError} = useForm({
         defaultValues: currentUser, // Initialize form values with current user data
@@ -219,7 +219,7 @@ export default function EditClientForm({ submitEditHandler, currentUser, cancelH
             </form>
 
         
-
+            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>  
         </div>
     )
 }

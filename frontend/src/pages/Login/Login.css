@@ -2,6 +2,18 @@
 
 
 
+.errour-label{
+ 
+  
+    color: rgba(234, 76, 54, 0.70);
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    pointer-events: none;
+}
+
 .login-container{
     width: 100%;
     display: flex;

@@ -175,6 +175,7 @@ class Artisan(Person):
     commune = models.CharField(max_length=50)
     adresse = models.CharField(max_length=50)
     rating = models.FloatField(max_length=1, editable=False, default=0)
+    description = models.TextField(verbose_name='description', max_length=400,default=" ",null=True)
     
 
     def __str__(self):
@@ -204,11 +205,18 @@ class Contact(models.Model):
 from django.utils import timezone
 def upload_path(instance, filename):
     return '/'.join(['annonce', str(instance.service), filename])
+
+class Image_annonce(models.Model):
+    img_annonce = models.ImageField(verbose_name="img annonce", upload_to="photos")
+
+    def __str__(self):
+        return self.img_annonce.name
+    
 class Annonce(models.Model):
     date_of_pub = models.DateTimeField(verbose_name="date of publication",default=timezone.now)    
     categorie = models.CharField(max_length=30)
     service = models.CharField(max_length=30)
-    img_annonce = models.ImageField(verbose_name="img annonce", blank=True, null=True, default="annonce/vv/brooklyn99.jpg", upload_to=upload_path) 
+    img_annonce = models.ManyToManyField(Image_annonce, blank=True, null=True)
     description = models.TextField()
     rating_annonce = models.FloatField(max_length=1, editable=False, default=0,verbose_name="rating annonce")
     artisan = models.ForeignKey(Artisan, on_delete=models.CASCADE)

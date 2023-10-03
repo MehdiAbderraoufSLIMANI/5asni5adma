@@ -14,7 +14,7 @@ const override = {
 };
 
 export default function ProfilClient() {
-  let { user ,EditProfil,logoutUser} = useContext(AuthContext);
+  let { user ,EditProfil} = useContext(AuthContext);
    
   const someData = {
     id: user.id, username: user.username, email: user.email, password: '123456',
@@ -53,22 +53,19 @@ export default function ProfilClient() {
     },1500)
   }
 
-  const submitEditHandler = (data) => {
+  const submitEditHandler = async (data) => {
  
- 
-      setIsLoading(true);
-      /* Backend
-      update client in database
-      ///////////////////////////à la fin mettre : //////////////
-                    setIsLoading(false);
-                    setShowEditForm(false);
-      et supprimer le bloc 'setTimeout()' qui se trouve en bas
-     //////////////////////////////////////////////////
-       */
-     EditProfil(data);
-     setIsLoading(false);
-     logoutUser();
+   
+    try {
+     const respon = await EditProfil(data);
+      
     
+    } catch (error) { 
+      console.log("ProfilClient "+error)  
+      throw error;
+ 
+      
+    }
    
     
   }

@@ -1,27 +1,139 @@
-import React from 'react'
+import React, {useContext, useEffect ,useState} from 'react'
 import "./ConsulterProfile.css"
 import profilPic from "../../resources/images/img-worker-profil.svg"
 import { ReactComponent as StarLogo } from '../../resources/logos/star.svg'
-import {Link} from "react-router-dom"
+import {Link ,useParams} from "react-router-dom"
 
+
+import axios from 'axios';
+import dayjs from 'dayjs'
+import jwt_decode from "jwt-decode";
+import AuthContext from '../../conctions/AuthContext'
+
+
+import ScaleLoader from 'react-spinners/ScaleLoader'
 const ConsulterProfile = () => {
+  const override = {
+    display: "block",
+    margin: "21% auto",
+    width: "80px",
+    borderColor: "red",
+  };
+  const [isLoading, setIsLoading] = useState(true);
 
     
+  const baseURL = 'http://127.0.0.1:8000'
+
+
+  const {authTokens, setUser, setAuthTokens} = useContext(AuthContext)  
+ 
+  const client = axios.create({
+      baseURL,
+      headers:{Authorization: `Bearer ${authTokens?.access}`}
+  });
+
+
+  client.interceptors.request.use(async req => {
+  
+      const user = jwt_decode(authTokens.access)
+      const isExpired = dayjs.unix(user.exp).diff(dayjs()) < 1;
+  
+      if(!isExpired) return req
+  
+      const response = await axios.post(`${baseURL}/api/token/refresh/`, {
+          refresh: authTokens.refresh
+        });
+  
+      localStorage.setItem('authTokens', JSON.stringify(response.data))
+      
+      setAuthTokens(response.data)
+      setUser(jwt_decode(response.data.access))
+      
+      req.headers.Authorization = `Bearer ${response.data.access}`
+      return req
+  })
+
+  const [resp, setresp] = useState(  );
+  
+  let { numAnn } = useParams();
+
+
+  let getAnnonce = async (numAnn)=> {
+      
+
+    
+       
+    try { 
+        const response = client.get(`/api/oneannonce/${numAnn}/`);
+        return response;
+        
+    } catch (error) {
+        return error;
+    }
+      
+    }
+
+
+  useEffect(() => {
+    setIsLoading(true);
+  
+    const fetchData = async () => {
+      try {
+        const res = await getAnnonce(numAnn);
+  
+        // Assign res.data to resp inside the try block
+        setresp(res.data.artisan);
+        console.log(res.data.artisan)
+     
+       
+      } catch (error) {
+        // Handle errors if needed
+      } finally {
+          
+          setIsLoading(false);
+        
+      }
+    };
+  
+    fetchData();
+  }, [numAnn]);
+  
+
+  const [margin, setMargin] = useState(600);
+  useEffect(() => {
+    if(isLoading==true) {
+      setMargin(800);
+      window.scrollTo(0, 0);
+    }else {
+      setMargin(600)
+    }
+  }, [isLoading])
+
+   
+ 
   return (
+
+    <div>
+
+    {isLoading &&     <div className="disabled">
+        <ScaleLoader color="#EA4C36" loading={isLoading} size={150}  cssOverride={override} />
+    </div>
+        }
+            {!isLoading &&
     <div className='container-consulter-profile'>
       <div className="first-section">
-        <p>about the worker</p>
+        <p>About the worker</p>
         <div className="profile">
-          <img src={profilPic} alt='image de profile'/>
+          <img src={baseURL+resp.img} alt='image de profile'/>
           <div className="worker-info">
             <div className="name">
-              <p>Vicky Smith</p>
-              <p>@username</p>
+              <p>{resp.nom}</p>
+              <p>@{resp.username}</p>
             </div>
-            <p>slm montage et réparation tout type de climatiseur chambre froid réparation frigidaire frigo machine a laver Lave vaisselle a domicile.....................................................</p>
+            <p>descraption of the worker</p>
             <div className="rating">
               <StarLogo className="star"/>
-              <p>4.7</p>
+              <p>{resp.rating}</p>
             </div>
           </div>
         </div>
@@ -32,12 +144,11 @@ const ConsulterProfile = () => {
       <div className="second-sec">
         <div className="info-about-worker">
           <div className="first">
-            <p>De<br/><span>Alger, bab el oued</span></p>
+            <p>De<br/><span>{resp.wilaya}, {resp.commune}</span></p>
             <p>temps de réponse moyen<br/><span>3hrs</span></p>
           </div>
           <div className="second">
             <p>Membre depuis<br/><span>juillet 2022</span></p>
-            <p>Langue<br/><span>Arabe, Francais , englais</span></p>
           </div>  
         </div>
         <div className="line"/>
@@ -47,6 +158,8 @@ const ConsulterProfile = () => {
           </p>
         </div>
       </div>
+    </div>
+    }
     </div>
   )
 }

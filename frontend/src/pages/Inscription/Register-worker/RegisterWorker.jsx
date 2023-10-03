@@ -41,7 +41,7 @@ const RegisterWorker = () => {
   } 
 
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
 
      
@@ -50,13 +50,20 @@ const RegisterWorker = () => {
       alert('Password and Confirm Password do not match.');
       return;
     } 
+
     setIsLoading(true); 
-    const err = regesterWorker(e);
-      if(!err){
-        setIsLoading(false);
-      }
-     
+
+    try {
+      const resp = await regesterWorker(e);
+    } catch (error) {
+      setIsLoading(false);
+    }
+ 
+
+ 
   };
+
+
   let [isInputEmpty, setIsInputEmpty] = useState(true)
 
     const handleEmailChange = (e) => {

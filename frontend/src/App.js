@@ -30,8 +30,7 @@ import axios from 'axios';
 import PrivateRoute from './conctions/PrivateRoute';
 import ScrollToTop from './components/ScrollToTop';
 import { AuthProvider } from './conctions/AuthContext';
-import PrivateRoute from './conctions/PrivateRoute';
-
+import PrivateRoute from './conctions/PrivateRoute'; 
 
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';

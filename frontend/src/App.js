@@ -31,7 +31,7 @@ import PrivateRoute from './conctions/PrivateRoute';
 import ScrollToTop from './components/ScrollToTop';
 import { AuthProvider } from './conctions/AuthContext';
 import ProfilClient from './pages/Profil_client/ProfilClient';
-import ConsulterProfile from './pages/ConsulterProfile/ConsulterProfile';
+import ConsulterProfile from './pages/ConsulterProfile/ConsulterProfile'; 
 
  
 
@@ -80,7 +80,7 @@ function App() {
 
           <header className="App-header">
             <Navbar /> 
-            <NavbarClient />
+            <NavbarClient /> 
           </header>
 
           <GoTop scrollRate={scrollRate} />
@@ -124,6 +124,11 @@ function App() {
               <Route exact path='/profil/client' element={<PrivateRoute/>}>
                 <Route exact path='/profil/client' element={<ProfilClient/>}/>
               </Route>
+
+              <Route exact path='/profil/worker' element={<PrivateRoute/>}>
+                <Route exact path='/profil/worker' element={<ProfileWorker/>}/>
+              </Route>
+
               <Route exact path='/inbox/client' element={<PrivateRoute/>}>
                 <Route exact path='/inbox/client' element={<InboxClient/>}/>
               </Route> 

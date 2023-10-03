@@ -45,8 +45,10 @@ const Login = () => {
      
   };
   const handlemailChange = (e) => {
-    setIsEmailFilled(e.target.value.trim() !== ''); // Check if the input has any value (ignoring leading/trailing spaces)
-  };
+    const isFilled = e.target.value.trim() !== '';
+    setIsEmailFilled(isFilled);
+    setIsInputEmpty(!isFilled);  // Update isInputEmpty based on whether the field is empty
+};
   return (
     <div className="login-container">
       <div className='login-form'>
@@ -100,13 +102,6 @@ const Login = () => {
     
   )
 
-  /*
-  
-            <div  className="user-error" >
-                  {error && <p>{error}</p>}
-          </div>
-
-  */ 
 }
 
 export default Login

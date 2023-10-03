@@ -137,9 +137,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
             # Add custom claims
             token['email'] = worker.email
             token['username'] = worker.username
-<<<<<<< HEAD
             token['account_type'] = worker.compte_type 
-=======
             token['nom'] = worker.nom
             token['prenom'] = worker.prenom
             token['tel'] = worker.tel
@@ -147,8 +145,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
             token['commune'] = worker.commune
             token['adresse'] = worker.adresse
             token['rating'] = worker.rating
-
->>>>>>> 87d30092a33a6528bf822dbb52c99e9ceea1da01
+            token['description'] = worker.description
             
             if len(str(worker.img)) != 0 :
                 token['pic'] = settings.SITE_URL + "/media/"+ str(worker.img) 
@@ -158,15 +155,12 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
             token['email'] = client.email
             token['username'] = client.username
             token['account_type'] = client.compte_type
-<<<<<<< HEAD
-=======
             token['nom'] = client.nom
             token['prenom'] = client.prenom
             token['tel'] = client.tel
             token['wilaya'] = client.wilaya
             token['commune'] = client.commune
             token['adresse'] = client.adresse
->>>>>>> 87d30092a33a6528bf822dbb52c99e9ceea1da01
             if len(str(client.img)) != 0 : 
                 token['pic'] = settings.SITE_URL + "/media/"+ str(client.img) 
         else :

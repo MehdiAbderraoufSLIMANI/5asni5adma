@@ -14,7 +14,7 @@ const override = {
 };
 
 export default function ProfilClient() {
-  let { user ,EditProfil,logoutUser} = useContext(AuthContext);
+  let { user ,EditProfil} = useContext(AuthContext);
    
   const someData = {
     id: user.id, username: user.username, email: user.email, password: '123456',

@@ -18,7 +18,8 @@ class oneAnnonceArtisanSerializer(serializers.ModelSerializer):
         'wilaya',
         'commune',
         'rating',
-        'img' 
+        'img',
+        'description'
     )
 
 class oneAnnonceImagesSerializer(serializers.ModelSerializer):
@@ -230,6 +231,7 @@ class ArtisanSerializer(serializers.ModelSerializer):
         'adresse',
         'rating',
         'category_of_worker',
+        'description'
     )
 
 #Client""""""""""""""""""""""""""""""""

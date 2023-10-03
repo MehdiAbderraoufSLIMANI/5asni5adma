@@ -175,6 +175,7 @@ class Artisan(Person):
     commune = models.CharField(max_length=50)
     adresse = models.CharField(max_length=50)
     rating = models.FloatField(max_length=1, editable=False, default=0)
+    description = models.TextField(verbose_name='description', max_length=400,default=" ",null=True)
     
 
     def __str__(self):

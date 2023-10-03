@@ -214,7 +214,7 @@ const ConsulterService = () => {
           
 
         <div className="comment-section">
-            <p>1566 commentaire</p>
+            <h3>1566 commentaire</h3>
             <div className="comment-user">
                 <div className="rating">
                     <p>Lisser un avis</p>

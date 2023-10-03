@@ -19,7 +19,7 @@ import ScaleLoader from 'react-spinners/ScaleLoader'
 
 const override = {
   display: "block",
-  margin: "21% auto",
+  margin: "21% auto",  
   width: "80px",
   borderColor: "red",
 };

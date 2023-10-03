@@ -85,6 +85,7 @@
     color: #000;
 
     /* normal text */
+    text-align: justify;
     font-family: Poppins;
     font-size: 16px;
     font-style: normal;

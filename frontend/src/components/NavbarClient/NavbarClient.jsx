@@ -61,7 +61,7 @@ Récupérer à partir de la table "anonce" toutes les categories existantes*/
             </li>
 
             <li className="nav-item">
-              <HashLink to='/#contact' smooth={true} className="nav-link">Nous Contacter</HashLink>
+              <HashLink to='/#contact' smooth={true} className="nav-link">Contact</HashLink>
             </li>
 
 

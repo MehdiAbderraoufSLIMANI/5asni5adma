@@ -1,0 +1,16 @@
+<svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="8" height="8" fill="#E5E5E5"/>
+<g id="profile-worker">
+<rect width="1440" height="1252" transform="translate(-1252 -212)" fill="white"/>
+<g id="container">
+<g id="gigs">
+<g id="gig1">
+<rect x="-640" y="-16" width="664" height="240" rx="8" fill="#1C1F1E"/>
+<g id="dots">
+<circle id="dot1" cx="4" cy="4" r="4" fill="#D9D9D9"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>

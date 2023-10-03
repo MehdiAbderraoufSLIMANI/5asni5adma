@@ -1,30 +1,23 @@
-import React, {useEffect, useState } from 'react'
+import React, {useEffect, useState, useContext } from 'react'
 import { NavLink,Link, useLocation } from 'react-router-dom'
 import { HashLink } from 'react-router-hash-link'
 import { motion } from 'framer-motion'; 
 import logo from '../resources/images/logo.png';
-
-
-import   {useContext} from 'react' 
- 
 import AuthContext from '../conctions/AuthContext';
+
+
+//import AuthContext from '../conctions/AuthContext';
 
 export default function Navbar() {
 
   
-  let {isLoggedIn,logoutUser,user} = useContext(AuthContext)
+  let {isLoggedIn} = useContext(AuthContext)
 
  
-  
-  const handleLogout = () => {
-    logoutUser()
-     
-  };
-
 /*Backend
 Récupérer à partir de la table "anonce" toutes les categories existantes*/
   //testing
-  const categories = ['Climatiseur', 'Menuisierie'];
+  const categories = ['Photography', 'Fashion & Style']   //['Climatiseur', 'Menuisierie'];
  
 
   
@@ -45,9 +38,9 @@ Récupérer à partir de la table "anonce" toutes les categories existantes*/
   const withoutNavFooterRoutes = ["/connection" , "/inscription", "/register-worker","/register-client"];
   ///******************************************************************************* */
 
-  if (withoutNavFooterRoutes.some((item) => sampleLocation.pathname === item))   return null;
-
-  return(
+  if (isLoggedIn() || withoutNavFooterRoutes.some((item) => sampleLocation.pathname === item) ) {  return null;}
+  
+  else { return(
     <nav className="navbar navbar-expand-xl ">
       <div className="container-fluid" style={{ paddingBottom: '0px' }}>
         <a className="navbar-brand"  >
@@ -62,7 +55,7 @@ Récupérer à partir de la table "anonce" toutes les categories existantes*/
 
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 pageLinks">
             <li className="nav-item">
-              <NavLink to='/' className="nav-link">Acceuil</NavLink>
+              <NavLink to='/' className="nav-link">Accueil </NavLink>
             </li>
 
             <li className="nav-item dropdown">
@@ -76,11 +69,11 @@ Récupérer à partir de la table "anonce" toutes les categories existantes*/
             </li>
 
             <li className="nav-item">
-              <NavLink to='/FAQ' className="nav-link">FAQ</NavLink>
+              <NavLink to='/about us' className="nav-link">Qui sommes-nous?</NavLink>
             </li>
 
             <li className="nav-item">
-              <HashLink to='/#contact' smooth={true}  className="nav-link ">Nous Contacter</HashLink>  {/* scroll={(el) => el.scrollIntoView({ behavior: 'smooth', block: 'start' })} */}
+              <HashLink to='/#contact' smooth={true}  className="nav-link">Contact</HashLink>  
             </li>
 
 
@@ -88,12 +81,6 @@ Récupérer à partir de la table "anonce" toutes les categories existantes*/
           <ul className="navbar-nav  mb-2 mb-lg-0 pushRight"  >
 
             
-          {isLoggedIn() ? (
-              <div></div>
-            ) : (
-              // Render this link if the user is not logged in
-               
-
             <motion.li className="nav-item redBtn"
               whileHover={{
                 scale: 1.1,
@@ -105,57 +92,26 @@ Récupérer à partir de la table "anonce" toutes les categories existantes*/
               }}
             >
 
-              <Link to='/inscription' className="nav-link ">Rejoigner nous</Link>
+              <Link to='/inscription' className="nav-link">Rejoigner nous</Link>
            
-             
-             
-           
-            </motion.li>
-            )}
+          </motion.li>
+        
+
+            <motion.li className="nav-item redBtn"
+              whileHover={{
+                scale: 1.1,
+                backgroundColor: "#F5432A",
+                transition: ".8s ease-in-out"
+              }}
+              whileTap={{
+                scale: 1
+              }}
+            >
             
-
-            <motion.li className="nav-item redBtn"
-              whileHover={{
-                scale: 1.1,
-                backgroundColor: "#F5432A",
-                transition: ".8s ease-in-out"
-              }}
-              whileTap={{
-                scale: 1
-              }}
-            >
-              {isLoggedIn() ? (
-                <div>
-            <Link to='/connection' onClick={handleLogout}  className="nav-link">Déconnecté</Link>
- 
-         
-            </div>
-
-          ) : (
-            // Render this link if the user is not logged in
             <Link to='/connection' className="nav-link ">Se connecter</Link>
-          )}
+        
               
             </motion.li> 
-
-            {isLoggedIn && user &&(
-              <Link to='/' >
-              <motion.img
-                src={user.pic || logo} 
-                style={{
-                  width: '50px', // Adjust this value to set the desired width
-                  height: '50px', // Adjust this value to set the desired height
-                  borderRadius: '50%', // To make it a circular image like Facebook logo
-                }}
-                initial={{ opacity: 0, scale: 1 }} // Initial opacity and scale when loading
-                animate={{ opacity: 1, scale: 1 }} // Animation to full opacity and scale
-                transition={{ duration: 1 }} // Animation duration
-              />
-
-              </Link>
-
-              )}
-     
              
           </ul>
 
@@ -164,6 +120,6 @@ Récupérer à partir de la table "anonce" toutes les categories existantes*/
     </nav>
 
   ) 
-          
+            }      
   
 }

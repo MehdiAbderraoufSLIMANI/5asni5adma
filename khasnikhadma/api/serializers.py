@@ -5,6 +5,46 @@ from django.contrib.auth import get_user_model, authenticate
 
 
 
+#One Annonce""""""""""""""""""""""""""""""""""""""""""""
+class oneAnnonceArtisanSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Artisan
+        fields =(
+        'email',
+        'username',
+        'nom',
+        'prenom',
+        'tel',
+        'wilaya',
+        'commune',
+        'rating',
+        'img',
+        'description'
+    )
+
+class oneAnnonceImagesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Image_annonce
+        fields =("img_annonce",)
+        
+class oneAnnonceSerializer(serializers.ModelSerializer):
+
+    artisan = oneAnnonceArtisanSerializer()
+    images = oneAnnonceImagesSerializer(source='img_annonce', many=True, read_only=True)
+
+    class Meta:
+        model = models.Annonce
+        fields = '__all__'
+
+#profilUpdate"""""""""""""""""""""""""""""""""""""""""""""
+
+
+class ProfileClientUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Client
+        fields = ['nom', 'prenom', 'username', 'email', 'wilaya', 'commune', 'adresse', 'tel', 'img']
+
+
 #AnnonceCreate""""""""""""""""""""""""""""""""""""""""""""
 class AnnonceCreateSerializer(serializers.Serializer):
  
@@ -191,6 +231,7 @@ class ArtisanSerializer(serializers.ModelSerializer):
         'adresse',
         'rating',
         'category_of_worker',
+        'description'
     )
 
 #Client""""""""""""""""""""""""""""""""

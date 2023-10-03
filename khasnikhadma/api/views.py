@@ -21,6 +21,65 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from django.conf import settings
 
+from rest_framework import generics
+from rest_framework import permissions
+from rest_framework.decorators import permission_classes,parser_classes
+from django.core.files.uploadedfile import InMemoryUploadedFile
+#One Annonce"""""""""""""""""""""""""""""""""""""""""""""""""""""""""" 
+
+from rest_framework.permissions import AllowAny
+@permission_classes([IsAuthenticated])
+@api_view(['GET'])
+def oneAnnonceView(request,numAnn):
+    queryset = models.Annonce.objects.get(id=numAnn)
+    serializer = serializers.oneAnnonceSerializer(queryset ,many =False)
+    return Response(serializer.data)
+
+
+
+
+#profilupdated""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+from django.contrib.auth.hashers import check_password
+
+@api_view(['PUT'])
+@parser_classes([MultiPartParser, FormParser])
+@permission_classes([IsAuthenticated])
+def ProfileClientUpdateView(request, ):
+    try:
+        
+        client = models.Client.objects.get(email=request.user)
+        password_matches = check_password(request.data["oldpassword"], client.password)
+        if(password_matches):
+            
+            client.adresse = request.data.get('adresse', client.adresse)
+            client.commune = request.data.get('commune', client.commune)
+            client.email = request.data.get('email', client.email)
+            client.nom = request.data.get('nom', client.nom)
+            client.prenom = request.data.get('prenom', client.prenom)
+            client.tel = request.data.get('tel', client.tel)
+            client.username = request.data.get('username', client.username)
+            client.wilaya = request.data.get('wilaya', client.wilaya)
+            
+            if isinstance(request.data["img"], InMemoryUploadedFile):
+                client.img = request.data.get('img', client.img)
+        
+            
+            if "Newpassword" in request.data:
+                client.set_password(request.data['Newpassword'])
+         
+
+            # Save the updated client object
+            client.save()
+
+            # Serialize the updated data (if needed)
+            serializer = serializers.ProfileClientUpdateSerializer(client)
+
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else :
+            return Response({"error": "password is wrong"}, status=status.HTTP_400_BAD_REQUEST)
+    except models.Client.DoesNotExist:
+        return Response({'detail': 'Client not found'}, status=status.HTTP_404_NOT_FOUND)
+ 
 
 #Annonce""""""""""""""""""""""""""""""""
 @api_view(['GET'])
@@ -64,18 +123,29 @@ def FAQView(request):
     return Response(serializer.data) 
 
 #Login""""""""""""""""""""""""""""""""""""""""""""""""""
-
+from rest_framework.exceptions import AuthenticationFailed
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+   
     @classmethod
     def get_token(cls, acount):
         token = super().get_token(acount)
 
         if acount.compte_type == "worker":
+ 
             worker = Artisan.objects.get(email = acount.email)
             # Add custom claims
             token['email'] = worker.email
             token['username'] = worker.username
+            token['account_type'] = worker.compte_type 
+            token['nom'] = worker.nom
+            token['prenom'] = worker.prenom
+            token['tel'] = worker.tel
+            token['wilaya'] = worker.wilaya
+            token['commune'] = worker.commune
+            token['adresse'] = worker.adresse
+            token['rating'] = worker.rating
+            token['description'] = worker.description
             
             if len(str(worker.img)) != 0 :
                 token['pic'] = settings.SITE_URL + "/media/"+ str(worker.img) 
@@ -84,16 +154,34 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
             
             token['email'] = client.email
             token['username'] = client.username
+            token['account_type'] = client.compte_type
+            token['nom'] = client.nom
+            token['prenom'] = client.prenom
+            token['tel'] = client.tel
+            token['wilaya'] = client.wilaya
+            token['commune'] = client.commune
+            token['adresse'] = client.adresse
             if len(str(client.img)) != 0 : 
                 token['pic'] = settings.SITE_URL + "/media/"+ str(client.img) 
         else :
+ 
             token['email'] = acount.email
             token['username'] = acount.username
+            token['account_type'] = acount.compte_type
+            token['nom'] = acount.nom
+            token['prenom'] = acount.prenom
+            token['tel'] = acount.tel
+            token['wilaya'] = acount.wilaya
+            token['commune'] = acount.commune
+            token['adresse'] = acount.adresse
+
         return token
     
+ 
 class MyTokenObtainPairView(TokenObtainPairView):
+ 
     serializer_class = MyTokenObtainPairSerializer
-
+"""
 class Login(APIView):
     permission_classes = ()
     
@@ -104,6 +192,7 @@ class Login(APIView):
 
         if user is not None:
             login(request, user)
+            print(user," loged in \n\n\n")
             refresh = RefreshToken.for_user(user)
             return Response({
                 'refresh': str(refresh),
@@ -117,7 +206,7 @@ class Login(APIView):
         else:
             return Response({'error': 'Invalid email or password.'}, status=status.HTTP_401_UNAUTHORIZED)
 
-
+"""
 class UserData(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -207,6 +296,8 @@ def clientView(request):
     queryset = models.Client.objects.all()
     serializer = serializers.ClientSerializer(queryset ,many =True )
     return Response(serializer.data)
+
+
 
 #adding element to db==================
 from django.shortcuts import HttpResponse

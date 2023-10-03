@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function AboutUs() {
+export default function InboxClient() {
   return (
     <div>
-      Nous sômmes....
+      
     </div>
   )
 }

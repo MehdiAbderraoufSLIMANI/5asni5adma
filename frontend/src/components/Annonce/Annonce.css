@@ -32,8 +32,8 @@
 .annonce-container p {
     background-color: #CBCFD0;
     padding: 8px;
-    height: 40px;
-    width: 200px;
+    min-height: 40px;
+    max-width: 250px;
     border-radius: 8px;
     font-size: 16px;
     color: black;

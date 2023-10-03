@@ -14,34 +14,6 @@ import Skeleton from '../../components/Skeleton/Skeleton';
 import { client } from '../../App';
 export default function ListServices() {
 
-  /*const TousAnnonces = [
-    { num: 1,id_artisan: 1, categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 2,id_artisan: 1, categorie: 'Peintre', service: 'peinture mur', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Ain Taya' },
-    { num: 3,id_artisan: 1, categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images_Backend/peintre.jpg', rating: '4', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 4,id_artisan: 1, categorie: 'Menuisierie', service: 'armoire et lit', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 5,id_artisan: 1, categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 6,id_artisan: 1, categorie: 'Menuisierie', service: 'armoire et lit', img: '../images_Backend/peintre.jpg', rating: '1', wilaya: 'Jijel', commune: 'Taher' },
-    { num: 7,id_artisan: 1, categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 8,id_artisan: 2, categorie: 'Menuisierie', service: 'armoire et lit', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Sidi Moussa' },
-    { num: 9,id_artisan: 2, categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images_Backend/peintre.jpg', rating: '5', wilaya: 'Jijel', commune: 'Taher' },
-    { num: 10,id_artisan: 3,  categorie: 'Peintre', service: 'peinture mur', img: '../images_Backend/peintre.jpg', rating: '2', wilaya: 'Alger', commune: 'Ain Taya' },
-    { num: 11,id_artisan: 3,  categorie: 'Peintre', service: 'peinture mur', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Ain Taya' },
-    { num: 12,id_artisan: 3,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 13,id_artisan: 3,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Sidi Moussa' },
-    { num: 14,id_artisan: 3,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 15,id_artisan: 3,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    
-    { num: 16,id_artisan: 4,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 17,id_artisan: 4,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 18,id_artisan: 4,  categorie: 'Peintre', service: 'peinture mur', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 19,id_artisan: 4,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 20,id_artisan: 5,  categorie: 'Peintre', service: 'peinture mur', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 21,id_artisan: 5,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 22,id_artisan: 5,  categorie: 'Peintre', service: 'peinture mur', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-    { num: 23,id_artisan: 5,  categorie: 'Climatiseur', service: 'Froid et Climatisation installation', img: '../images_Backend/peintre.jpg', rating: '3', wilaya: 'Alger', commune: 'Kouba' },
-  ];*/
-
-
   const [scrollRate, setScrollRate] = useState(0);
   const [showStickyFilter, setShowStickyFilter] = useState(false);
   
@@ -69,14 +41,13 @@ export default function ListServices() {
     else {
       setAnnonces(allAnnonces);
     }
+    setCurrentPage(1);
     setIsLoading(false);    
     }
   }, [allAnnonces,categ]);
 
   const getTousAnnonce = async () => {
     try {
- 
-     
       client.get('/api/Annonce/')
       .then((response ) => {
         setAllannonces(response.data);
@@ -122,26 +93,8 @@ export default function ListServices() {
   }, [scrollRate])
 
 
-
-
-
-
   const { categorie, wilaya, commune,setCategorie, setWilaya, setCommune} = useContext(filterCtx);
 
-
-  useEffect(() => {
-    setIsLoading(true);
-    setCurrentPage(1);
-    if (categ) {
-      setAnnonces(allAnnonces.filter(ann => ann.categorie === categ));
-    }
-    else {
-      setAnnonces(allAnnonces)
-    }
-    setIsLoading(false);
-  }, [categ])
-
- 
   //Search bar logic
   const searchHandler = (e) => {
     setIsLoading(true);
@@ -169,8 +122,9 @@ export default function ListServices() {
   const firstInd = (currentPage-1) * itemsPerPage;
   const lastInd = currentPage * itemsPerPage;
   
-  const currentAnnonces = annonces.slice(firstInd,lastInd);
   
+  const currentAnnonces = annonces.slice(firstInd,lastInd);
+ 
 
 
   //Filter logic
@@ -218,11 +172,9 @@ export default function ListServices() {
 
   return (
     <div>
-
       <div className="services-header container-fluid">
         <h2>À la recherche d'un artisan talentueux et qualié pour vous aider ?</h2>
         <p> Ne cherchez plus ! Nous avons sélectionné pour vous les meilleurs artisans de votre région</p>
-        <div className="overlay"></div>
       </div>
 
       {showFilter && <div className='disabled'></div> }    
@@ -230,7 +182,7 @@ export default function ListServices() {
 
           { !isLoading && <StickyFilter showStickyFilter={showStickyFilter} setShowFilter={setShowFilter} setShowStickyFilter={setShowStickyFilter}/> }
    
-   { isLoading ? <Skeleton showFilter={showFilter} /> : 
+   { (isLoading || allAnnonces.length===0) ? <Skeleton showFilter={showFilter} /> : 
      <div className="main-content">
       <div id='top' className="filter-search-container ">
         <form className="d-flex" role="search">
@@ -262,10 +214,10 @@ export default function ListServices() {
             
               currentAnnonces.map(ann => <Annonce key={ann.num} ann={ann} />)
               
-              :
+             :
               <AnimatePresence>
                   <motion.p key='message' className='alert'
-                  initial={{opacity: 0.5, x: -150   }}
+                  initial={{opacity: 0, x: -1050   }}
                   animate={{opacity: 1, x: 0   }}
                   transition= {{duration: 1, type: 'spring'}}
                   >Aucun résultat trouvé ! 

@@ -21,8 +21,8 @@ export default function Footer() {
     <div className="footer-content container-fluid mt-5">
         <div className="row justify-content-evenly align-items-center">
             <div className="col-md-4">
+                <p><Link to='/FAQ'>Questions les plus fréquentes(FAQ)</Link></p>
                 <p><Link to='/about us'>Qui sômmes-nous ?</Link></p>
-                <p><Link to='/FAQ'>Les questions les plus fréquentes</Link></p>
             </div>
 
             <div className="col-md-4 align-self-start">

@@ -1,15 +1,26 @@
 import { createContext, useState, useEffect } from 'react'
 import jwt_decode from "jwt-decode";
-import { useNavigate } from 'react-router-dom'
-import { client } from '../App';
+ 
+import { useNavigate } from 'react-router-dom' 
 
+import axios from 'axios';
+ 
+
+import createAxiosInstance from './createAxiosInstance';
 const AuthContext = createContext()
 
 export default AuthContext;
 
 
 export const AuthProvider = ({children}) => {
+
+
+    const baseURL = 'http://127.0.0.1:8000'
+
+
     let [authTokens, setAuthTokens] = useState(()=> localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null)
+   
+
 
     let [user, setUser] = useState(()=> localStorage.getItem('authTokens') ? jwt_decode(localStorage.getItem('authTokens')) : null)
     
@@ -17,27 +28,29 @@ export const AuthProvider = ({children}) => {
 
     const history = useNavigate()
 
-    let loginUser = async (e )=> {
+    let loginUser =  async (e )=> {
         e.preventDefault()
-        let response = await fetch('http://127.0.0.1:8000/api/token/', {
-            method:'POST',
-            headers:{
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify({'email':e.target.email.value, 'password':e.target.password.value})
-        })
-        let data = await response.json()
+        const login = axios.create({
+            baseURL 
+        });
 
-        if(response.status === 200){
-            
+        const formData = new FormData();
+        formData.append("email", e.target.email.value);
+        formData.append("password", e.target.password.value);
+        await login.post('/api/token/', formData)
+        .then(  (response ) => { 
+            const data = response.data;
             setAuthTokens(data)
             setUser(jwt_decode(data.access))
             localStorage.setItem('authTokens', JSON.stringify(data))
             history('/')
-        }else{
-            alert('Something went wrong!')
-            return response.status
-        }
+        })
+        .catch((error) => { 
+        console.log(error)
+         throw error 
+        });
+
+ 
     }
 
 
@@ -45,15 +58,20 @@ export const AuthProvider = ({children}) => {
         setAuthTokens(null)
         setUser(null)
         localStorage.removeItem('authTokens')
-        history('/connection')
-    }
+        history('/')
+    } 
 
     const isLoggedIn = () => {
-        return authTokens !== null;
+        return authTokens != null;
       };
 
 
       let regesterClient = async (e)=> {
+
+        const resgsterclient = axios.create({
+            baseURL 
+        });
+
         e.preventDefault()
         const formData = new FormData();
         formData.append("nom", e.target.elements.nom.value);
@@ -66,22 +84,24 @@ export const AuthProvider = ({children}) => {
         formData.append("password", e.target.elements.password.value);
         formData.append("telephone", e.target.elements.telephone.value);
         formData.append("img", e.target.elements.img.files[0]); 
-          client.post('/api/register-client/', formData)
+        resgsterclient.post('/api/register-client/', formData)
           .then((response ) => {
             console.log('Registration successful!');
             loginUser(e)
             return true
           })
           .catch((error) => { 
- 
-            alert('Something went wrong!')
-            return false
-      
+            throw error
+            // Handle error as needed
           });
     };
 
 
     let regesterWorker = async (e)=> {
+        const resgsterWorker = axios.create({
+            baseURL 
+        });
+
         e.preventDefault()
         const formData = new FormData();
         formData.append("nom", e.target.elements.nom.value);
@@ -95,21 +115,63 @@ export const AuthProvider = ({children}) => {
         formData.append("telephone", e.target.elements.telephone.value);
         formData.append("img", e.target.elements.img.files[0]); 
         
-          client.post('/api/register-worker/', formData)
+        resgsterWorker.post('/api/register-worker/', formData)
           .then((response ) => {
             console.log('Registration successful!');
             loginUser(e)
           })
           .catch((error) => { 
-            console.error('Registration react failed :', error);
-            // Handle error as needed
+            return error;
+          
           });
+    };
+
+
+    
+    let EditProfil = async (data)=> {
+       
+        const client =await createAxiosInstance();
+        const formData = new FormData();
+ 
+        formData.append("adresse", data.adresse);
+        formData.append("commune", data.commune);
+        formData.append("email", data.email);
+        formData.append("nom", data.nom);
+        formData.append("prenom", data.prenom);
+        formData.append("tel", data.tel);
+        formData.append("username", data.username);
+        formData.append("wilaya", data.wilaya);
+        formData.append("img", data.profileImage);
+        formData.append("oldpassword", data.oldpassword);
+
+        if (data.Newpassword){
+            if(data.oldpassword != data.Newpassword){
+                formData.append("Newpassword", data.Newpassword);
+            }
+
+        }
+        try {
+             
+            const response =await client.put(`/api/profile/update/`, formData); 
+            await logoutUser();
+            return 'Profile updated successfully';
+        
+            
+        } catch (error) {
+            console.log(error)
+            throw error.response.data.error;
+            
+              
+        }
+      
+
     };
 
 
     let contextData = {
         user:user,
         authTokens:authTokens,
+        EditProfil:EditProfil,
         setAuthTokens:setAuthTokens,
         setUser:setUser,
         loginUser:loginUser,

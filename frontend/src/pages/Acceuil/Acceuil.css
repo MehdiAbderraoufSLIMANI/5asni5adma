@@ -1,12 +1,27 @@
 .acceuil-intro {
     background-color: var(--noir);
     color: white;
-    padding: 221px 248px 308px 248px;
+    padding: 221px 248px 308px 120px;
     min-height: 450px;
 }
 @media all and (max-width: 1199px) {
     .acceuil-intro {
         margin-top: -50px;
+    }
+}
+.acceuil-intro .img-artisans {
+    height: fit-content !important;
+}
+@media all and (max-width: 950px) {
+    .acceuil-intro {
+        padding: 180px 260px 220px 150px !important;
+    }
+    .acceuil-intro .img-artisans img {
+        width: 380px !important;
+        height: 300px !important;
+    }
+    .acceuil-intro h1 {
+        font-size: 38px !important;
     }
 }
 .acceuil-intro h1 {

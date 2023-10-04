@@ -32,6 +32,8 @@ import ScrollToTop from './components/ScrollToTop';
 import { AuthProvider } from './conctions/AuthContext';
 import ProfilClient from './pages/Profil_client/ProfilClient';
 import ConsulterProfile from './pages/ConsulterProfile/ConsulterProfile'; 
+import InboxWorker from './pages/BoiteRecepWorker/InboxWorker';
+import NavbarWorker from './components/NavbarWorker/NavbarWorker';
 
  
 
@@ -79,8 +81,9 @@ function App() {
 
 
           <header className="App-header">
-            <Navbar /> 
-            <NavbarClient /> 
+             <Navbar /> 
+            <NavbarClient />
+            <NavbarWorker />
           </header>
 
           <GoTop scrollRate={scrollRate} />
@@ -128,6 +131,10 @@ function App() {
               <Route exact path='/profil/worker' element={<PrivateRoute/>}>
                 <Route exact path='/profil/worker' element={<ProfileWorker/>}/>
               </Route>
+
+              <Route exact path='/inbox/worker' element={<PrivateRoute/>}>
+                <Route exact path='/inbox/worker' element={<InboxWorker/>}/>
+              </Route> 
 
               <Route exact path='/inbox/client' element={<PrivateRoute/>}>
                 <Route exact path='/inbox/client' element={<InboxClient/>}/>

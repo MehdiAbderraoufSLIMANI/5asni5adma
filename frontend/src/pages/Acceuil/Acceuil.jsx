@@ -46,7 +46,7 @@ export default function Acceuil() {
   const el = useRef();
   useEffect(() => {
     const typed = new Typed(el.current, {
-      strings: ['Plombiers', 'Electriciens', 'Peintres', 'Ferroniers', 'et encore plus...'],
+      strings: ['Plombiers', 'Electriciens', 'Peintres', 'Ferroniers', 'etc...'],
       typeSpeed: 25,
       backSpeed: 25,
       loop: true
@@ -67,13 +67,13 @@ export default function Acceuil() {
     <div>
       <div className="acceuil-intro container-fluid">
         <div className="row justify-content-evenly align-items-center">
-          <div className="col-md-6">
+          <div className="col-md-7">
             <h1>Meilleur Site Web En Algérie Qui Vous Rapproche Des Artisans : </h1>
             <span className='typedAnim' ref={el}></span>
             <p style={{marginTop: '24px'}}>On vous propose plusieurs artisans algériens avec une variété de domaines, uniquement pour vous.</p>
           </div>
-          <div className="col-md-6">
-            <img src={acceuil} alt="artisans" height='130%' width='120%' />
+          <div className="col-md-5 img-artisans">
+            <img src={acceuil} alt="artisans" height='400' width='480' />
           </div>
         </div>
       </div>

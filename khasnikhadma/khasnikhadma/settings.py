@@ -93,7 +93,7 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': '5astni5admaadmin',
         'HOST': '127.0.0.1', 
-        'PORT': '5432', # libre--> 5433  projet--> 'PORT': '5432',
+        'PORT': '5432', 
     } 
 }
 

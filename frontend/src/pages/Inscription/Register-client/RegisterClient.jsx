@@ -43,7 +43,7 @@ const RegisterClient = () => {
     )
   } 
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
 
     if (e.target.elements.password.value !== e.target.elements.password2.value) {
@@ -51,11 +51,17 @@ const RegisterClient = () => {
       alert('Password and Confirm Password do not match.');
       return;
     }
-      setIsLoading(true); 
-      const err = regesterClient(e);
-      if(!err){
-        setIsLoading(false);
-      }
+    setIsLoading(true); 
+    try {
+     
+      const resp = await regesterClient(e);
+      
+    
+    } catch (error) { 
+      setIsLoading(false);
+    }
+    
+ 
       
      
   };

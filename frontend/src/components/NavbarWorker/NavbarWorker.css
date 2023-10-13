@@ -1,12 +1,3 @@
-.nav-link.dropdown-toggle::after {
-    content: '';
-    border-top: 0.3em solid;
-    border-right: 0.3em solid transparent;
-    border-left: 0.3em solid transparent;
-    margin-left: 0.5em;
-    margin-top: 0.5em;
-    display: inline-block;
-  }
 ul.user-links {
     display: none;
 }
@@ -20,14 +11,13 @@ ul.user-dropdown img {
     border-radius: 50%;
     background-color: white;
 }
-nav ul.pageLinksClient {
-    margin-left: 160px;
+nav ul.pageLinksWorker li {
+    margin-right: 32px;
 }
-
-nav ul.pageLinks li a, nav ul.pageLinksClient li a {
+nav ul.pageLinks li a, nav ul.pageLinksWorker li a {
     transition: .2s ease-in-out !important;
 }
-nav ul.pageLinks li a:hover, nav ul.pageLinksClient li a:hover {
+nav ul.pageLinks li a:hover, nav ul.pageLinksWorker li a:hover {
     color: rgb(192, 188, 188) !important;
 }
 
@@ -38,38 +28,11 @@ nav ul.user-links .logout {
     width: fit-content;
     margin-top: 24px;
 }
-@media all and (max-width: 991px) {
-    ul.user-dropdown {
-        display: none;
-    }
-    ul.user-links {
-        display: block;
-        width: 80%;
-        margin-left: 19% ;
-    }
-}
-@media all and (max-width: 991px) {
-    nav ul.pageLinksClient {
-        margin-left: 0 !important;
-    }
-}
-@media all and (max-width: 800px) {
-    ul.user-links {
-        margin-left: 21%;
-    }
- }
- .dropdown-menu .dropdown-item {
-    transition: .5s ease-in-out;
- }
-.dropdown-menu .dropdown-item:hover {
-    background-color: var(--rouge);
-    color: var(--noir) !important;
-}
- /*****************************Dropdown *****************/
-.client-dropdown-menu .dropdown-item {
+/*****************************Dropdown *****************/
+.worker-dropdown-menu .dropdown-item {
     transition: .5s ease-in-out;
 }
-.client-dropdown-menu .dropdown-item:hover {
+.worker-dropdown-menu .dropdown-item:hover {
     background-color: #ea4b36af;
 }
 nav ul.user-dropdown li .dropdown-menu {
@@ -81,12 +44,12 @@ nav ul.user-dropdown li .dropdown-menu {
     padding-bottom: 8px;
     position: relative;
 }
-.client-dropdown-menu {
+.worker-dropdown-menu {
     height: 100%;
     display: flex;
     flex-direction: column;
 }
-.client-dropdown-menu li {
+.worker-dropdown-menu li {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -117,3 +80,18 @@ nav ul.user-dropdown  i {
 
 
 /****************************************************/
+@media all and (max-width: 991.5px) { /* 991px */
+    ul.user-dropdown {
+        display: none;
+    }
+    ul.user-links {
+        display: block;
+        width: 80%;
+        margin-left: 19% ;
+    }
+}
+@media all and (max-width: 800px) {
+    ul.user-links {
+        margin-left: 21%;
+    }
+ }

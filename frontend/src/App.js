@@ -32,8 +32,6 @@ import ScrollToTop from './components/ScrollToTop';
 import { AuthProvider } from './conctions/AuthContext';
 import ProfilClient from './pages/Profil_client/ProfilClient';
 import ConsulterProfile from './pages/ConsulterProfile/ConsulterProfile';
-import EditProfilWorker from './pages/profile_worker/EditProfilWorker';
-import CreateGig from './pages/profile_worker/CreateGig';
 
  
 
@@ -76,12 +74,14 @@ function App() {
     <div className="App">
       <Router>
         <AuthProvider>
+  
           <ScrollToTop />
 
 
           <header className="App-header">
-            <Navbar /> 
+             <Navbar /> 
             <NavbarClient />
+            <NavbarWorker />
           </header>
 
           <GoTop scrollRate={scrollRate} />
@@ -92,8 +92,13 @@ function App() {
 
               <Route path='/services' element={<ListServices />} />
               <Route path='/services/:categ' element={<ListServices />} />
+
+
               <Route path='/service/:numAnn/:idArtisan' element={<ConsulterService />} />
               <Route path='/service/:numAnn/:idArtisan/profile' element={<ConsulterProfile />} />
+
+
+
               <Route path='/FAQ' element={<FAQ />} />
               <Route path='/inscription' element={<Inscription />} />
 
@@ -106,13 +111,14 @@ function App() {
               <Route path='/register-client' element={<RegisterClient />} />
               <Route path='/connection' element={<Login />} />
               <Route path='/about us' element={<AboutUs />} />
-              <Route path='/ValidationPage' element={<ValidationPage />} />
+
+
+
+
               <Route path='/backendtest' element={<Backendtest />} />
               <Route path='/Annoncetesting' element={<Annoncetesting />} />
               <Route path='/profil/client' element={<ProfilClient />} />  
               <Route path='/profil/worker' element={<ProfileWorker />}/> 
-              <Route path='/profil/worker/editer' element={<EditProfilWorker />}/> 
-              <Route path='/profil/worker/gig' element={<CreateGig />}/> 
               <Route path='/inbox/client' element={<InboxClient />} />
 
               <Route path='*' element={<ErrorPage />} />
@@ -124,7 +130,7 @@ function App() {
           <footer className='App-footer'>
             <Footer />
           </footer>
-
+        
         </AuthProvider>
       </Router>
 
